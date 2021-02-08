@@ -1,0 +1,12 @@
+{
+  "name": "shared-notes",
+  "displayName": "shared-notes",
+  "expo": {
+    "name": "shared-notes",
+    "slug": "shared-notes",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
