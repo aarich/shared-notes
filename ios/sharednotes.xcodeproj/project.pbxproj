@@ -12,9 +12,49 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
+		7F4BB89AF90C860F72231240 /* libPods-sharednotes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7535FC25D1ED4800374ACA /* libPods-sharednotes.a */; };
+		8D213C2A25D100B90096D194 /* NoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D213C2925D100B90096D194 /* NoteWidgetView.swift */; };
+		8D213C2F25D104BF0096D194 /* AsyncStorageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D213C2E25D104BF0096D194 /* AsyncStorageDelegate.swift */; };
+		8D213C7C25D108660096D194 /* AsyncStorageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D213C7B25D108660096D194 /* AsyncStorageDelegate.m */; };
+		8D213C8225D110850096D194 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D213C8125D110850096D194 /* Provider.swift */; };
+		8D286ED125D0FEC700D3C0FD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D286ED025D0FEC700D3C0FD /* WidgetKit.framework */; };
+		8D286ED325D0FEC700D3C0FD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D286ED225D0FEC700D3C0FD /* SwiftUI.framework */; };
+		8D286ED625D0FEC700D3C0FD /* NoteWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D286ED525D0FEC700D3C0FD /* NoteWidget.swift */; };
+		8D286ED925D0FEC800D3C0FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D286ED825D0FEC800D3C0FD /* Assets.xcassets */; };
+		8D286EDB25D0FEC800D3C0FD /* NoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D286ED725D0FEC700D3C0FD /* NoteWidget.intentdefinition */; };
+		8D286EDC25D0FEC800D3C0FD /* NoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D286ED725D0FEC700D3C0FD /* NoteWidget.intentdefinition */; };
+		8D286EDF25D0FEC800D3C0FD /* NoteWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8D286ECF25D0FEC700D3C0FD /* NoteWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8D75352425D1E35300374ACA /* KeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75352325D1E35300374ACA /* KeyProvider.swift */; };
+		8D75354525D1EAD100374ACA /* AsyncStorageAccessor.h in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB926E25D1DDC400C2B607 /* AsyncStorageAccessor.h */; };
+		8D75355125D1EBA400374ACA /* KeyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D75352325D1E35300374ACA /* KeyProvider.swift */; };
+		8DFB927025D1DF3E00C2B607 /* AsyncStorageAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DFB926F25D1DF3E00C2B607 /* AsyncStorageAccessor.m */; };
 		96905EF65AED1B983A6B3ABC /* libPods-sharednotes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-sharednotes.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8D286EDD25D0FEC800D3C0FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D286ECE25D0FEC700D3C0FD;
+			remoteInfo = NoteWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8D286EE025D0FEC800D3C0FD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8D286EDF25D0FEC800D3C0FD /* NoteWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -28,6 +68,112 @@
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-sharednotes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sharednotes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-sharednotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sharednotes.debug.xcconfig"; path = "Target Support Files/Pods-sharednotes/Pods-sharednotes.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-sharednotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sharednotes.release.xcconfig"; path = "Target Support Files/Pods-sharednotes/Pods-sharednotes.release.xcconfig"; sourceTree = "<group>"; };
+		8D0DA06C25D1DB470059399A /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D213C2925D100B90096D194 /* NoteWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidgetView.swift; sourceTree = "<group>"; };
+		8D213C2E25D104BF0096D194 /* AsyncStorageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStorageDelegate.swift; sourceTree = "<group>"; };
+		8D213C7825D106A60096D194 /* AsyncStorageDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncStorageDelegate.h; sourceTree = "<group>"; };
+		8D213C7B25D108660096D194 /* AsyncStorageDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncStorageDelegate.m; sourceTree = "<group>"; };
+		8D213C8125D110850096D194 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		8D286ECF25D0FEC700D3C0FD /* NoteWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NoteWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D286ED025D0FEC700D3C0FD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		8D286ED225D0FEC700D3C0FD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		8D286ED525D0FEC700D3C0FD /* NoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidget.swift; sourceTree = "<group>"; };
+		8D286ED725D0FEC700D3C0FD /* NoteWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = NoteWidget.intentdefinition; sourceTree = "<group>"; };
+		8D286ED825D0FEC800D3C0FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8D286EDA25D0FEC800D3C0FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D46798725D11475001A4CE2 /* sharednotes-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sharednotes-Bridging-Header.h"; sourceTree = "<group>"; };
+		8D75352325D1E35300374ACA /* KeyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyProvider.swift; sourceTree = "<group>"; };
+		8D75359C25D1ED3E00374ACA /* libRCTTypeSafety.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTTypeSafety.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75359E25D1ED3E00374ACA /* libReact-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535A025D1ED3E00374ACA /* libReact-CoreModules.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-CoreModules.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535A225D1ED3E00374ACA /* libReact-cxxreact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-cxxreact.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535A425D1ED3E00374ACA /* libReact-jsi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535A625D1ED3E00374ACA /* libReact-jsiexecutor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsiexecutor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535A825D1ED3E00374ACA /* libReact-jsinspector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsinspector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535AA25D1ED3E00374ACA /* libreact-native-safe-area-context.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-safe-area-context.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535AC25D1ED3E00374ACA /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535AE25D1ED3E00374ACA /* libReact-RCTBlob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTBlob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535B025D1ED3E00374ACA /* libReact-RCTImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535B225D1ED3E00374ACA /* libReact-RCTLinking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTLinking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535B425D1ED3E00374ACA /* libReact-RCTNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535B625D1ED3E00374ACA /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535B825D1ED3E00374ACA /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535BA25D1ED3E00374ACA /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535BC25D1ED3E00374ACA /* libReactCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535BE25D1ED3E00374ACA /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535C025D1ED3E00374ACA /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535C225D1ED3E00374ACA /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNReanimated.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535C425D1ED3E00374ACA /* libRNScreens.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNScreens.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535C625D1ED3E00374ACA /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNSVG.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535C825D1ED3E00374ACA /* libUMAppLoader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUMAppLoader.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535CA25D1ED3E00374ACA /* libUMCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUMCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535CC25D1ED3E00374ACA /* libUMPermissionsInterface.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUMPermissionsInterface.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535CE25D1ED3E00374ACA /* libUMReactNativeAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUMReactNativeAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535D025D1ED3E00374ACA /* libYoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535D225D1ED4800374ACA /* libDoubleConversion.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDoubleConversion.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535D425D1ED4800374ACA /* libEXAdsAdMob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXAdsAdMob.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535D625D1ED4800374ACA /* libEXApplication.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXApplication.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535D825D1ED4800374ACA /* libEXConstants.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXConstants.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535DA25D1ED4800374ACA /* libEXErrorRecovery.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXErrorRecovery.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535DC25D1ED4800374ACA /* libEXFileSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXFileSystem.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535DE25D1ED4800374ACA /* libEXFont.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXFont.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535E025D1ED4800374ACA /* libEXImageLoader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXImageLoader.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535E225D1ED4800374ACA /* libEXKeepAwake.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXKeepAwake.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535E425D1ED4800374ACA /* libEXLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXLinearGradient.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535E625D1ED4800374ACA /* libEXLocation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXLocation.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535E825D1ED4800374ACA /* libEXPermissions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXPermissions.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535EA25D1ED4800374ACA /* libEXSecureStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXSecureStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535EC25D1ED4800374ACA /* libEXSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXSplashScreen.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535EE25D1ED4800374ACA /* libEXSQLite.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXSQLite.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535F025D1ED4800374ACA /* libEXUpdates.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEXUpdates.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535F225D1ED4800374ACA /* libFBReactNativeSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBReactNativeSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535F425D1ED4800374ACA /* libFolly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFolly.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535F625D1ED4800374ACA /* libglog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libglog.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535F825D1ED4800374ACA /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535FA25D1ED4800374ACA /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535FC25D1ED4800374ACA /* libPods-sharednotes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-sharednotes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D7535FE25D1ED4800374ACA /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75360025D1ED4800374ACA /* libRCTTypeSafety.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTTypeSafety.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75360225D1ED4800374ACA /* libReact-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75360425D1ED4800374ACA /* libReact-CoreModules.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-CoreModules.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75360625D1ED4800374ACA /* libReact-cxxreact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-cxxreact.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75360825D1ED4800374ACA /* libReact-jsi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75360A25D1ED4800374ACA /* libReact-jsiexecutor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsiexecutor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75360C25D1ED4800374ACA /* libReact-jsinspector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsinspector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75360E25D1ED4800374ACA /* libreact-native-safe-area-context.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-safe-area-context.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75361025D1ED4800374ACA /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75361225D1ED4800374ACA /* libReact-RCTBlob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTBlob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75361425D1ED4800374ACA /* libReact-RCTImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75361625D1ED4800374ACA /* libReact-RCTLinking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTLinking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75361825D1ED4800374ACA /* libReact-RCTNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75361A25D1ED4800374ACA /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75361C25D1ED4800374ACA /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75361E25D1ED4800374ACA /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75362025D1ED4800374ACA /* libReactCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75362225D1ED4800374ACA /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75362425D1ED4800374ACA /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75362625D1ED4800374ACA /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNReanimated.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75362825D1ED4800374ACA /* libRNScreens.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNScreens.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75362A25D1ED4800374ACA /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNSVG.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75362C25D1ED4800374ACA /* libUMAppLoader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUMAppLoader.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75362E25D1ED4800374ACA /* libUMCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUMCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75363025D1ED4800374ACA /* libUMPermissionsInterface.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUMPermissionsInterface.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75363225D1ED4800374ACA /* libUMReactNativeAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libUMReactNativeAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75363425D1ED4800374ACA /* libYoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75363A25D1ED8F00374ACA /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75363C25D1ED9000374ACA /* libReact-RCTBlob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTBlob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75363E25D1ED9000374ACA /* libReact-RCTImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75364025D1ED9000374ACA /* libReact-RCTLinking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTLinking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75364225D1ED9000374ACA /* libReact-RCTNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75364425D1ED9000374ACA /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75364625D1ED9000374ACA /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75364825D1ED9000374ACA /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75364A25D1ED9000374ACA /* libReactCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75364C25D1ED9000374ACA /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D75365A25D1FF2800374ACA /* NoteWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NoteWidgetExtension.entitlements; sourceTree = "<group>"; };
+		8D7536A425D2039F00374ACA /* sharednotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = sharednotes.entitlements; path = sharednotes/sharednotes.entitlements; sourceTree = "<group>"; };
+		8DFB926E25D1DDC400C2B607 /* AsyncStorageAccessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncStorageAccessor.h; sourceTree = "<group>"; };
+		8DFB926F25D1DF3E00C2B607 /* AsyncStorageAccessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncStorageAccessor.m; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = sharednotes/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -40,6 +186,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				96905EF65AED1B983A6B3ABC /* libPods-sharednotes.a in Frameworks */,
+				7F4BB89AF90C860F72231240 /* libPods-sharednotes.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D286ECC25D0FEC700D3C0FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D286ED325D0FEC700D3C0FD /* SwiftUI.framework in Frameworks */,
+				8D286ED125D0FEC700D3C0FD /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,10 +205,18 @@
 		13B07FAE1A68108700A75B9A /* sharednotes */ = {
 			isa = PBXGroup;
 			children = (
+				8D7536A425D2039F00374ACA /* sharednotes.entitlements */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				8D213C7825D106A60096D194 /* AsyncStorageDelegate.h */,
+				8D213C7B25D108660096D194 /* AsyncStorageDelegate.m */,
+				8D46798725D11475001A4CE2 /* sharednotes-Bridging-Header.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				8D213C2E25D104BF0096D194 /* AsyncStorageDelegate.swift */,
+				8D75352325D1E35300374ACA /* KeyProvider.swift */,
+				8DFB926E25D1DDC400C2B607 /* AsyncStorageAccessor.h */,
+				8DFB926F25D1DF3E00C2B607 /* AsyncStorageAccessor.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -65,9 +229,99 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8D75363A25D1ED8F00374ACA /* libReact-RCTAnimation.a */,
+				8D75363C25D1ED9000374ACA /* libReact-RCTBlob.a */,
+				8D75363E25D1ED9000374ACA /* libReact-RCTImage.a */,
+				8D75364025D1ED9000374ACA /* libReact-RCTLinking.a */,
+				8D75364225D1ED9000374ACA /* libReact-RCTNetwork.a */,
+				8D75364425D1ED9000374ACA /* libReact-RCTSettings.a */,
+				8D75364625D1ED9000374ACA /* libReact-RCTText.a */,
+				8D75364825D1ED9000374ACA /* libReact-RCTVibration.a */,
+				8D75364A25D1ED9000374ACA /* libReactCommon.a */,
+				8D75364C25D1ED9000374ACA /* libRNCAsyncStorage.a */,
+				8D7535D225D1ED4800374ACA /* libDoubleConversion.a */,
+				8D7535D425D1ED4800374ACA /* libEXAdsAdMob.a */,
+				8D7535D625D1ED4800374ACA /* libEXApplication.a */,
+				8D7535D825D1ED4800374ACA /* libEXConstants.a */,
+				8D7535DA25D1ED4800374ACA /* libEXErrorRecovery.a */,
+				8D7535DC25D1ED4800374ACA /* libEXFileSystem.a */,
+				8D7535DE25D1ED4800374ACA /* libEXFont.a */,
+				8D7535E025D1ED4800374ACA /* libEXImageLoader.a */,
+				8D7535E225D1ED4800374ACA /* libEXKeepAwake.a */,
+				8D7535E425D1ED4800374ACA /* libEXLinearGradient.a */,
+				8D7535E625D1ED4800374ACA /* libEXLocation.a */,
+				8D7535E825D1ED4800374ACA /* libEXPermissions.a */,
+				8D7535EA25D1ED4800374ACA /* libEXSecureStore.a */,
+				8D7535EC25D1ED4800374ACA /* libEXSplashScreen.a */,
+				8D7535EE25D1ED4800374ACA /* libEXSQLite.a */,
+				8D7535F025D1ED4800374ACA /* libEXUpdates.a */,
+				8D7535F225D1ED4800374ACA /* libFBReactNativeSpec.a */,
+				8D7535F425D1ED4800374ACA /* libFolly.a */,
+				8D7535F625D1ED4800374ACA /* libglog.a */,
+				8D7535F825D1ED4800374ACA /* libGoogleUtilities.a */,
+				8D7535FA25D1ED4800374ACA /* libnanopb.a */,
+				8D7535FC25D1ED4800374ACA /* libPods-sharednotes.a */,
+				8D7535FE25D1ED4800374ACA /* libPromisesObjC.a */,
+				8D75360025D1ED4800374ACA /* libRCTTypeSafety.a */,
+				8D75360225D1ED4800374ACA /* libReact-Core.a */,
+				8D75360425D1ED4800374ACA /* libReact-CoreModules.a */,
+				8D75360625D1ED4800374ACA /* libReact-cxxreact.a */,
+				8D75360825D1ED4800374ACA /* libReact-jsi.a */,
+				8D75360A25D1ED4800374ACA /* libReact-jsiexecutor.a */,
+				8D75360C25D1ED4800374ACA /* libReact-jsinspector.a */,
+				8D75360E25D1ED4800374ACA /* libreact-native-safe-area-context.a */,
+				8D75361025D1ED4800374ACA /* libReact-RCTAnimation.a */,
+				8D75361225D1ED4800374ACA /* libReact-RCTBlob.a */,
+				8D75361425D1ED4800374ACA /* libReact-RCTImage.a */,
+				8D75361625D1ED4800374ACA /* libReact-RCTLinking.a */,
+				8D75361825D1ED4800374ACA /* libReact-RCTNetwork.a */,
+				8D75361A25D1ED4800374ACA /* libReact-RCTSettings.a */,
+				8D75361C25D1ED4800374ACA /* libReact-RCTText.a */,
+				8D75361E25D1ED4800374ACA /* libReact-RCTVibration.a */,
+				8D75362025D1ED4800374ACA /* libReactCommon.a */,
+				8D75362225D1ED4800374ACA /* libRNCAsyncStorage.a */,
+				8D75362425D1ED4800374ACA /* libRNGestureHandler.a */,
+				8D75362625D1ED4800374ACA /* libRNReanimated.a */,
+				8D75362825D1ED4800374ACA /* libRNScreens.a */,
+				8D75362A25D1ED4800374ACA /* libRNSVG.a */,
+				8D75362C25D1ED4800374ACA /* libUMAppLoader.a */,
+				8D75362E25D1ED4800374ACA /* libUMCore.a */,
+				8D75363025D1ED4800374ACA /* libUMPermissionsInterface.a */,
+				8D75363225D1ED4800374ACA /* libUMReactNativeAdapter.a */,
+				8D75363425D1ED4800374ACA /* libYoga.a */,
+				8D75359C25D1ED3E00374ACA /* libRCTTypeSafety.a */,
+				8D75359E25D1ED3E00374ACA /* libReact-Core.a */,
+				8D7535A025D1ED3E00374ACA /* libReact-CoreModules.a */,
+				8D7535A225D1ED3E00374ACA /* libReact-cxxreact.a */,
+				8D7535A425D1ED3E00374ACA /* libReact-jsi.a */,
+				8D7535A625D1ED3E00374ACA /* libReact-jsiexecutor.a */,
+				8D7535A825D1ED3E00374ACA /* libReact-jsinspector.a */,
+				8D7535AA25D1ED3E00374ACA /* libreact-native-safe-area-context.a */,
+				8D7535AC25D1ED3E00374ACA /* libReact-RCTAnimation.a */,
+				8D7535AE25D1ED3E00374ACA /* libReact-RCTBlob.a */,
+				8D7535B025D1ED3E00374ACA /* libReact-RCTImage.a */,
+				8D7535B225D1ED3E00374ACA /* libReact-RCTLinking.a */,
+				8D7535B425D1ED3E00374ACA /* libReact-RCTNetwork.a */,
+				8D7535B625D1ED3E00374ACA /* libReact-RCTSettings.a */,
+				8D7535B825D1ED3E00374ACA /* libReact-RCTText.a */,
+				8D7535BA25D1ED3E00374ACA /* libReact-RCTVibration.a */,
+				8D7535BC25D1ED3E00374ACA /* libReactCommon.a */,
+				8D7535BE25D1ED3E00374ACA /* libRNCAsyncStorage.a */,
+				8D7535C025D1ED3E00374ACA /* libRNGestureHandler.a */,
+				8D7535C225D1ED3E00374ACA /* libRNReanimated.a */,
+				8D7535C425D1ED3E00374ACA /* libRNScreens.a */,
+				8D7535C625D1ED3E00374ACA /* libRNSVG.a */,
+				8D7535C825D1ED3E00374ACA /* libUMAppLoader.a */,
+				8D7535CA25D1ED3E00374ACA /* libUMCore.a */,
+				8D7535CC25D1ED3E00374ACA /* libUMPermissionsInterface.a */,
+				8D7535CE25D1ED3E00374ACA /* libUMReactNativeAdapter.a */,
+				8D7535D025D1ED3E00374ACA /* libYoga.a */,
+				8D0DA06C25D1DB470059399A /* libRNCAsyncStorage.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				58EEBF8E8E6FB1BC6CAF49B5 /* libPods-sharednotes.a */,
+				8D286ED025D0FEC700D3C0FD /* WidgetKit.framework */,
+				8D286ED225D0FEC700D3C0FD /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -82,8 +336,10 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				8D75365A25D1FF2800374ACA /* NoteWidgetExtension.entitlements */,
 				13B07FAE1A68108700A75B9A /* sharednotes */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				8D286ED425D0FEC700D3C0FD /* NoteWidget */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
@@ -97,8 +353,22 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* sharednotes.app */,
+				8D286ECF25D0FEC700D3C0FD /* NoteWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8D286ED425D0FEC700D3C0FD /* NoteWidget */ = {
+			isa = PBXGroup;
+			children = (
+				8D286ED525D0FEC700D3C0FD /* NoteWidget.swift */,
+				8D213C2925D100B90096D194 /* NoteWidgetView.swift */,
+				8D286ED725D0FEC700D3C0FD /* NoteWidget.intentdefinition */,
+				8D286ED825D0FEC800D3C0FD /* Assets.xcassets */,
+				8D286EDA25D0FEC800D3C0FD /* Info.plist */,
+				8D213C8125D110850096D194 /* Provider.swift */,
+			);
+			path = NoteWidget;
 			sourceTree = "<group>";
 		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
@@ -133,15 +403,34 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				AF7BF8C823CE838DA4182532 /* [CP] Copy Pods Resources */,
+				8D286EE025D0FEC800D3C0FD /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8D286EDE25D0FEC800D3C0FD /* PBXTargetDependency */,
 			);
 			name = sharednotes;
 			productName = sharednotes;
 			productReference = 13B07F961A680F5B00A75B9A /* sharednotes.app */;
 			productType = "com.apple.product-type.application";
+		};
+		8D286ECE25D0FEC700D3C0FD /* NoteWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D286EE325D0FEC800D3C0FD /* Build configuration list for PBXNativeTarget "NoteWidgetExtension" */;
+			buildPhases = (
+				8D286ECB25D0FEC700D3C0FD /* Sources */,
+				8D286ECC25D0FEC700D3C0FD /* Frameworks */,
+				8D286ECD25D0FEC700D3C0FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NoteWidgetExtension;
+			productName = NoteWidgetExtension;
+			productReference = 8D286ECF25D0FEC700D3C0FD /* NoteWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -149,10 +438,17 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1230;
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						DevelopmentTeam = JVTXJSHY7N;
+						LastSwiftMigration = 1230;
+					};
+					8D286ECE25D0FEC700D3C0FD = {
+						CreatedOnToolsVersion = 12.3;
+						DevelopmentTeam = JVTXJSHY7N;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -170,6 +466,7 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* sharednotes */,
+				8D286ECE25D0FEC700D3C0FD /* NoteWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -183,6 +480,14 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D286ECD25D0FEC700D3C0FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D286ED925D0FEC800D3C0FD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,12 +574,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D286EDC25D0FEC800D3C0FD /* NoteWidget.intentdefinition in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				8DFB927025D1DF3E00C2B607 /* AsyncStorageAccessor.m in Sources */,
+				8D213C2F25D104BF0096D194 /* AsyncStorageDelegate.swift in Sources */,
+				8D213C7C25D108660096D194 /* AsyncStorageDelegate.m in Sources */,
+				8D75352425D1E35300374ACA /* KeyProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D286ECB25D0FEC700D3C0FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D75355125D1EBA400374ACA /* KeyProvider.swift in Sources */,
+				8D75354525D1EAD100374ACA /* AsyncStorageAccessor.h in Sources */,
+				8D213C8225D110850096D194 /* Provider.swift in Sources */,
+				8D213C2A25D100B90096D194 /* NoteWidgetView.swift in Sources */,
+				8D286EDB25D0FEC800D3C0FD /* NoteWidget.intentdefinition in Sources */,
+				8D286ED625D0FEC700D3C0FD /* NoteWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8D286EDE25D0FEC800D3C0FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D286ECE25D0FEC700D3C0FD /* NoteWidgetExtension */;
+			targetProxy = 8D286EDD25D0FEC800D3C0FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
@@ -293,9 +624,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C2E3173556A471DD304B334 /* Pods-sharednotes.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = sharednotes/sharednotes.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JVTXJSHY7N;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -303,15 +638,16 @@
 					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = sharednotes/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.name.sharednotes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mrarich.SharedNotes;
 				PRODUCT_NAME = sharednotes;
+				SWIFT_OBJC_BRIDGING_HEADER = "sharednotes-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -322,20 +658,25 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A4D352CD337FB3A3BF06240 /* Pods-sharednotes.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = sharednotes/sharednotes.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JVTXJSHY7N;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = sharednotes/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.name.sharednotes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mrarich.SharedNotes;
 				PRODUCT_NAME = sharednotes;
+				SWIFT_OBJC_BRIDGING_HEADER = "sharednotes-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -388,13 +729,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
-					"\"$(inherited)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -441,16 +778,83 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
-					"\"$(inherited)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8D286EE125D0FEC800D3C0FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = NoteWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_ASSET_PATHS = AsyncStorageAccessor.h;
+				DEVELOPMENT_TEAM = JVTXJSHY7N;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NoteWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mrarich.SharedNotes.NoteWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D286EE225D0FEC800D3C0FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = NoteWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_ASSET_PATHS = AsyncStorageAccessor.h;
+				DEVELOPMENT_TEAM = JVTXJSHY7N;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NoteWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mrarich.SharedNotes.NoteWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -471,6 +875,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D286EE325D0FEC800D3C0FD /* Build configuration list for PBXNativeTarget "NoteWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D286EE125D0FEC800D3C0FD /* Debug */,
+				8D286EE225D0FEC800D3C0FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

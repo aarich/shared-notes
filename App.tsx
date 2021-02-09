@@ -1,11 +1,21 @@
+import { persistor, store } from './src/redux/store';
+
+import Navigation from './src/screens/navigation/Navigation';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StyleSheet } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <SafeAreaProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Navigation />
+        </PersistGate>
+      </Provider>
+    </SafeAreaProvider>
   );
 }
 
