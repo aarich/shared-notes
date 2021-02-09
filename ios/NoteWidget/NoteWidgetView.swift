@@ -9,28 +9,27 @@ import Foundation
 import SwiftUI
 
 struct NoteWidgetEntryView : View {
-    var entry: Provider.Entry
+  var entry: Provider.Entry
   
-  let text = "Some Text"//KeyProvider.getKey()
-
-
-    var body: some View {
-      ZStack{
-        Color(red: 0.09, green: 0.63, blue: 0.52)
-          VStack(alignment: .leading) {
-            Spacer()
-            
-            Text(text)
-            .font(.system(size:10))
+  var body: some View {
+    ZStack{
+      Color(entry.color)
+      VStack(alignment: .leading) {
+        if (entry.showTitle) {
+          Text(entry.name)
+            .font(.system(size:13))
             .bold()
-            
-            Text(entry.content)
-            .font(.system(size:10))
-            Spacer()
-          
-          }
-          .padding(.all)
-      }
+        }
+        if (entry.showModified) {
+          Text(entry.lastModified, style: .relative)
+            .font(.system(size: 12))
+        }
         
+        Text(entry.content)
+          .font(.system(size:12))        
+      }
+      .padding(.all)
     }
+    
+  }
 }
