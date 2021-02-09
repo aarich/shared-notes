@@ -1,0 +1,17 @@
+export type NotesParamList = { Library: undefined; Edit: { slug?: string } };
+
+export type MoreParamList = {
+  Settings: undefined;
+  About: undefined;
+};
+
+export type Note = {
+  created: string;
+  modified: string;
+} & NoteDraft;
+
+export type NoteDraft = {
+  slug: string;
+  name: string;
+  content: string;
+};

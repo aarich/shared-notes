@@ -1,12 +1,44 @@
 {
   "name": "shared-notes",
-  "displayName": "shared-notes",
+  "displayName": "Shared Notes",
   "expo": {
     "name": "shared-notes",
     "slug": "shared-notes",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "userInterfaceStyle": "automatic",
+    "scheme": "sharednotes",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 3000
+    },
+    "ios": {
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-6949812709353975~7748559513"
+      },
+      "bundleIdentifier": "com.mrarich.Intervals",
+      "associatedDomains": ["applinks:mrarich.com"]
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "config": {
+        "googleMobileAdsAppId": "ca-app-pub-6949812709353975~9033721022"
+      },
+      "permissions": ["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
+      "package": "com.mrarich.Intervals"
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "MyVersion": "1"
+    }
   }
 }
