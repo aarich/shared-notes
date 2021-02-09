@@ -1,4 +1,4 @@
-import { Alert, Dimensions, StyleSheet, View } from 'react-native';
+import { Alert, Dimensions, FlatList, StyleSheet, View } from 'react-native';
 import {
   Button,
   Card,
@@ -10,13 +10,14 @@ import {
 } from '@ui-kitten/components';
 import { NoteDraft, NotesParamList } from '../utils/types';
 import React, { useEffect, useState } from 'react';
+import { getNote, patchNote, postNote } from '../redux/actions/thunks';
 import { getShareLink, sendErrorAlert, shareNote } from '../utils/experience';
-import { patchNote, postNote } from '../redux/actions/thunks';
 
+import { AdUnit } from '../utils/ads';
 import Input from '../components/shared/Input';
+import PotentialAd from '../components/shared/PotentialAd';
 import QRCode from 'react-native-qrcode-svg';
 import { RouteProp } from '@react-navigation/native';
-import { ScrollView } from 'react-native-gesture-handler';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { generateSlug } from 'random-word-slugs';
 import { useAppDispatch } from '../redux/store';
@@ -37,6 +38,7 @@ const EditScreen = ({ navigation, route }: Props) => {
   const [qrVisible, setQRVisible] = useState(false);
   const note = useNote(slug);
   const [isDirty, setIsDirty] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [draft, setDraft] = useState<NoteDraft>(() => ({
     name: note?.name || '',
     content: note?.content || '',
@@ -55,6 +57,15 @@ const EditScreen = ({ navigation, route }: Props) => {
       setBridgeError(undefined);
     }
   }, [bridgeError]);
+
+  useEffect(() => {
+    if (!isNew) {
+      slug &&
+        dispatch(getNote(slug))
+          .catch(sendErrorAlert)
+          .then(() => setIsRefreshing(false));
+    }
+  }, []);
 
   useEffect(() => {
     const headerTitle = isNew ? 'Create Note' : 'Edit Note';
@@ -136,54 +147,68 @@ const EditScreen = ({ navigation, route }: Props) => {
           </View>
         </Card>
       </Modal>
-      <ScrollView>
-        <View style={styles.margined}>
-          <Input
-            label="Title"
-            placeholder="Note Title"
-            value={draft.name}
-            onChangeText={(name) => setDraftWrapper({ ...draft, name })}
-          />
-          <Input
-            label="Slug"
-            placeholder="Note Slug"
-            value={draft.slug}
-            onChangeText={(slug) => setDraftWrapper({ ...draft, slug })}
-            disabled={!isNew}
-          />
-          <Input
-            label="Content"
-            placeholder="Note Content"
-            value={draft.content}
-            onChangeText={(content) => setDraftWrapper({ ...draft, content })}
-            numberOfLines={10}
-            textStyle={{ minHeight: 64 }}
-            multiline={true}
-            size="large"
-          />
-          <Button
-            style={{ marginTop: 10 }}
-            disabled={!isDirty}
-            onPress={() =>
-              dispatch(isNew ? postNote(draft) : patchNote(draft))
-                .then(() =>
-                  Alert.alert(
-                    'Note Saved',
-                    'To display this on your home screen, add the widget, press and hold, then tap "Edit Widget" to choose a note.' +
-                      (isNew
-                        ? ''
-                        : '\n\nOther devices displaying this note will be updated soon!')
+      <FlatList
+        refreshing={isRefreshing}
+        onRefresh={() => {
+          setIsRefreshing(true);
+          slug &&
+            dispatch(getNote(slug))
+              .catch(sendErrorAlert)
+              .then(() => setIsRefreshing(false));
+        }}
+        keyExtractor={(_, i) => '' + i}
+        renderItem={() => <></>}
+        data={[]}
+        ListHeaderComponent={
+          <View style={styles.margined}>
+            <Input
+              label="Title"
+              placeholder="Note Title"
+              value={draft.name}
+              onChangeText={(name) => setDraftWrapper({ ...draft, name })}
+            />
+            <Input
+              label="Slug"
+              placeholder="Note Slug"
+              value={draft.slug}
+              onChangeText={(slug) => setDraftWrapper({ ...draft, slug })}
+              disabled={!isNew}
+            />
+            <Input
+              label="Content"
+              placeholder="Note Content"
+              value={draft.content}
+              onChangeText={(content) => setDraftWrapper({ ...draft, content })}
+              numberOfLines={10}
+              textStyle={{ minHeight: 64 }}
+              multiline={true}
+              size="large"
+            />
+            <Button
+              style={{ marginTop: 10 }}
+              disabled={!isDirty}
+              onPress={() =>
+                dispatch(isNew ? postNote(draft) : patchNote(draft))
+                  .then(() =>
+                    Alert.alert(
+                      'Note Saved',
+                      'To display this on your home screen, add the widget, press and hold, then tap "Edit Widget" to choose a note.' +
+                        (isNew
+                          ? ''
+                          : '\n\nOther devices displaying this note will be updated soon!')
+                    )
                   )
-                )
-                .then(() => setIsNew(false))
-                .catch(sendErrorAlert)
-                .then(() => setIsDirty(false))
-            }
-          >
-            Save
-          </Button>
-        </View>
-      </ScrollView>
+                  .then(() => setIsNew(false))
+                  .catch(sendErrorAlert)
+                  .then(() => setIsDirty(false))
+              }
+            >
+              Save
+            </Button>
+          </View>
+        }
+      />
+      <PotentialAd unit={AdUnit.edit} />
     </Layout>
   );
 };

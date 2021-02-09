@@ -25,13 +25,14 @@ type Props = {
 const LibraryScreen = ({ navigation }: Props) => {
   const dispatch = useAppDispatch();
   const notes = useNotes();
+  console.log(notes);
 
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <TopNavigationAction
           icon={(props) => <Icon {...props} name="plus" />}
-          onPress={() => navigation.push('EditScreen', {})}
+          onPress={() => navigation.push('EditScreen', { slug: undefined })}
         />
       ),
     });

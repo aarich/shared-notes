@@ -21,7 +21,7 @@ export const getNote = (slug: string): AppThunk<Note> => (dispatch) =>
   fetch(`${noteEndpoint}?slug=${slug}`)
     .then(checkResponse)
     .then((resp) => {
-      const fetched = resp.note;
+      const fetched = { ...resp.note, slug };
       dispatch(setNote(fetched));
       return fetched;
     });

@@ -1,3 +1,5 @@
+import * as ScreenOrientation from 'expo-screen-orientation';
+
 import { AdType, initialState } from '../../redux/reducers/settingsReducer';
 import { AdUnit, getAdId } from '../../utils/ads';
 import React, { useEffect, useState } from 'react';
@@ -14,6 +16,7 @@ const PotentialAd = ({ unit }: { unit: AdUnit }) => {
   const dispatch = useAppDispatch();
   const adSetting = useSetting('ads');
   const adLastReset = useSetting('adLastReset');
+  const [isPortrait, setIsPortrait] = useState(true);
 
   const [showAd, setShowAd] = useState(AdType.Off !== adSetting);
 
@@ -28,9 +31,27 @@ const PotentialAd = ({ unit }: { unit: AdUnit }) => {
     setShowAd(AdType.Off !== adSetting);
   }, [adSetting]);
 
+  useEffect(() => {
+    const setMode = (orientation: ScreenOrientation.Orientation) =>
+      setIsPortrait(
+        ![
+          ScreenOrientation.Orientation.LANDSCAPE_LEFT,
+          ScreenOrientation.Orientation.LANDSCAPE_RIGHT,
+        ].includes(orientation)
+      );
+
+    ScreenOrientation.getOrientationAsync().then((o) => setMode(o));
+
+    ScreenOrientation.addOrientationChangeListener((e) => {
+      setMode(e.orientationInfo.orientation);
+    });
+
+    return () => ScreenOrientation.removeOrientationChangeListeners();
+  }, []);
+
   return showAd ? (
     <AdMobBanner
-      bannerSize="smartBannerPortrait"
+      bannerSize={isPortrait ? 'smartBannerPortrait' : 'smartBannerLandscape'}
       adUnitID={getAdId(unit)}
       servePersonalizedAds={adSetting === AdType.Personal}
       onDidFailToReceiveAdWithError={() => setShowAd(false)}
