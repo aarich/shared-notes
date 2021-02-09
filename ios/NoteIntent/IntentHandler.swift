@@ -30,7 +30,7 @@
   }
   
   func getAppData() -> AppData? {
-    let sharedDefaults = UserDefaults.init(suiteName: "group.com.mrarich.SharedNotes")
+    let sharedDefaults = UserDefaults.init(suiteName: "group.com.mrarich.SharedNoteWidget")
 
     if (sharedDefaults != nil) {
       do{

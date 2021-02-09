@@ -2,14 +2,12 @@ import * as Linking from 'expo-linking';
 
 import { Icon, useTheme } from '@ui-kitten/components';
 import { MoreParamList, NotesParamList } from '../../utils/types';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import AboutScreen from '../AboutScreen';
-import { Alert } from 'react-native';
 import EditScreen from '../EditScreen';
 import LibraryScreen from '../LibraryScreen';
 import MoreScreen from '../MoreScreen';
-import SharedGroupPreferences from 'react-native-shared-group-preferences';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { navigateToEdit } from './rootNavRef';
@@ -30,12 +28,15 @@ type TabBarIconProps = {
 export default function BottomTabNavigator() {
   const theme = useTheme();
 
-  const handleURL = (url: string) => {
-    const parsed = Linking.parse(url);
-    if (parsed.queryParams?.f) {
-      navigateToEdit(parsed.queryParams.f);
-    }
-  };
+  const handleURL = useCallback(
+    (url: string) => {
+      const parsed = Linking.parse(url);
+      if (parsed.hostname === 'edit' && parsed.path) {
+        navigateToEdit(parsed.path);
+      }
+    },
+    [navigateToEdit]
+  );
 
   useEffect(() => {
     Linking.getInitialURL().then((initialUrl) => {
@@ -45,16 +46,6 @@ export default function BottomTabNavigator() {
     const handleUrlEvent = (e: Linking.EventType) => handleURL(e.url);
     Linking.addEventListener('url', handleUrlEvent);
     return () => Linking.removeEventListener('url', handleUrlEvent);
-  }, []);
-
-  useEffect(() => {
-    SharedGroupPreferences.setItem(
-      'data',
-      { ids: ['FIRST ID', 'b', 'c'] },
-      'group.com.mrarich.SharedNotes'
-    )
-      .then(() => Alert.alert('Set value'))
-      .catch((e) => Alert.alert(e?.message || 'Got error'));
   }, []);
 
   return (
@@ -99,9 +90,9 @@ const NotesStack = createStackNavigator<NotesParamList>();
 
 function NotesNavigator() {
   return (
-    <NotesStack.Navigator>
+    <NotesStack.Navigator initialRouteName="Library">
       <NotesStack.Screen name="Library" component={LibraryScreen} />
-      <NotesStack.Screen name="Edit" component={EditScreen} />
+      <NotesStack.Screen name="EditScreen" component={EditScreen} />
     </NotesStack.Navigator>
   );
 }

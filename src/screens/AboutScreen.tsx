@@ -78,8 +78,8 @@ const AboutScreen = () => {
         <Text category="p1" style={styles.p}>
           The source code for this app is entirely public! You can browse it and
           if you like, make a contribution! Check it out on{' '}
-          {a('GitHub', 'github.com/aarich/react-native-intervals')}. You can
-          find out more about the developer {a('here', 'mrarich.com/about')}.
+          {a('GitHub', 'github.com/aarich/shared-notes')}. You can find out more
+          about the developer {a('here', 'mrarich.com/about')}.
         </Text>
         {p(
           `Version ${Constants.nativeAppVersion}-${Constants.manifest.extra.MyVersion}`

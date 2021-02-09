@@ -23,11 +23,14 @@ struct NoteWidgetEntryView : View {
         if (entry.showTitle) {
           Text(entry.name)
             .font(.system(size:13))
+            .foregroundColor(entry.color.isLight() ? Color.black : Color.white)
             .bold()
         }
         if (entry.showModified) {
-          Text("Modified \(entry.lastModified, formatter: Self.formatter)")
+          // Adding -1 second to make it the time always appear in the past.
+          Text("Updated \(entry.lastModified.addingTimeInterval(TimeInterval(-1)), formatter: Self.formatter)")
             .font(.system(size: 10))
+            .foregroundColor(entry.color.isLight() ? Color.black : Color.white)
         }
         if (entry.showTitle || entry.showModified) {
           Spacer()
@@ -35,13 +38,15 @@ struct NoteWidgetEntryView : View {
         
         Text(entry.content)
           .font(.system(size:12))
+          .foregroundColor(entry.color.isLight() ? Color.black : Color.white)
+
         
         Spacer()
         Spacer()
 
       }
-      .padding(15)
-    }
+      .padding(10)
+    }.widgetURL(URL(string:"sharednotes://edit/\(entry.slug)"))
     
   }
 }

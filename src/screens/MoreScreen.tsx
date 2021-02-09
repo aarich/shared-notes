@@ -3,10 +3,18 @@ import {
   BooleanSettings,
   SelectSettings,
 } from '../redux/reducers/settingsReducer';
-import { Divider, Icon, Layout, List, ListItem } from '@ui-kitten/components';
-import React, { useCallback } from 'react';
+import {
+  Divider,
+  Icon,
+  Layout,
+  List,
+  ListItem,
+  Modal,
+} from '@ui-kitten/components';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { AdUnit } from '../utils/ads';
+import ColorPicker from '../components/settings/ColorPicker';
 import ListItemAds from '../components/settings/ListItemAds';
 import ListItemTheme from '../components/settings/ListItemTheme';
 import ListItemToggle from '../components/settings/ListItemToggle';
@@ -15,6 +23,7 @@ import PotentialAd from '../components/shared/PotentialAd';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { resetApp } from '../redux/actions';
 import { useAppDispatch } from '../redux/store';
+import { useUpToDateBridgeData } from '../utils/bridge';
 
 type Props = {
   navigation: StackNavigationProp<MoreParamList, 'Settings'>;
@@ -33,6 +42,7 @@ type ListItemSelectSetting = {
 
 const MoreScreen = ({ navigation }: Props) => {
   const dispatch = useAppDispatch();
+  const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
 
   const resetAppAlert = useCallback(() => {
     Alert.alert(
@@ -65,12 +75,24 @@ const MoreScreen = ({ navigation }: Props) => {
   const lastNavListItem = listItems.length - 1;
 
   const selectables: (keyof SelectSettings)[] = ['theme', 'ads'];
-  const booleans: (keyof BooleanSettings)[] = ['hideDescription'];
+  const booleans: (keyof BooleanSettings)[] = ['showLastModified', 'showTitle'];
 
   booleans.forEach((setting) => listItems.push({ setting, isBoolean: true }));
+  listItems.push({
+    label: 'Widget Color',
+    action: () => setIsColorPickerVisible(true),
+  });
   selectables.forEach((setting) =>
     listItems.push({ setting, isBoolean: false })
   );
+
+  const [bridgeError, setBridgeError] = useUpToDateBridgeData();
+  useEffect(() => {
+    if (bridgeError) {
+      Alert.alert('Error', bridgeError);
+      setBridgeError(undefined);
+    }
+  }, [bridgeError]);
 
   const getListItem = (
     listItem:
@@ -115,6 +137,14 @@ const MoreScreen = ({ navigation }: Props) => {
 
   return (
     <Layout style={styles.container}>
+      <Modal
+        visible={isColorPickerVisible}
+        onBackdropPress={() => setIsColorPickerVisible(false)}
+        backdropStyle={styles.backdrop}
+      >
+        <ColorPicker />
+      </Modal>
+
       <List
         style={{ flex: 1, width: '100%' }}
         ItemSeparatorComponent={Divider}
@@ -142,6 +172,7 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  backdrop: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
 });
 
 export default MoreScreen;
