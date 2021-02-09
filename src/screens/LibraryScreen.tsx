@@ -31,7 +31,7 @@ const LibraryScreen = ({ navigation }: Props) => {
       headerRight: () => (
         <TopNavigationAction
           icon={(props) => <Icon {...props} name="plus" />}
-          onPress={() => navigation.push('Edit', {})}
+          onPress={() => navigation.push('EditScreen', {})}
         />
       ),
     });
@@ -43,12 +43,11 @@ const LibraryScreen = ({ navigation }: Props) => {
         style={{ flex: 1, width: '100%' }}
         ItemSeparatorComponent={Divider}
         data={notes}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item: Note) => item.slug}
         renderItem={({ item }: { item: Note }) => (
           <ListItem
             title={item.name}
-            key={item.slug}
-            onPress={() => navigation.push('Edit', { slug: item.slug })}
+            onPress={() => navigation.push('EditScreen', { slug: item.slug })}
             accessoryRight={(props) => (
               <Pressable
                 style={{ flexDirection: 'row' }}

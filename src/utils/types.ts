@@ -1,4 +1,7 @@
-export type NotesParamList = { Library: undefined; Edit: { slug?: string } };
+export type NotesParamList = {
+  Library: undefined;
+  EditScreen: { slug?: string };
+};
 
 export type MoreParamList = {
   Settings: undefined;

@@ -11,9 +11,8 @@ import { useAppDispatch } from '../../redux/store';
 import { useSetting } from '../../redux/selectors';
 
 const labels = {
-  countUp: 'Timers Count Up',
-  showTotalTime: 'Show Total Time',
-  hideDescription: 'Hide Description (saves space)',
+  showTitle: 'Show Note Title',
+  showLastModified: 'Show Last Modified',
 };
 
 const ListItemToggle = ({ setting }: { setting: keyof BooleanSettings }) => {

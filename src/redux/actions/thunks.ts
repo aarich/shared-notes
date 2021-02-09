@@ -50,12 +50,20 @@ export const patchNote = (note: NoteDraft): AppThunk<Note> => (dispatch) =>
       return updated;
     });
 
-export const deleteNote = (slug: string): AppThunk<void> => (dispatch) =>
-  fetch(noteEndpoint, {
-    method: 'DELETE',
-    body: JSON.stringify({ slug }),
-  })
-    .then(checkResponse)
-    .then(() => {
-      dispatch(removeNote(slug));
-    });
+export const deleteNote = (
+  slug: string,
+  deleteFromDB: boolean
+): AppThunk<void> => async (dispatch) => {
+  if (deleteFromDB) {
+    await fetch(noteEndpoint, {
+      method: 'DELETE',
+      body: JSON.stringify({ slug }),
+    })
+      .then(checkResponse)
+      .then(() => {
+        dispatch(removeNote(slug));
+      });
+  } else {
+    dispatch(removeNote(slug));
+  }
+};

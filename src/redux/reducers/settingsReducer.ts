@@ -17,30 +17,39 @@ export enum ThemeType {
   System = 'System',
 }
 
+// Select
 type adSetting = { ads: AdType };
 type themeSetting = { theme: ThemeType };
-type hideDescription = { hideDescription: boolean };
+// Boolean
+type showTitle = { showTitle: boolean };
+type showLastModified = { showLastModified: boolean };
 // other
 type adLastResetSetting = { adLastReset: number };
+type widgetColor = { widgetColor: string };
 
 export type AnySetting =
   | adSetting
   | themeSetting
-  | hideDescription
-  | adLastResetSetting;
+  | showTitle
+  | showLastModified
+  | adLastResetSetting
+  | widgetColor;
 
-export type BooleanSettings = hideDescription;
+export type BooleanSettings = showTitle & showLastModified;
 
 export type SelectSettings = adSetting & themeSetting;
 
 export type SettingsState = SelectSettings &
   BooleanSettings &
-  adLastResetSetting;
+  adLastResetSetting &
+  widgetColor;
 
 export const initialState: SettingsState = {
   ads: AdType.Generic,
   theme: ThemeType.System,
-  hideDescription: false,
+  showTitle: true,
+  showLastModified: true,
+  widgetColor: '#3AA0FF',
   adLastReset: Date.now(),
 };
 

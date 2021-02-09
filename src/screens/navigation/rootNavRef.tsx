@@ -3,9 +3,9 @@ import { createRef } from 'react';
 
 export const rootNavRef = createRef<NavigationContainerRef>();
 
-export const navigateToEdit = (serializedFlow: string) => {
-  rootNavRef.current?.navigate('Flows', {
+export const navigateToEdit = (slug: string) => {
+  rootNavRef.current?.navigate('Library', {
     screen: 'EditScreen',
-    params: { serializedFlow },
+    params: { slug },
   });
 };

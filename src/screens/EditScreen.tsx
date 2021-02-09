@@ -21,12 +21,13 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { generateSlug } from 'random-word-slugs';
 import { useAppDispatch } from '../redux/store';
 import { useNote } from '../redux/selectors';
+import { useUpToDateBridgeData } from '../utils/bridge';
 
 const { width } = Dimensions.get('window');
 
 type Props = {
-  navigation: StackNavigationProp<NotesParamList, 'Edit'>;
-  route: RouteProp<NotesParamList, 'Edit'>;
+  navigation: StackNavigationProp<NotesParamList, 'EditScreen'>;
+  route: RouteProp<NotesParamList, 'EditScreen'>;
 };
 
 const EditScreen = ({ navigation, route }: Props) => {
@@ -46,6 +47,14 @@ const EditScreen = ({ navigation, route }: Props) => {
     setIsDirty(true);
     setDraft(newDraft);
   };
+
+  const [bridgeError, setBridgeError] = useUpToDateBridgeData();
+  useEffect(() => {
+    if (bridgeError) {
+      Alert.alert('Error', bridgeError);
+      setBridgeError(undefined);
+    }
+  }, [bridgeError]);
 
   useEffect(() => {
     const headerTitle = isNew ? 'Create Note' : 'Edit Note';
@@ -106,23 +115,20 @@ const EditScreen = ({ navigation, route }: Props) => {
   );
 
   return (
-    <Layout style={{ flex: 1, flexGrow: 1 }}>
+    <Layout style={styles.container}>
       <Modal
         visible={qrVisible}
         onBackdropPress={() => setQRVisible(false)}
         backdropStyle={styles.backdrop}
       >
         <Card
-          disabled
           header={(props) => (
             <View {...props}>
               <Text category="s1">Point another iPhone camera at this!</Text>
             </View>
           )}
         >
-          <View
-            style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}
-          >
+          <View style={styles.qrCardBody}>
             <QRCode
               value={getShareLink(draft.slug)}
               size={Math.floor(width * 0.7)}
@@ -131,10 +137,10 @@ const EditScreen = ({ navigation, route }: Props) => {
         </Card>
       </Modal>
       <ScrollView>
-        <View style={{ marginHorizontal: '5%', marginVertical: '2%' }}>
+        <View style={styles.margined}>
           <Input
-            label="Name"
-            placeholder="Note Name"
+            label="Title"
+            placeholder="Note Title"
             value={draft.name}
             onChangeText={(name) => setDraftWrapper({ ...draft, name })}
           />
@@ -160,8 +166,16 @@ const EditScreen = ({ navigation, route }: Props) => {
             disabled={!isDirty}
             onPress={() =>
               dispatch(isNew ? postNote(draft) : patchNote(draft))
+                .then(() =>
+                  Alert.alert(
+                    'Note Saved',
+                    'To display this on your home screen, add the widget, press and hold, then tap "Edit Widget" to choose a note.' +
+                      (isNew
+                        ? ''
+                        : '\n\nOther devices displaying this note will be updated soon!')
+                  )
+                )
                 .then(() => setIsNew(false))
-                .then(() => Alert.alert('Note Saved'))
                 .catch(sendErrorAlert)
                 .then(() => setIsDirty(false))
             }
@@ -175,9 +189,10 @@ const EditScreen = ({ navigation, route }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  backdrop: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
+  backdrop: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+  qrCardBody: { flex: 1, flexDirection: 'row', justifyContent: 'center' },
+  margined: { marginHorizontal: '5%', marginVertical: '2%' },
+  container: { flex: 1, flexGrow: 1 },
 });
 
 export default EditScreen;

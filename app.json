@@ -2,7 +2,7 @@
   "name": "shared-notes",
   "displayName": "Shared Notes",
   "expo": {
-    "name": "shared-notes",
+    "name": "Shared Notes",
     "slug": "shared-notes",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"],
@@ -20,8 +20,7 @@
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-6949812709353975~7748559513"
       },
-      "bundleIdentifier": "com.mrarich.Intervals",
-      "associatedDomains": ["applinks:mrarich.com"]
+      "bundleIdentifier": "com.mrarich.SharedNoteWidget"
     },
     "android": {
       "adaptiveIcon": {
@@ -32,7 +31,7 @@
         "googleMobileAdsAppId": "ca-app-pub-6949812709353975~9033721022"
       },
       "permissions": ["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
-      "package": "com.mrarich.Intervals"
+      "package": "com.mrarich.SharedNoteWidget"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
