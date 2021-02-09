@@ -32,6 +32,9 @@ PODS:
   - EXPermissions (10.0.0):
     - UMCore
     - UMPermissionsInterface
+  - EXScreenOrientation (2.1.0):
+    - React-Core
+    - UMCore
   - EXSecureStore (9.3.0):
     - UMCore
   - EXSplashScreen (0.8.1):
@@ -366,6 +369,7 @@ DEPENDENCIES:
   - EXLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - EXLocation (from `../node_modules/expo-location/ios`)
   - EXPermissions (from `../node_modules/expo-permissions/ios`)
+  - EXScreenOrientation (from `../node_modules/expo-screen-orientation/ios`)
   - EXSecureStore (from `../node_modules/expo-secure-store/ios`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - EXSQLite (from `../node_modules/expo-sqlite/ios`)
@@ -453,6 +457,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-location/ios"
   EXPermissions:
     :path: "../node_modules/expo-permissions/ios"
+  EXScreenOrientation:
+    :path: "../node_modules/expo-screen-orientation/ios"
   EXSecureStore:
     :path: "../node_modules/expo-secure-store/ios"
   EXSplashScreen:
@@ -568,6 +574,7 @@ SPEC CHECKSUMS:
   EXLinearGradient: c803fbd1aa974be038177b1e45524bc35759fe9c
   EXLocation: d55e2a37f61bcfb4eba9c813b3f4621d896c4c00
   EXPermissions: 17d4846ad1880f6891c74ae58ca1acb43e47ed47
+  EXScreenOrientation: 74ec9be3963b613eb37730d41ef0954e014b08ff
   EXSecureStore: 1b571851e6068b30b8ec097be848a04603c03bae
   EXSplashScreen: 8c7c1112ce7611a853486af4737fe2298eda7657
   EXSQLite: bda6a286dded0637bb312ee781239dcca163ff4b

@@ -16,14 +16,11 @@
 		8D03272F25D25DB600DEA687 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D03272E25D25DB600DEA687 /* Intents.framework */; };
 		8D03273225D25DB600DEA687 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D03273125D25DB600DEA687 /* IntentHandler.swift */; };
 		8D03273625D25DB600DEA687 /* NoteIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8D03272D25D25DB600DEA687 /* NoteIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		8D03275425D2642F00DEA687 /* NoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D286ED725D0FEC700D3C0FD /* NoteWidget.intentdefinition */; };
 		8D03277025D2672900DEA687 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D03273125D25DB600DEA687 /* IntentHandler.swift */; };
 		8D213C2A25D100B90096D194 /* NoteWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D213C2925D100B90096D194 /* NoteWidgetView.swift */; };
 		8D286ED125D0FEC700D3C0FD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D286ED025D0FEC700D3C0FD /* WidgetKit.framework */; };
 		8D286ED325D0FEC700D3C0FD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D286ED225D0FEC700D3C0FD /* SwiftUI.framework */; };
 		8D286ED925D0FEC800D3C0FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D286ED825D0FEC800D3C0FD /* Assets.xcassets */; };
-		8D286EDB25D0FEC800D3C0FD /* NoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D286ED725D0FEC700D3C0FD /* NoteWidget.intentdefinition */; };
-		8D286EDC25D0FEC800D3C0FD /* NoteWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D286ED725D0FEC700D3C0FD /* NoteWidget.intentdefinition */; };
 		8D286EDF25D0FEC800D3C0FD /* NoteWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8D286ECF25D0FEC700D3C0FD /* NoteWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8D6A9C8025D267960004F108 /* NoteIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D6A9C7F25D267960004F108 /* NoteIntents.intentdefinition */; };
 		8D6A9C9025D267F80004F108 /* NoteIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D6A9C7F25D267960004F108 /* NoteIntents.intentdefinition */; };
@@ -90,7 +87,6 @@
 		8D286ED025D0FEC700D3C0FD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		8D286ED225D0FEC700D3C0FD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		8D286ED525D0FEC700D3C0FD /* NoteWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteWidget.swift; sourceTree = "<group>"; };
-		8D286ED725D0FEC700D3C0FD /* NoteWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = NoteWidget.intentdefinition; sourceTree = "<group>"; };
 		8D286ED825D0FEC800D3C0FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D286EDA25D0FEC800D3C0FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D6A9C7F25D267960004F108 /* NoteIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = NoteIntents.intentdefinition; sourceTree = "<group>"; };
@@ -392,7 +388,6 @@
 				8D286ED525D0FEC700D3C0FD /* NoteWidget.swift */,
 				8D7FE35725D31F3E007EB2C0 /* UIColorExtensions.swift */,
 				8D213C2925D100B90096D194 /* NoteWidgetView.swift */,
-				8D286ED725D0FEC700D3C0FD /* NoteWidget.intentdefinition */,
 				8D286ED825D0FEC800D3C0FD /* Assets.xcassets */,
 				8D286EDA25D0FEC800D3C0FD /* Info.plist */,
 			);
@@ -633,7 +628,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D286EDC25D0FEC800D3C0FD /* NoteWidget.intentdefinition in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				8D03277025D2672900DEA687 /* IntentHandler.swift in Sources */,
@@ -645,7 +639,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D03275425D2642F00DEA687 /* NoteWidget.intentdefinition in Sources */,
 				8D03273225D25DB600DEA687 /* IntentHandler.swift in Sources */,
 				8D6A9C9025D267F80004F108 /* NoteIntents.intentdefinition in Sources */,
 			);
@@ -660,7 +653,6 @@
 				8D6A9CE225D26BE40004F108 /* IntentHandler.swift in Sources */,
 				8D213C2A25D100B90096D194 /* NoteWidgetView.swift in Sources */,
 				8D6A9CA125D268440004F108 /* NoteWidget.swift in Sources */,
-				8D286EDB25D0FEC800D3C0FD /* NoteWidget.intentdefinition in Sources */,
 				8D7FE35025D31E9C007EB2C0 /* NoteApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -724,6 +716,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -753,6 +746,7 @@
 				PRODUCT_NAME = sharednotes;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
