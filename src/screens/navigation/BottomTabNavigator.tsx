@@ -13,7 +13,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { navigateToEdit } from './rootNavRef';
 
 type BottomTabParamList = {
-  Library: undefined;
+  Notes: undefined;
   More: undefined;
 };
 
@@ -50,14 +50,14 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Library"
+      initialRouteName="Notes"
       tabBarOptions={{
         activeTintColor: theme['color-primary-500'],
         labelPosition: 'below-icon',
       }}
     >
       <BottomTab.Screen
-        name="Library"
+        name="Notes"
         component={NotesNavigator}
         options={{
           tabBarIcon: ({ color, focused, size }: TabBarIconProps) => (

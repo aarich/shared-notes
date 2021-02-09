@@ -3,15 +3,20 @@ import { Platform } from 'react-native';
 export enum AdUnit {
   library = 'library',
   settings = 'settings',
+  edit = 'edit',
 }
 
 const AD_UNIT = {
   library: {
-    ios: '',
+    ios: 'ca-app-pub-6949812709353975/6427824702',
     android: '',
   },
   settings: {
-    ios: '',
+    ios: 'ca-app-pub-6949812709353975/8487189445',
+    android: '',
+  },
+  edit: {
+    ios: 'ca-app-pub-6949812709353975/5088560986',
     android: '',
   },
 };
