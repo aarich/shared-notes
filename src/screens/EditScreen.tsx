@@ -9,9 +9,17 @@ import {
   Text,
   TopNavigationAction,
 } from '@ui-kitten/components';
+import Clipboard from 'expo-clipboard';
 import { generateSlug } from 'random-word-slugs';
 import React, { useEffect, useState } from 'react';
-import { Alert, Dimensions, FlatList, StyleSheet, View } from 'react-native';
+import {
+  Alert,
+  Dimensions,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  View,
+} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import Input from '../components/shared/Input';
 import PotentialAd from '../components/shared/PotentialAd';
@@ -190,13 +198,31 @@ const EditScreen = ({ navigation, route }: Props) => {
               value={draft.name}
               onChangeText={(name) => setDraftWrapper({ ...draft, name })}
             />
-            <Input
-              label="Slug"
-              placeholder="Note Slug"
-              value={draft.slug}
-              onChangeText={(slug) => setDraftWrapper({ ...draft, slug })}
-              disabled={!isNew}
-            />
+            <Pressable
+              onPress={
+                isNew
+                  ? undefined
+                  : () =>
+                      Alert.alert('Copy to Clipboard?', slug, [
+                        {
+                          text: 'Copy',
+                          onPress: () => Clipboard.setString(slug || ''),
+                        },
+                        {
+                          text: 'Cancel',
+                          style: 'cancel',
+                        },
+                      ])
+              }
+            >
+              <Input
+                label="Slug"
+                placeholder="Note Slug"
+                value={draft.slug}
+                onChangeText={(slug) => setDraftWrapper({ ...draft, slug })}
+                disabled={!isNew}
+              />
+            </Pressable>
             <Input
               label="Content"
               placeholder="Note Content"
