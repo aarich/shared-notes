@@ -6,6 +6,7 @@ export type NotesParamList = {
 export type MoreParamList = {
   Settings: undefined;
   About: undefined;
+  Feedback: undefined;
 };
 
 export type Note = {

@@ -1,11 +1,10 @@
 import { Card, Text, useTheme } from '@ui-kitten/components';
-import { Dimensions, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
-
+import { Dimensions, StyleSheet, View } from 'react-native';
 import ColorPalette from 'react-native-color-palette';
 import { updateSetting } from '../../redux/actions';
-import { useAppDispatch } from '../../redux/store';
 import { useSetting } from '../../redux/selectors';
+import { useAppDispatch } from '../../redux/store';
 
 const { width } = Dimensions.get('window');
 const labels = [

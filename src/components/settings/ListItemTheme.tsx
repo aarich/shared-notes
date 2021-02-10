@@ -1,10 +1,9 @@
 import * as React from 'react';
-
-import ListWithOptions from './ListWithOptions';
-import { ThemeType } from '../../redux/reducers/settingsReducer';
 import { updateSetting } from '../../redux/actions';
-import { useAppDispatch } from '../../redux/store';
+import { ThemeType } from '../../redux/reducers/settingsReducer';
 import { useSetting } from '../../redux/selectors';
+import { useAppDispatch } from '../../redux/store';
+import ListWithOptions from './ListWithOptions';
 
 const ListItemTheme = () => {
   const dispatch = useAppDispatch();

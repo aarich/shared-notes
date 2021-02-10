@@ -1,10 +1,8 @@
-import * as Linking from 'expo-linking';
-
 import { Layout, Text } from '@ui-kitten/components';
-import { ScrollView, StyleSheet, View } from 'react-native';
-
-import Constants from 'expo-constants';
+import * as Linking from 'expo-linking';
 import React from 'react';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { VERSION } from '../utils/experience';
 
 const h3 = (text: string) => (
   <Text category="h3" style={styles.h3}>
@@ -68,6 +66,7 @@ const AboutScreen = () => {
         )}
         {[
           { name: 'Expo', url: 'expo.io' },
+          { name: 'GitHub', url: 'github.com' },
           {
             name: 'QR Code SVG',
             url: 'github.com/awesomejerry/react-native-qrcode-svg',
@@ -105,9 +104,7 @@ const AboutScreen = () => {
           {a('GitHub', 'github.com/aarich/shared-notes')}. You can find out more
           about the developer {a('here', 'mrarich.com/about')}.
         </Text>
-        {p(
-          `Version ${Constants.nativeAppVersion}-${Constants.manifest.extra.MyVersion}`
-        )}
+        {p(`Version ${VERSION}`)}
         {p(`© ${new Date().getFullYear()} Alex Rich`)}
         <Text></Text>
       </ScrollView>

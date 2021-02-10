@@ -1,14 +1,12 @@
+import { ListItem, Toggle } from '@ui-kitten/components';
 import * as React from 'react';
-
+import { updateSetting } from '../../redux/actions';
 import {
   AnySetting,
   BooleanSettings,
 } from '../../redux/reducers/settingsReducer';
-import { ListItem, Toggle } from '@ui-kitten/components';
-
-import { updateSetting } from '../../redux/actions';
-import { useAppDispatch } from '../../redux/store';
 import { useSetting } from '../../redux/selectors';
+import { useAppDispatch } from '../../redux/store';
 
 const labels = {
   showTitle: 'Show Note Title',

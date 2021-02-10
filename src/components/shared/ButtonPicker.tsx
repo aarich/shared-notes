@@ -1,7 +1,6 @@
-import { StyleSheet, View, ViewProps, ViewStyle } from 'react-native';
-
 import { ButtonElement } from '@ui-kitten/components';
 import React from 'react';
+import { StyleSheet, View, ViewProps, ViewStyle } from 'react-native';
 
 interface ButtonSwitchProps extends ViewProps {
   fullWidth?: boolean;

@@ -1,12 +1,11 @@
+import theme from '../../../assets/theme.json';
 import {
   AppActionTypes,
   RESET,
-  SET_SETTINGS,
   SettingsActionTypes,
+  SET_SETTINGS,
   UPDATE_SETTING,
 } from '../actions/actionTypes';
-
-import theme from '../../../assets/theme.json';
 
 export enum AdType {
   Personal = 'Personal',

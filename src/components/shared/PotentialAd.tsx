@@ -1,13 +1,11 @@
-import * as ScreenOrientation from 'expo-screen-orientation';
-
-import { AdType, initialState } from '../../redux/reducers/settingsReducer';
-import { AdUnit, getAdId } from '../../utils/ads';
-import React, { useEffect, useState } from 'react';
-
 import { AdMobBanner } from 'expo-ads-admob';
+import * as ScreenOrientation from 'expo-screen-orientation';
+import React, { useEffect, useState } from 'react';
 import { updateSetting } from '../../redux/actions';
-import { useAppDispatch } from '../../redux/store';
+import { AdType, initialState } from '../../redux/reducers/settingsReducer';
 import { useSetting } from '../../redux/selectors';
+import { useAppDispatch } from '../../redux/store';
+import { AdUnit, getAdId } from '../../utils/ads';
 
 //                   ms     s <- m <- h <- d <- 3 days
 const AD_RESET_DELAY_MS = 1000 * 60 * 60 * 24 * 3;

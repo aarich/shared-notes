@@ -1,7 +1,6 @@
 import { Button, ListItem } from '@ui-kitten/components';
-
-import ButtonPicker from '../shared/ButtonPicker';
 import React from 'react';
+import ButtonPicker from '../shared/ButtonPicker';
 
 type Props = {
   selectedIndex: number;

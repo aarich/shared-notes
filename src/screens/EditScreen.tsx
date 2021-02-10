@@ -1,4 +1,5 @@
-import { Alert, Dimensions, FlatList, StyleSheet, View } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import {
   Button,
   Card,
@@ -8,21 +9,19 @@ import {
   Text,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import { NoteDraft, NotesParamList } from '../utils/types';
+import { generateSlug } from 'random-word-slugs';
 import React, { useEffect, useState } from 'react';
-import { getNote, patchNote, postNote } from '../redux/actions/thunks';
-import { getShareLink, sendErrorAlert, shareNote } from '../utils/experience';
-
-import { AdUnit } from '../utils/ads';
+import { Alert, Dimensions, FlatList, StyleSheet, View } from 'react-native';
+import QRCode from 'react-native-qrcode-svg';
 import Input from '../components/shared/Input';
 import PotentialAd from '../components/shared/PotentialAd';
-import QRCode from 'react-native-qrcode-svg';
-import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { generateSlug } from 'random-word-slugs';
-import { useAppDispatch } from '../redux/store';
+import { getNote, patchNote, postNote } from '../redux/actions/thunks';
 import { useNote } from '../redux/selectors';
+import { useAppDispatch } from '../redux/store';
+import { AdUnit } from '../utils/ads';
 import { useUpToDateBridgeData } from '../utils/bridge';
+import { getShareLink, sendErrorAlert, shareNote } from '../utils/experience';
+import { NoteDraft, NotesParamList } from '../utils/types';
 
 const { width } = Dimensions.get('window');
 
@@ -56,7 +55,7 @@ const EditScreen = ({ navigation, route }: Props) => {
       Alert.alert('Error', bridgeError);
       setBridgeError(undefined);
     }
-  }, [bridgeError]);
+  }, [bridgeError, setBridgeError]);
 
   useEffect(() => {
     if (!isNew) {
@@ -65,7 +64,7 @@ const EditScreen = ({ navigation, route }: Props) => {
           .catch(sendErrorAlert)
           .then(() => setIsRefreshing(false));
     }
-  }, []);
+  }, [dispatch, isNew, slug]);
 
   useEffect(() => {
     const headerTitle = isNew ? 'Create Note' : 'Edit Note';
@@ -123,7 +122,7 @@ const EditScreen = ({ navigation, route }: Props) => {
       headerTitle,
       headerRight,
     });
-  }, [isNew]);
+  }, [dispatch, draft.slug, isNew, navigation]);
 
   useEffect(
     () =>

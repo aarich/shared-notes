@@ -1,10 +1,9 @@
-import { Action, AnyAction, applyMiddleware, createStore } from 'redux';
-import { persistReducer, persistStore } from 'redux-persist';
-import rootReducer, { RootState } from './reducers';
-import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
+import { Action, AnyAction, applyMiddleware, createStore } from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
+import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import rootReducer, { RootState } from './reducers';
 
 const persistConfig = {
   key: 'root',

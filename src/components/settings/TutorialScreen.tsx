@@ -1,7 +1,6 @@
-import { StyleSheet, View } from 'react-native';
-
-import React from 'react';
 import { Text } from '@ui-kitten/components';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
 type Props = {
   title: string;
