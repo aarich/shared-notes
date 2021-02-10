@@ -69,6 +69,7 @@ const EditScreen = ({ navigation, route }: Props) => {
     if (!isNew) {
       slug &&
         dispatch(getNote(slug))
+          .then((note) => setDraft({ ...note }))
           .catch(sendErrorAlert)
           .then(() => setIsRefreshing(false));
     }
@@ -104,6 +105,7 @@ const EditScreen = ({ navigation, route }: Props) => {
                               .then((note) => {
                                 setIsNew(false);
                                 setDraft({ ...note });
+                                setIsDirty(false);
                               })
                               .catch(sendErrorAlert)
                           : Alert.alert('Enter a slug'),
@@ -184,6 +186,8 @@ const EditScreen = ({ navigation, route }: Props) => {
           setIsRefreshing(true);
           slug &&
             dispatch(getNote(slug))
+              .then((note) => setDraft({ ...note }))
+              .then(() => setIsDirty(false))
               .catch(sendErrorAlert)
               .then(() => setIsRefreshing(false));
         }}
