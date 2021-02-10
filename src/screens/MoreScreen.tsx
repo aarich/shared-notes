@@ -1,8 +1,4 @@
-import { Alert, StyleSheet, View } from 'react-native';
-import {
-  BooleanSettings,
-  SelectSettings,
-} from '../redux/reducers/settingsReducer';
+import { StackNavigationProp } from '@react-navigation/stack';
 import {
   Divider,
   Icon,
@@ -12,19 +8,22 @@ import {
   Modal,
 } from '@ui-kitten/components';
 import React, { useCallback, useEffect, useState } from 'react';
-
-import { AdUnit } from '../utils/ads';
+import { Alert, StyleSheet, View } from 'react-native';
 import ColorPicker from '../components/settings/ColorPicker';
 import ListItemAds from '../components/settings/ListItemAds';
 import ListItemTheme from '../components/settings/ListItemTheme';
 import ListItemToggle from '../components/settings/ListItemToggle';
-import { MoreParamList } from '../utils/types';
 import PotentialAd from '../components/shared/PotentialAd';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { resetApp } from '../redux/actions';
-import { useAppDispatch } from '../redux/store';
+import {
+  BooleanSettings,
+  SelectSettings,
+} from '../redux/reducers/settingsReducer';
 import { useSetting } from '../redux/selectors';
+import { useAppDispatch } from '../redux/store';
+import { AdUnit } from '../utils/ads';
 import { useUpToDateBridgeData } from '../utils/bridge';
+import { MoreParamList } from '../utils/types';
 
 type Props = {
   navigation: StackNavigationProp<MoreParamList, 'Settings'>;
@@ -74,6 +73,7 @@ const MoreScreen = ({ navigation }: Props) => {
     | ListItemBooleanSetting
   )[] = [
     { label: 'About', destination: 'About' },
+    { label: 'Feedback', destination: 'Feedback' },
     { label: 'Reset', action: resetAppAlert },
   ];
   const lastNavListItem = listItems.length - 1;
@@ -95,7 +95,7 @@ const MoreScreen = ({ navigation }: Props) => {
       Alert.alert('Error', bridgeError);
       setBridgeError(undefined);
     }
-  }, [bridgeError]);
+  }, [bridgeError, setBridgeError]);
 
   const getListItem = (
     listItem:

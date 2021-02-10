@@ -1,6 +1,5 @@
-import { AnySetting, SettingsState } from '../reducers/settingsReducer';
-
 import { Note } from '../../utils/types';
+import { AnySetting, SettingsState } from '../reducers/settingsReducer';
 
 export const RESET = 'RESET';
 

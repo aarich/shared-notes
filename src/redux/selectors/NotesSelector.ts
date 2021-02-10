@@ -1,5 +1,5 @@
-import { NotesState } from '../reducers/notesReducer';
 import { useSelector } from 'react-redux';
+import { NotesState } from '../reducers/notesReducer';
 
 interface RootState {
   notes: NotesState;

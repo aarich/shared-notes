@@ -1,5 +1,5 @@
-import { SettingsState } from '../reducers/settingsReducer';
 import { useSelector } from 'react-redux';
+import { SettingsState } from '../reducers/settingsReducer';
 
 interface RootState {
   settings: SettingsState;

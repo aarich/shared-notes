@@ -1,10 +1,9 @@
 import * as React from 'react';
-
-import { AdType } from '../../redux/reducers/settingsReducer';
-import ListWithOptions from './ListWithOptions';
 import { updateSetting } from '../../redux/actions';
-import { useAppDispatch } from '../../redux/store';
+import { AdType } from '../../redux/reducers/settingsReducer';
 import { useSetting } from '../../redux/selectors';
+import { useAppDispatch } from '../../redux/store';
+import ListWithOptions from './ListWithOptions';
 
 const ListItemAds = () => {
   const dispatch = useAppDispatch();

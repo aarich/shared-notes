@@ -1,3 +1,4 @@
+import { Note } from '../../utils/types';
 import {
   AppActionTypes,
   DELETE_NOTE,
@@ -5,8 +6,6 @@ import {
   RESET,
   SET_NOTE,
 } from '../actions/actionTypes';
-
-import { Note } from '../../utils/types';
 
 export type NotesState = { [slug: string]: Note };
 

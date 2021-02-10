@@ -1,6 +1,5 @@
-import { Note, NoteDraft } from '../../utils/types';
 import { removeNote, setNote } from '.';
-
+import { Note, NoteDraft } from '../../utils/types';
 import { AppThunk } from '../store';
 
 const noteEndpoint = 'https://projects.mrarich.com/notes/api/note';

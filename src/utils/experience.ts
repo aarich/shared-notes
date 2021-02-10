@@ -1,9 +1,11 @@
+import Constants from 'expo-constants';
 import { Alert, Platform, Share } from 'react-native';
-
+import { removeNote } from '../redux/actions';
+import { deleteNote } from '../redux/actions/thunks';
 import { AppDispatch } from '../redux/store';
 import { Note } from './types';
-import { deleteNote } from '../redux/actions/thunks';
-import { removeNote } from '../redux/actions';
+
+export const VERSION = `${Constants.nativeAppVersion}-${Constants.manifest.extra.MyVersion}`;
 
 export const sendErrorAlert = (e: Error) => Alert.alert('Error', e.message);
 
@@ -43,7 +45,7 @@ export const getShareLink = (slug: string) =>
   `https://projects.mrarich.com/notes?note=${slug}`;
 
 export const validateSlug = (slug: string) => {
-  if (!/^[a-z0-9\-]+$/i.test(slug)) {
+  if (!/^[a-z0-9-]+$/i.test(slug)) {
     throw new Error(
       'Invalid slug! Must be alphanumeric with hyphens anywhere.'
     );

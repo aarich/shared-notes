@@ -1,15 +1,14 @@
-import * as Linking from 'expo-linking';
-
-import { Icon, useTheme } from '@ui-kitten/components';
-import { MoreParamList, NotesParamList } from '../../utils/types';
-import React, { useCallback, useEffect } from 'react';
-
-import AboutScreen from '../AboutScreen';
-import EditScreen from '../EditScreen';
-import LibraryScreen from '../LibraryScreen';
-import MoreScreen from '../MoreScreen';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Icon, useTheme } from '@ui-kitten/components';
+import * as Linking from 'expo-linking';
+import React, { useCallback, useEffect } from 'react';
+import { MoreParamList, NotesParamList } from '../../utils/types';
+import AboutScreen from '../AboutScreen';
+import EditScreen from '../EditScreen';
+import FeedbackScreen from '../FeedbackScreen';
+import LibraryScreen from '../LibraryScreen';
+import MoreScreen from '../MoreScreen';
 import { navigateToEdit } from './rootNavRef';
 
 type BottomTabParamList = {
@@ -28,15 +27,12 @@ type TabBarIconProps = {
 export default function BottomTabNavigator() {
   const theme = useTheme();
 
-  const handleURL = useCallback(
-    (url: string) => {
-      const parsed = Linking.parse(url);
-      if (parsed.hostname === 'edit' && parsed.path) {
-        navigateToEdit(parsed.path);
-      }
-    },
-    [navigateToEdit]
-  );
+  const handleURL = useCallback((url: string) => {
+    const parsed = Linking.parse(url);
+    if (parsed.hostname === 'edit' && parsed.path) {
+      navigateToEdit(parsed.path);
+    }
+  }, []);
 
   useEffect(() => {
     Linking.getInitialURL().then((initialUrl) => {
@@ -46,7 +42,7 @@ export default function BottomTabNavigator() {
     const handleUrlEvent = (e: Linking.EventType) => handleURL(e.url);
     Linking.addEventListener('url', handleUrlEvent);
     return () => Linking.removeEventListener('url', handleUrlEvent);
-  }, []);
+  }, [handleURL]);
 
   return (
     <BottomTab.Navigator
@@ -108,6 +104,7 @@ function MoreNavigator() {
         options={{ headerTitle: 'Options' }}
       />
       <MoreStack.Screen name="About" component={AboutScreen} />
+      <MoreStack.Screen name="Feedback" component={FeedbackScreen} />
     </MoreStack.Navigator>
   );
 }
