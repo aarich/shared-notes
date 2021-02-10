@@ -76,18 +76,42 @@ const EditScreen = ({ navigation, route }: Props) => {
       : 'You can edit the name or content of this note!';
     const headerRight = () => (
       <View style={{ flexDirection: 'row' }}>
-        {isNew ? null : (
-          <TopNavigationAction
-            icon={(props) => <Icon {...props} name="share-outline" />}
-            onPress={() =>
-              Alert.alert('Share', 'How would you like to share this note?', [
-                { text: 'View QR Code', onPress: () => setQRVisible(true) },
-                { text: 'Share Link', onPress: () => shareNote(draft.slug) },
-                { text: 'Cancel', style: 'cancel' },
-              ])
-            }
-          />
-        )}
+        <TopNavigationAction
+          icon={(props) => (
+            <Icon
+              {...props}
+              name={isNew ? 'download-outline' : 'share-outline'}
+            />
+          )}
+          onPress={() =>
+            isNew
+              ? Alert.prompt(
+                  'Load',
+                  "Enter the slug/identifier of a note you'd like to load",
+                  [
+                    {
+                      text: 'Load',
+                      onPress: (slug) =>
+                        slug
+                          ? dispatch(getNote(slug))
+                              .then((note) => {
+                                setIsNew(false);
+                                setDraft({ ...note });
+                              })
+                              .catch(sendErrorAlert)
+                          : Alert.alert('Enter a slug'),
+                    },
+                    { text: 'Cancel', style: 'cancel' },
+                  ],
+                  'plain-text'
+                )
+              : Alert.alert('Share', 'How would you like to share this note?', [
+                  { text: 'View QR Code', onPress: () => setQRVisible(true) },
+                  { text: 'Share Link', onPress: () => shareNote(draft.slug) },
+                  { text: 'Cancel', style: 'cancel' },
+                ])
+          }
+        />
         <TopNavigationAction
           icon={(props) => <Icon {...props} name="info-outline" />}
           onPress={() => Alert.alert(headerTitle, message + '\n\n' + secureMsg)}
@@ -192,7 +216,7 @@ const EditScreen = ({ navigation, route }: Props) => {
                   .then(() =>
                     Alert.alert(
                       'Note Saved',
-                      'To display this on your home screen, add the widget, press and hold, then tap "Edit Widget" to choose a note.' +
+                      'To add it to a your home screen, press and hold the widget, then tap "Edit Widget" to choose a note.' +
                         (isNew
                           ? ''
                           : '\n\nOther devices displaying this note will be updated soon!')

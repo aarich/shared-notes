@@ -23,6 +23,7 @@ import PotentialAd from '../components/shared/PotentialAd';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { resetApp } from '../redux/actions';
 import { useAppDispatch } from '../redux/store';
+import { useSetting } from '../redux/selectors';
 import { useUpToDateBridgeData } from '../utils/bridge';
 
 type Props = {
@@ -31,6 +32,7 @@ type Props = {
 
 type ListItemNav = { label: string; destination: keyof MoreParamList };
 type ListItemAction = { label: string; action: () => void };
+type ListItemColor = { label: string };
 type ListItemBooleanSetting = {
   setting: keyof BooleanSettings;
   isBoolean: true;
@@ -43,11 +45,12 @@ type ListItemSelectSetting = {
 const MoreScreen = ({ navigation }: Props) => {
   const dispatch = useAppDispatch();
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
+  const color = useSetting('widgetColor');
 
   const resetAppAlert = useCallback(() => {
     Alert.alert(
       'Are you sure?',
-      'This will clear all saved flows. You cannot undo this action.',
+      "This will clear all notes from this device, but it won't delete them from the server.",
       [
         {
           text: 'Reset',
@@ -67,6 +70,7 @@ const MoreScreen = ({ navigation }: Props) => {
     | ListItemNav
     | ListItemSelectSetting
     | ListItemAction
+    | ListItemColor
     | ListItemBooleanSetting
   )[] = [
     { label: 'About', destination: 'About' },
@@ -80,7 +84,6 @@ const MoreScreen = ({ navigation }: Props) => {
   booleans.forEach((setting) => listItems.push({ setting, isBoolean: true }));
   listItems.push({
     label: 'Widget Color',
-    action: () => setIsColorPickerVisible(true),
   });
   selectables.forEach((setting) =>
     listItems.push({ setting, isBoolean: false })
@@ -99,6 +102,7 @@ const MoreScreen = ({ navigation }: Props) => {
       | ListItemNav
       | ListItemSelectSetting
       | ListItemAction
+      | ListItemColor
       | ListItemBooleanSetting,
     index: number
   ) => {
@@ -110,10 +114,9 @@ const MoreScreen = ({ navigation }: Props) => {
           ads: ListItemAds,
           theme: ListItemTheme,
         }[listItem.setting];
-
         return <Comp />;
       }
-    } else {
+    } else if ('action' in listItem || 'destination' in listItem) {
       return (
         <>
           <ListItem
@@ -131,6 +134,19 @@ const MoreScreen = ({ navigation }: Props) => {
             <View style={{ height: 20 }}></View>
           ) : null}
         </>
+      );
+    } else {
+      // Its color
+      return (
+        <ListItem
+          title={listItem.label}
+          onPress={() => setIsColorPickerVisible(true)}
+          accessoryRight={(props) => (
+            <View style={{ paddingRight: 10 }}>
+              <Icon {...props} name="checkmark-circle-2" fill={color} />
+            </View>
+          )}
+        />
       );
     }
   };

@@ -6,6 +6,8 @@ import {
   UPDATE_SETTING,
 } from '../actions/actionTypes';
 
+import theme from '../../../assets/theme.json';
+
 export enum AdType {
   Personal = 'Personal',
   Generic = 'Generic',
@@ -49,7 +51,7 @@ export const initialState: SettingsState = {
   theme: ThemeType.System,
   showTitle: true,
   showLastModified: true,
-  widgetColor: '#3AA0FF',
+  widgetColor: theme['color-primary-500'],
   adLastReset: Date.now(),
 };
 

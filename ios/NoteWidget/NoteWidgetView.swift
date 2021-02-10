@@ -16,7 +16,9 @@ struct NoteWidgetEntryView : View {
   
   var body: some View {
     ZStack{
+      
       Color(entry.color)
+      
       VStack(alignment: .leading) {
         Spacer()
 

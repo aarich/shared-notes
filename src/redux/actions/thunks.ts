@@ -17,6 +17,21 @@ const checkResponse = (resp: Response) => {
   });
 };
 
+const validateNote = (note: NoteDraft) => {
+  const ret = new Promise<void>((resolve) => {
+    if (note.name.length === 0 || note.content.length === 0) {
+      throw new Error('Note needs a title and content!');
+      // return Promise.reject('Note needs a title and content!');
+    } else if (note.slug.length < 5) {
+      return Promise.reject(
+        'Identifier is too short! Must be at least 5 characters.'
+      );
+    }
+    resolve();
+  });
+  return ret;
+};
+
 export const getNote = (slug: string): AppThunk<Note> => (dispatch) =>
   fetch(`${noteEndpoint}?slug=${slug}`)
     .then(checkResponse)
@@ -27,10 +42,13 @@ export const getNote = (slug: string): AppThunk<Note> => (dispatch) =>
     });
 
 export const postNote = (note: NoteDraft): AppThunk<Note> => (dispatch) =>
-  fetch(noteEndpoint, {
-    method: 'POST',
-    body: JSON.stringify(note),
-  })
+  validateNote(note)
+    .then(() =>
+      fetch(noteEndpoint, {
+        method: 'POST',
+        body: JSON.stringify(note),
+      })
+    )
     .then(checkResponse)
     .then((resp) => {
       const created = { ...note, ...resp.note };
@@ -39,31 +57,26 @@ export const postNote = (note: NoteDraft): AppThunk<Note> => (dispatch) =>
     });
 
 export const patchNote = (note: NoteDraft): AppThunk<Note> => (dispatch) =>
-  fetch(noteEndpoint, {
-    method: 'PATCH',
-    body: JSON.stringify(note),
-  })
+  validateNote(note)
+    .then(() =>
+      fetch(noteEndpoint, {
+        method: 'PATCH',
+        body: JSON.stringify(note),
+      })
+    )
     .then(checkResponse)
-    .then((resp) => {
+    .then(() => {
       const updated = { ...note, created: '', modified: '' };
       dispatch(setNote(updated));
       return updated;
     });
 
-export const deleteNote = (
-  slug: string,
-  deleteFromDB: boolean
-): AppThunk<void> => async (dispatch) => {
-  if (deleteFromDB) {
-    await fetch(noteEndpoint, {
-      method: 'DELETE',
-      body: JSON.stringify({ slug }),
-    })
-      .then(checkResponse)
-      .then(() => {
-        dispatch(removeNote(slug));
-      });
-  } else {
-    dispatch(removeNote(slug));
-  }
-};
+export const deleteNote = (slug: string): AppThunk<void> => (dispatch) =>
+  fetch(noteEndpoint, {
+    method: 'DELETE',
+    body: JSON.stringify({ slug }),
+  })
+    .then(checkResponse)
+    .then(() => {
+      dispatch(removeNote(slug));
+    });
