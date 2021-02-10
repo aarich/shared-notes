@@ -1,3 +1,4 @@
+import { StackNavigationProp } from '@react-navigation/stack';
 import {
   Divider,
   Icon,
@@ -7,16 +8,14 @@ import {
   Text,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import { Note, NotesParamList } from '../utils/types';
-import { Pressable, StyleSheet, View } from 'react-native';
 import React, { useEffect } from 'react';
-
-import { AdUnit } from '../utils/ads';
+import { Pressable, StyleSheet, View } from 'react-native';
 import PotentialAd from '../components/shared/PotentialAd';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { deleteNoteAlert } from '../utils/experience';
-import { useAppDispatch } from '../redux/store';
 import { useNotes } from '../redux/selectors';
+import { useAppDispatch } from '../redux/store';
+import { AdUnit } from '../utils/ads';
+import { deleteNoteAlert } from '../utils/experience';
+import { Note, NotesParamList } from '../utils/types';
 
 type Props = {
   navigation: StackNavigationProp<NotesParamList, 'Library'>;
@@ -25,7 +24,6 @@ type Props = {
 const LibraryScreen = ({ navigation }: Props) => {
   const dispatch = useAppDispatch();
   const notes = useNotes();
-  console.log(notes);
 
   useEffect(() => {
     navigation.setOptions({
