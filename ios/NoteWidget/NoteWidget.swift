@@ -49,7 +49,7 @@ struct NoteWidget: Widget {
       NoteWidgetEntryView(entry: entry)
     }
     .configurationDisplayName("Shared Note")
-    .description("View your note here! Configure in the app.")
+    .description("View a note. Configure content and settings in the app.")
   }
 }
 

@@ -30,6 +30,22 @@ const AboutScreen = () => {
   return (
     <Layout style={{ flex: 1, flexGrow: 1 }}>
       <ScrollView style={{ paddingHorizontal: '5%' }}>
+        {h3('Instructions')}
+        {p(
+          "You can put custom notes on you and your friends' your home screen!"
+        )}
+        {p('1. Create a note (use the "Notes" tab)')}
+        {p('2. Save the note')}
+        {p('3. Add the "Shared Note" widget to your home screen.')}
+        {p('4. Press and hold on the widget until the menu opens')}
+        {p('5. Tap "Edit Widget"')}
+        {p('6. Choose the note you just created!')}
+        {p(
+          'You can have as many widgets displaying different notes as you like! Share the notes with friends or family members to always have up-to-date information. The content will automatically be synchronized.'
+        )}
+        {p(
+          'Widgets can take between fifteen minutes to an hour to refresh on other devices.'
+        )}
         {h3('Privacy')}
         {p(
           "It's simple: this app does not collect any data unless you explicitly provide it. Notes are stored on our servers, " +
@@ -61,6 +77,14 @@ const AboutScreen = () => {
             url: 'github.com/nas5w/random-word-slugs',
           },
           { name: 'React Native', url: 'reactnative.dev' },
+          {
+            name: 'React Native Color Palette',
+            url: 'github.com/holmansv/react-native-color-palette',
+          },
+          {
+            name: 'React Native WidgetKit',
+            url: 'github.com/fasky-software/react-native-widgetkit#readme',
+          },
           {
             name: 'Shared Group Preferences',
             url:
