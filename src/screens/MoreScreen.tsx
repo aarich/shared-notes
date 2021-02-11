@@ -1,12 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import {
-  Divider,
-  Icon,
-  Layout,
-  List,
-  ListItem,
-  Modal,
-} from '@ui-kitten/components';
+import { Divider, Icon, Layout, List, ListItem } from '@ui-kitten/components';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import ColorPicker from '../components/settings/ColorPicker';
@@ -136,7 +129,7 @@ const MoreScreen = ({ navigation }: Props) => {
         </>
       );
     } else {
-      // Its color
+      // It's color
       return (
         <ListItem
           title={listItem.label}
@@ -153,14 +146,10 @@ const MoreScreen = ({ navigation }: Props) => {
 
   return (
     <Layout style={styles.container}>
-      <Modal
+      <ColorPicker
         visible={isColorPickerVisible}
-        onBackdropPress={() => setIsColorPickerVisible(false)}
-        backdropStyle={styles.backdrop}
-      >
-        <ColorPicker />
-      </Modal>
-
+        onDismiss={() => setIsColorPickerVisible(false)}
+      />
       <List
         style={{ flex: 1, width: '100%' }}
         ItemSeparatorComponent={Divider}
@@ -188,7 +177,6 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
-  backdrop: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
 });
 
 export default MoreScreen;

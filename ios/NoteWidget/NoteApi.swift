@@ -11,8 +11,7 @@ func lookupNoteDetails(for configuration: SelectNoteIntent, completion: @escapin
   let slug = configuration.note?.identifier
   
   if (slug == nil) {
-    print("xxx slug was nil")
-    completion(makeEntry(title: "Your Note Here!", content: "Tap here to create a note, then press and hold here and select \"Edit Widget\""))
+    completion(makeEntry(title: "Your Note Here!", content: "1. Tap here to open the app and create a note.\n\r2. Press and hold here and select \"Edit Widget\" to select your note!"))
     return
   }
   
@@ -25,6 +24,7 @@ func lookupNoteDetails(for configuration: SelectNoteIntent, completion: @escapin
     var name:String
     var modified:String
     var content:String
+    let unknownError = "We couldn't load the note for some reason. Make sure you have the latest version of the app!"
     
     let json = try? JSONSerialization.jsonObject(with: data, options: [])
     if let dictionary = json as? [String: Any] {
@@ -33,7 +33,7 @@ func lookupNoteDetails(for configuration: SelectNoteIntent, completion: @escapin
         if (message != nil) {
           completion(makeEntry(from: message!))
         } else {
-          completion(makeEntry(from: "Success was false and message was not present"))
+          completion(makeEntry(from: unknownError))
         }
         return
       }
@@ -43,11 +43,11 @@ func lookupNoteDetails(for configuration: SelectNoteIntent, completion: @escapin
         modified=note["modified"] as! String
         content = note["content"] as! String
       } else {
-        completion(makeEntry(from: "Couldn't find note"))
+        completion(makeEntry(from: "Couldn't find your note, did someone delete it? Tap here to try and recover it."))
         return
       }
     } else {
-      completion(makeEntry(from: "couldn't deserialize"))
+      completion(makeEntry(from: unknownError))
       return
     }
     

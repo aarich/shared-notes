@@ -13,7 +13,7 @@ const ListItemTheme = () => {
 
   return (
     <ListWithOptions
-      title="Theme"
+      title="App Theme"
       optionLabels={options}
       selectedIndex={selectedIndex}
       setSelectedIndex={(newIndex) =>

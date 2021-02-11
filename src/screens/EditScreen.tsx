@@ -11,7 +11,7 @@ import {
 } from '@ui-kitten/components';
 import Clipboard from 'expo-clipboard';
 import { generateSlug } from 'random-word-slugs';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Alert,
   Dimensions,
@@ -28,7 +28,12 @@ import { useNote } from '../redux/selectors';
 import { useAppDispatch } from '../redux/store';
 import { AdUnit } from '../utils/ads';
 import { useUpToDateBridgeData } from '../utils/bridge';
-import { getShareLink, sendErrorAlert, shareNote } from '../utils/experience';
+import {
+  getShareLink,
+  sendErrorAlert,
+  shareNote,
+  showInfoAlert,
+} from '../utils/experience';
 import { NoteDraft, NotesParamList } from '../utils/types';
 
 const { width } = Dimensions.get('window');
@@ -75,64 +80,71 @@ const EditScreen = ({ navigation, route }: Props) => {
     }
   }, [dispatch, isNew, slug]);
 
+  const loadNote = useCallback(
+    () =>
+      Alert.prompt(
+        'Load',
+        "Enter the slug/identifier of a note you'd like to load",
+        [
+          {
+            text: 'Load',
+            onPress: (slug) =>
+              slug
+                ? dispatch(getNote(slug))
+                    .then((note) => {
+                      setIsNew(false);
+                      setDraft({ ...note });
+                      setIsDirty(false);
+                    })
+                    .catch(sendErrorAlert)
+                : Alert.alert('Enter a slug'),
+          },
+          { text: 'Cancel', style: 'cancel' },
+        ],
+        'plain-text'
+      ),
+    [dispatch]
+  );
+
+  const shareNoteAlert = useCallback(
+    () =>
+      Alert.alert('Share', 'How would you like to share this note?', [
+        { text: 'View QR Code', onPress: () => setQRVisible(true) },
+        { text: 'Share Link', onPress: () => shareNote(draft.slug) },
+        { text: 'Cancel', style: 'cancel' },
+      ]),
+    [draft.slug]
+  );
+
+  const showInfoAlertCB = useCallback(
+    () => showInfoAlert(draft.content, isNew),
+    [draft.content, isNew]
+  );
+
   useEffect(() => {
-    const headerTitle = isNew ? 'Create Note' : 'Edit Note';
-    const secureMsg =
-      'Anyone who can guess the slug is able to view, edit, or delete this note, so do not enter any private or secure information.';
-    const message = isNew
-      ? 'Choose a name, slug, and enter content for the note. '
-      : 'You can edit the name or content of this note!';
     const headerRight = () => (
       <View style={{ flexDirection: 'row' }}>
         <TopNavigationAction
           icon={(props) => (
             <Icon
               {...props}
-              name={isNew ? 'download-outline' : 'share-outline'}
+              name={isNew ? 'cloud-download-outline' : 'share-outline'}
             />
           )}
-          onPress={() =>
-            isNew
-              ? Alert.prompt(
-                  'Load',
-                  "Enter the slug/identifier of a note you'd like to load",
-                  [
-                    {
-                      text: 'Load',
-                      onPress: (slug) =>
-                        slug
-                          ? dispatch(getNote(slug))
-                              .then((note) => {
-                                setIsNew(false);
-                                setDraft({ ...note });
-                                setIsDirty(false);
-                              })
-                              .catch(sendErrorAlert)
-                          : Alert.alert('Enter a slug'),
-                    },
-                    { text: 'Cancel', style: 'cancel' },
-                  ],
-                  'plain-text'
-                )
-              : Alert.alert('Share', 'How would you like to share this note?', [
-                  { text: 'View QR Code', onPress: () => setQRVisible(true) },
-                  { text: 'Share Link', onPress: () => shareNote(draft.slug) },
-                  { text: 'Cancel', style: 'cancel' },
-                ])
-          }
+          onPress={() => (isNew ? loadNote() : shareNoteAlert())}
         />
         <TopNavigationAction
           icon={(props) => <Icon {...props} name="info-outline" />}
-          onPress={() => Alert.alert(headerTitle, message + '\n\n' + secureMsg)}
+          onPress={showInfoAlertCB}
         />
       </View>
     );
 
     navigation.setOptions({
-      headerTitle,
+      headerTitle: isNew ? 'Create Note' : 'Edit Note',
       headerRight,
     });
-  }, [dispatch, draft.slug, isNew, navigation]);
+  }, [isNew, loadNote, navigation, shareNoteAlert, showInfoAlertCB]);
 
   useEffect(
     () =>
@@ -240,21 +252,27 @@ const EditScreen = ({ navigation, route }: Props) => {
             <Button
               style={{ marginTop: 10 }}
               disabled={!isDirty}
-              onPress={() =>
-                dispatch(isNew ? postNote(draft) : patchNote(draft))
+              onPress={() => {
+                setIsDirty(false);
+                setIsRefreshing(true);
+                (isNew
+                  ? dispatch(postNote(draft)).then(() => undefined)
+                  : dispatch(patchNote(draft)).then(() => undefined)
+                )
                   .then(() =>
                     Alert.alert(
                       'Note Saved',
-                      'To add it to a your home screen, press and hold the widget, then tap "Edit Widget" to choose a note.' +
-                        (isNew
+                      `To add it to a your home screen, press and hold the widget, then tap "Edit Widget" to choose a note.${
+                        isNew
                           ? ''
-                          : '\n\nOther devices displaying this note will be updated soon!')
+                          : '\n\nOther devices displaying this note will be updated soon!'
+                      }`
                     )
                   )
                   .then(() => setIsNew(false))
                   .catch(sendErrorAlert)
-                  .then(() => setIsDirty(false))
-              }
+                  .then(() => setIsRefreshing(false));
+              }}
             >
               Save
             </Button>
