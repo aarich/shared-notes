@@ -4,7 +4,7 @@
   "expo": {
     "name": "Shared Notes",
     "slug": "shared-notes",
-    "version": "1.0.0",
+    "version": "1.1",
     "assetBundlePatterns": ["**/*"],
     "userInterfaceStyle": "automatic",
     "scheme": "sharednotes",
@@ -14,7 +14,7 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 3000
+      "fallbackToCacheTimeout": 10
     },
     "ios": {
       "config": {
@@ -22,22 +22,11 @@
       },
       "bundleIdentifier": "com.mrarich.SharedNoteWidget"
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "config": {
-        "googleMobileAdsAppId": "ca-app-pub-6949812709353975~9033721022"
-      },
-      "permissions": ["READ_EXTERNAL_STORAGE", "WRITE_EXTERNAL_STORAGE"],
-      "package": "com.mrarich.SharedNoteWidget"
-    },
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
     "extra": {
-      "MyVersion": "1"
+      "MyVersion": "2"
     }
   }
 }

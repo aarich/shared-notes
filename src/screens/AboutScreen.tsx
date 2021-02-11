@@ -29,17 +29,14 @@ const AboutScreen = () => {
     <Layout style={{ flex: 1, flexGrow: 1 }}>
       <ScrollView style={{ paddingHorizontal: '5%' }}>
         {h3('Instructions')}
+        {p("You can put custom notes on you and your friends' home screens!")}
+        {p('1. Draft and save a note (use the "Notes" tab)')}
+        {p('2. Add the "Shared Notes" widget to your home screen')}
+        {p('3. Press and hold on the widget until the menu opens')}
+        {p('4. Tap "Edit Widget"')}
+        {p('5. Choose the note you just created!')}
         {p(
-          "You can put custom notes on you and your friends' your home screen!"
-        )}
-        {p('1. Create a note (use the "Notes" tab)')}
-        {p('2. Save the note')}
-        {p('3. Add the "Shared Note" widget to your home screen.')}
-        {p('4. Press and hold on the widget until the menu opens')}
-        {p('5. Tap "Edit Widget"')}
-        {p('6. Choose the note you just created!')}
-        {p(
-          'You can have as many widgets displaying different notes as you like! Share the notes with friends or family members to always have up-to-date information. The content will automatically be synchronized.'
+          'You can have as many different notes as you like! Share the notes with friends or family members to always have automatically up-to-date information.'
         )}
         {p(
           'Widgets can take between fifteen minutes to an hour to refresh on other devices.'
@@ -47,7 +44,7 @@ const AboutScreen = () => {
         {h3('Privacy')}
         {p(
           "It's simple: this app does not collect any data unless you explicitly provide it. Notes are stored on our servers, " +
-            'however they are not linked to you.' +
+            'however they are not linked to you. ' +
             'We use ads, and those ad providers have their own privacy policies.'
         )}
         <Text category="p1" style={styles.p}>
@@ -99,8 +96,8 @@ const AboutScreen = () => {
         ))}
         {h3('Who is building this?')}
         <Text category="p1" style={styles.p}>
-          The source code for this app is entirely public! You can browse it and
-          if you like, make a contribution! Check it out on{' '}
+          The source code for this app is public! You can browse it and, if you
+          like, make it better! Check it out on{' '}
           {a('GitHub', 'github.com/aarich/shared-notes')}. You can find out more
           about the developer {a('here', 'mrarich.com/about')}.
         </Text>

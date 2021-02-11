@@ -55,7 +55,9 @@ export const postNote = (note: NoteDraft): AppThunk<Note> => (dispatch) =>
       return created;
     });
 
-export const patchNote = (note: NoteDraft): AppThunk<Note> => (dispatch) =>
+export const patchNote = (note: NoteDraft): AppThunk<[Note, boolean]> => (
+  dispatch
+) =>
   validateNote(note)
     .then(() =>
       fetch(noteEndpoint, {
@@ -64,10 +66,10 @@ export const patchNote = (note: NoteDraft): AppThunk<Note> => (dispatch) =>
       })
     )
     .then(checkResponse)
-    .then(() => {
+    .then((resp) => {
       const updated = { ...note, created: '', modified: '' };
       dispatch(setNote(updated));
-      return updated;
+      return [updated, resp.created];
     });
 
 export const deleteNote = (slug: string): AppThunk<void> => (dispatch) =>

@@ -1,5 +1,6 @@
+import Clipboard from 'expo-clipboard';
 import Constants from 'expo-constants';
-import { Alert, Platform, Share } from 'react-native';
+import { Alert, AlertButton, Platform, Share } from 'react-native';
 import { removeNote } from '../redux/actions';
 import { deleteNote } from '../redux/actions/thunks';
 import { AppDispatch } from '../redux/store';
@@ -21,7 +22,7 @@ Deleting it from the servers means all others will lose access. You cannot undo 
         onPress: () => dispatch(removeNote(note.slug)),
       },
       {
-        text: 'Delete',
+        text: 'Delete for everyone',
         style: 'destructive',
         onPress: () => dispatch(deleteNote(note.slug)),
       },
@@ -50,4 +51,22 @@ export const validateSlug = (slug: string) => {
       'Invalid slug! Must be alphanumeric with hyphens anywhere.'
     );
   }
+};
+
+export const showInfoAlert = (content: string, isNew: boolean) => {
+  const infoButtons: AlertButton[] | undefined = isNew
+    ? undefined
+    : [
+        {
+          text: 'Copy Note to Clipboard',
+          onPress: () => Clipboard.setString(content),
+        },
+        { text: 'Cancel', style: 'cancel' },
+      ];
+  const secureMsg =
+    'Anyone who can guess the slug is able to view, edit, or delete this note, so do not enter any private or secure information.';
+  const message = isNew
+    ? 'Choose a name, slug, and enter content for the note. '
+    : 'You can edit the name or content of this note!';
+  Alert.alert('Info', message + '\n\n' + secureMsg, infoButtons);
 };
