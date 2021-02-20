@@ -1,11 +1,9 @@
-import { persistor, store } from './src/redux/store';
-
-import Navigation from './src/screens/navigation/Navigation';
-import { PersistGate } from 'redux-persist/integration/react';
-import { Provider } from 'react-redux';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StyleSheet } from 'react-native';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './src/redux/store';
+import Navigation from './src/screens/navigation/Navigation';
 
 export default function App() {
   return (
@@ -18,12 +16,3 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

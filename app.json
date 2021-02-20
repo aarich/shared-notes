@@ -4,7 +4,7 @@
   "expo": {
     "name": "Shared Notes",
     "slug": "shared-notes",
-    "version": "1.1",
+    "version": "1.2",
     "assetBundlePatterns": ["**/*"],
     "userInterfaceStyle": "automatic",
     "scheme": "sharednotes",
@@ -26,7 +26,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "extra": {
-      "MyVersion": "2"
+      "MyVersion": "3"
     }
   }
 }

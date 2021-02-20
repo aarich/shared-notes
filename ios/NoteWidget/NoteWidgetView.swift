@@ -47,7 +47,7 @@ struct NoteWidgetEntryView : View {
         Spacer()
 
       }
-      .padding(10)
+      .padding(8)
     }.widgetURL(URL(string:"sharednotes://edit/\(entry.slug)"))
     
   }
