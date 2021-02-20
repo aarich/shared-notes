@@ -1,10 +1,11 @@
+import { Alert, AlertButton, Platform, Share } from 'react-native';
+
+import { AppDispatch } from '../redux/store';
 import Clipboard from 'expo-clipboard';
 import Constants from 'expo-constants';
-import { Alert, AlertButton, Platform, Share } from 'react-native';
-import { removeNote } from '../redux/actions';
-import { deleteNote } from '../redux/actions/thunks';
-import { AppDispatch } from '../redux/store';
 import { Note } from './types';
+import { deleteNote } from '../redux/actions/thunks';
+import { removeNote } from '../redux/actions';
 
 export const VERSION = `${Constants.nativeAppVersion}-${Constants.manifest.extra.MyVersion}`;
 
@@ -70,3 +71,43 @@ export const showInfoAlert = (content: string, isNew: boolean) => {
     : 'You can edit the name or content of this note!';
   Alert.alert('Info', message + '\n\n' + secureMsg, infoButtons);
 };
+
+export const noteSavedMessage = (isNew: boolean) =>
+  Alert.alert(
+    'Note Saved',
+    `To add it to a your home screen, press and hold the widget, then tap "Edit Widget" to choose a note.${
+      isNew
+        ? ''
+        : '\n\nOther devices displaying this note will be updated soon!'
+    }`
+  );
+
+export const copyWithConfirm = (textToCopy: string) =>
+  Alert.alert('Copy to Clipboard?', textToCopy, [
+    {
+      text: 'Copy',
+      onPress: () => Clipboard.setString(textToCopy || ''),
+    },
+    {
+      text: 'Cancel',
+      style: 'cancel',
+    },
+  ]);
+
+export const checkDiscard = (
+  onYes: () => void,
+  text: string,
+  discardText?: string
+) =>
+  Alert.alert(
+    'Discard changes?',
+    'You may have unsaved changes. This will discard those changes.',
+    [
+      { text, style: 'cancel' },
+      {
+        text: discardText || 'Discard',
+        style: 'destructive',
+        onPress: onYes,
+      },
+    ]
+  );

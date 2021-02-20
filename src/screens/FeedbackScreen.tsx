@@ -1,10 +1,12 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Button, Icon, Layout, Text } from '@ui-kitten/components';
-import { openURL } from 'expo-linking';
 import * as StoreReview from 'expo-store-review';
-import React, { useEffect } from 'react';
+
+import { Button, Icon, Layout, Text } from '@ui-kitten/components';
 import { Platform, StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { VERSION } from '../utils/experience';
+import { openURL } from 'expo-linking';
 
 const baseMainURL = 'https://mrarich.com';
 
@@ -28,7 +30,7 @@ const FeedbackScreen = () => {
   const issuesUrl = 'https://github.com/aarich/shared-notes/issues/new';
   const storeUrl =
     Platform.OS === 'ios'
-      ? 'https://apps.apple.com/app/apple-store/id1552960395?ct=inappfeedback&mt=8'
+      ? 'https://apps.apple.com/app/apple-store/id1552960395?pt=117925864&ct=inappfeedback&mt=8'
       : '';
   const app = Platform.OS === 'ios' ? 'App' : 'Play';
 

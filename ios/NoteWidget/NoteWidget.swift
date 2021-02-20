@@ -69,22 +69,29 @@ func makeEntry(from error: String) -> SimpleEntry {
 }
 
 func makeEntry(title: String, content:String) -> SimpleEntry {
-  return makeEntry(name: title, content: content, lastModified: Date(), slug:"")
+  return makeEntry(name: title, content: content, lastModified: Date(), slug:"", hideModified: true)
+}
+  
+func makeEntry(name: String, content: String, lastModified: Date, slug:String) -> SimpleEntry {
+  return makeEntry(name: name, content: content, lastModified: lastModified, slug: slug, hideModified: false)
 }
 
-func makeEntry(name: String, content: String, lastModified: Date, slug:String) -> SimpleEntry {
-  
+func makeEntry(name: String, content: String, lastModified: Date, slug:String, hideModified:Bool) -> SimpleEntry {
+
   let appData = getAppData()
   
   var color = UIColor(red: 0.09, green: 0.63, blue: 0.52, alpha: 1)
   var showTitle = true;
   var showModified = false;
-
   
   if (appData != nil) {
     color = UIColor(hex: appData!.settings.color)!
     showTitle = appData!.settings.showTitle
     showModified = appData!.settings.showLastModified
+  }
+  
+  if (hideModified) {
+    showModified = false;
   }
   
   return SimpleEntry(date: Date(), name:name, content: content, lastModified: lastModified, color: color, showTitle: showTitle, showModified: showModified, slug: slug)

@@ -1,17 +1,18 @@
 import { Card, Icon, Modal, Text, useTheme } from '@ui-kitten/components';
-import React, { useMemo, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
+import React, { useMemo, useState } from 'react';
+
 import ColorPalette from 'react-native-color-palette';
 import { updateSetting } from '../../redux/actions';
-import { useSetting } from '../../redux/selectors';
 import { useAppDispatch } from '../../redux/store';
+import { useSetting } from '../../redux/selectors';
 
 const { width } = Dimensions.get('window');
 
 const labels = [
   'Select a color for the widget',
-  'Finished? Tap outside the modal',
-  'Tap outside the modal when finished',
+  'Finished? Tap outside',
+  'Tap outside when finished',
   "Indecisive? Just choose one, it'll be ok.",
   "Tap outside when you're finished.",
 ];

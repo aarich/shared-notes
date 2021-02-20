@@ -1,7 +1,14 @@
+import {
+  Dimensions,
+  StyleProp,
+  TextProps,
+  TextStyle,
+  View,
+} from 'react-native';
 import { Icon, Input as UIKInput } from '@ui-kitten/components';
-import { RenderProp } from '@ui-kitten/components/devsupport';
+
 import React from 'react';
-import { StyleProp, TextProps, TextStyle, View } from 'react-native';
+import { RenderProp } from '@ui-kitten/components/devsupport';
 import useColorScheme from '../../hooks/useColorScheme';
 
 type Props = {
@@ -34,6 +41,7 @@ const Input = ({ value, iconRight, numeric = false, ...otherProps }: Props) => {
         }
         keyboardType={type}
         keyboardAppearance={scheme}
+        style={{ maxHeight: Math.floor(Dimensions.get('screen').height * 0.4) }}
       />
     </View>
   );

@@ -1,5 +1,12 @@
-import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import {
+  Alert,
+  Dimensions,
+  FlatList,
+  KeyboardAvoidingView,
+  Pressable,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {
   Button,
   Card,
@@ -9,32 +16,30 @@ import {
   Text,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import Clipboard from 'expo-clipboard';
-import { generateSlug } from 'random-word-slugs';
+import { NoteDraft, NotesParamList } from '../utils/types';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-  Alert,
-  Dimensions,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  View,
-} from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
-import Input from '../components/shared/Input';
-import PotentialAd from '../components/shared/PotentialAd';
-import { getNote, patchNote, postNote } from '../redux/actions/thunks';
-import { useNote } from '../redux/selectors';
-import { useAppDispatch } from '../redux/store';
-import { AdUnit } from '../utils/ads';
-import { useUpToDateBridgeData } from '../utils/bridge';
-import {
+  checkDiscard,
+  copyWithConfirm,
   getShareLink,
+  noteSavedMessage,
   sendErrorAlert,
   shareNote,
   showInfoAlert,
 } from '../utils/experience';
-import { NoteDraft, NotesParamList } from '../utils/types';
+import { getNote, patchNote, postNote } from '../redux/actions/thunks';
+
+import { AdUnit } from '../utils/ads';
+import Input from '../components/shared/Input';
+import PotentialAd from '../components/shared/PotentialAd';
+import QRCode from 'react-native-qrcode-svg';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { generateSlug } from 'random-word-slugs';
+import { massageNewEditorContent } from '../utils/editor';
+import { useAppDispatch } from '../redux/store';
+import { useNote } from '../redux/selectors';
+import { useUpToDateBridgeData } from '../utils/bridge';
 
 const { width } = Dimensions.get('window');
 
@@ -116,11 +121,6 @@ const EditScreen = ({ navigation, route }: Props) => {
     [draft.slug]
   );
 
-  const showInfoAlertCB = useCallback(
-    () => showInfoAlert(draft.content, isNew),
-    [draft.content, isNew]
-  );
-
   useEffect(() => {
     const headerRight = () => (
       <View style={{ flexDirection: 'row' }}>
@@ -135,7 +135,7 @@ const EditScreen = ({ navigation, route }: Props) => {
         />
         <TopNavigationAction
           icon={(props) => <Icon {...props} name="info-outline" />}
-          onPress={showInfoAlertCB}
+          onPress={() => showInfoAlert(draft.content, isNew)}
         />
       </View>
     );
@@ -144,7 +144,7 @@ const EditScreen = ({ navigation, route }: Props) => {
       headerTitle: isNew ? 'Create Note' : 'Edit Note',
       headerRight,
     });
-  }, [isNew, loadNote, navigation, shareNoteAlert, showInfoAlertCB]);
+  }, [draft.content, isNew, loadNote, navigation, shareNoteAlert]);
 
   useEffect(
     () =>
@@ -153,133 +153,120 @@ const EditScreen = ({ navigation, route }: Props) => {
           return;
         }
         e.preventDefault();
-
-        Alert.alert(
-          'Discard changes?',
-          'You may have unsaved changes. This will discard those changes.',
-          [
-            { text: 'Stay Here', style: 'cancel' },
-            {
-              text: 'Discard',
-              style: 'destructive',
-              onPress: () => navigation.dispatch(e.data.action),
-            },
-          ]
-        );
+        checkDiscard(() => navigation.dispatch(e.data.action), 'Stay Here');
       }),
     [navigation, isDirty]
   );
 
+  const onRefresh = useCallback(() => {
+    const inner = () => {
+      setIsRefreshing(true);
+      slug &&
+        dispatch(getNote(slug))
+          .then((note) => setDraft({ ...note }))
+          .then(() => setIsDirty(false))
+          .catch(sendErrorAlert)
+          .then(() => setIsRefreshing(false));
+    };
+    if (isDirty) {
+      Promise.resolve()
+        .then(() => setIsRefreshing(true))
+        .then(() => setIsRefreshing(false))
+        .then(() => checkDiscard(inner, 'Cancel', 'Refresh and Lose Changes'));
+    } else {
+      inner();
+    }
+  }, [dispatch, isDirty, slug]);
+
   return (
     <Layout style={styles.container}>
-      <Modal
-        visible={qrVisible}
-        onBackdropPress={() => setQRVisible(false)}
-        backdropStyle={styles.backdrop}
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoidingContainer}
+        behavior="padding"
       >
-        <Card
-          header={(props) => (
-            <View {...props}>
-              <Text category="s1">Point another iPhone camera at this!</Text>
-            </View>
-          )}
+        <Modal
+          visible={qrVisible}
+          onBackdropPress={() => setQRVisible(false)}
+          backdropStyle={styles.backdrop}
         >
-          <View style={styles.qrCardBody}>
-            <QRCode
-              value={getShareLink(draft.slug)}
-              size={Math.floor(width * 0.7)}
-            />
-          </View>
-        </Card>
-      </Modal>
-      <FlatList
-        refreshing={isRefreshing}
-        onRefresh={() => {
-          setIsRefreshing(true);
-          slug &&
-            dispatch(getNote(slug))
-              .then((note) => setDraft({ ...note }))
-              .then(() => setIsDirty(false))
-              .catch(sendErrorAlert)
-              .then(() => setIsRefreshing(false));
-        }}
-        keyExtractor={(_, i) => '' + i}
-        renderItem={() => <></>}
-        data={[]}
-        ListHeaderComponent={
-          <View style={styles.margined}>
-            <Input
-              label="Title"
-              placeholder="Note Title"
-              value={draft.name}
-              onChangeText={(name) => setDraftWrapper({ ...draft, name })}
-            />
-            <Pressable
-              onPress={
-                isNew
-                  ? undefined
-                  : () =>
-                      Alert.alert('Copy to Clipboard?', slug, [
-                        {
-                          text: 'Copy',
-                          onPress: () => Clipboard.setString(slug || ''),
-                        },
-                        {
-                          text: 'Cancel',
-                          style: 'cancel',
-                        },
-                      ])
-              }
-            >
-              <Input
-                label="Slug"
-                placeholder="Note Slug"
-                value={draft.slug}
-                onChangeText={(slug) => setDraftWrapper({ ...draft, slug })}
-                disabled={!isNew}
+          <Card
+            header={(props) => (
+              <View {...props}>
+                <Text category="s1">Point another iPhone camera at this!</Text>
+              </View>
+            )}
+          >
+            <View style={styles.qrCardBody}>
+              <QRCode
+                value={getShareLink(draft.slug)}
+                size={Math.floor(width * 0.7)}
               />
-            </Pressable>
-            <Input
-              label="Content"
-              placeholder="Note Content"
-              value={draft.content}
-              onChangeText={(content) => setDraftWrapper({ ...draft, content })}
-              numberOfLines={10}
-              textStyle={{ minHeight: 64 }}
-              multiline={true}
-              size="large"
-            />
-            <Button
-              style={{ marginTop: 10 }}
-              disabled={!isDirty}
-              onPress={() => {
-                setIsDirty(false);
-                setIsRefreshing(true);
-                (isNew
-                  ? dispatch(postNote(draft)).then(() => undefined)
-                  : dispatch(patchNote(draft)).then(() => undefined)
-                )
-                  .then(() =>
-                    Alert.alert(
-                      'Note Saved',
-                      `To add it to a your home screen, press and hold the widget, then tap "Edit Widget" to choose a note.${
-                        isNew
-                          ? ''
-                          : '\n\nOther devices displaying this note will be updated soon!'
-                      }`
-                    )
+            </View>
+          </Card>
+        </Modal>
+        <FlatList
+          refreshing={isRefreshing}
+          onRefresh={onRefresh}
+          keyExtractor={(_, i) => '' + i}
+          renderItem={() => null}
+          data={[]}
+          ListHeaderComponent={
+            <View style={styles.margined}>
+              <Input
+                label="Title"
+                placeholder="Note Title"
+                value={draft.name}
+                onChangeText={(name) => setDraftWrapper({ ...draft, name })}
+              />
+              <Pressable
+                onPress={isNew ? undefined : () => copyWithConfirm(slug || '')}
+              >
+                <Input
+                  label="Slug"
+                  placeholder="Note Slug"
+                  value={draft.slug}
+                  onChangeText={(slug) => setDraftWrapper({ ...draft, slug })}
+                  disabled={!isNew}
+                />
+              </Pressable>
+              <Input
+                label="Content"
+                placeholder="Note Content"
+                value={draft.content}
+                onChangeText={(newContent) =>
+                  setDraftWrapper({
+                    ...draft,
+                    content: massageNewEditorContent(draft.content, newContent),
+                  })
+                }
+                numberOfLines={10}
+                textStyle={{ minHeight: 64 }}
+                multiline={true}
+                size="large"
+              />
+              <Button
+                style={styles.button}
+                disabled={!isDirty}
+                onPress={() => {
+                  setIsDirty(false);
+                  setIsRefreshing(true);
+                  (isNew
+                    ? dispatch(postNote(draft)).then(() => undefined)
+                    : dispatch(patchNote(draft)).then(() => undefined)
                   )
-                  .then(() => setIsNew(false))
-                  .catch(sendErrorAlert)
-                  .then(() => setIsRefreshing(false));
-              }}
-            >
-              Save
-            </Button>
-          </View>
-        }
-      />
-      <PotentialAd unit={AdUnit.edit} />
+                    .then(() => noteSavedMessage(isNew))
+                    .then(() => setIsNew(false))
+                    .catch(sendErrorAlert)
+                    .then(() => setIsRefreshing(false));
+                }}
+              >
+                Save
+              </Button>
+            </View>
+          }
+        />
+        <PotentialAd unit={AdUnit.edit} />
+      </KeyboardAvoidingView>
     </Layout>
   );
 };
@@ -289,6 +276,8 @@ const styles = StyleSheet.create({
   qrCardBody: { flex: 1, flexDirection: 'row', justifyContent: 'center' },
   margined: { marginHorizontal: '5%', marginVertical: '2%' },
   container: { flex: 1, flexGrow: 1 },
+  keyboardAvoidingContainer: { flex: 1 },
+  button: { marginTop: 10, marginBottom: 40 },
 });
 
 export default EditScreen;
