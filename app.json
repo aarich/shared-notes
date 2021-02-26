@@ -14,7 +14,7 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 10
+      "enabled": false
     },
     "ios": {
       "config": {
@@ -26,7 +26,7 @@
       "favicon": "./assets/images/favicon.png"
     },
     "extra": {
-      "MyVersion": "3"
+      "MyVersion": "4"
     }
   }
 }

@@ -1,16 +1,22 @@
-import { ListItem, Toggle } from '@ui-kitten/components';
 import * as React from 'react';
-import { updateSetting } from '../../redux/actions';
+
 import {
   AnySetting,
   BooleanSettings,
 } from '../../redux/reducers/settingsReducer';
-import { useSetting } from '../../redux/selectors';
+import { ListItem, Toggle } from '@ui-kitten/components';
+
+import { updateSetting } from '../../redux/actions';
 import { useAppDispatch } from '../../redux/store';
+import { useSetting } from '../../redux/selectors';
 
 const labels = {
-  showTitle: 'Show Note Title',
+  showTitle: 'Show Title',
   showLastModified: 'Show Last Modified',
+};
+const descriptions = {
+  showTitle: 'Show the note title',
+  showLastModified: 'Includes a timestamp in the widget',
 };
 
 const ListItemToggle = ({ setting }: { setting: keyof BooleanSettings }) => {
@@ -21,6 +27,7 @@ const ListItemToggle = ({ setting }: { setting: keyof BooleanSettings }) => {
     <ListItem
       disabled
       title={labels[setting]}
+      description={descriptions[setting]}
       accessoryRight={() => (
         <Toggle
           style={{ paddingRight: 10 }}

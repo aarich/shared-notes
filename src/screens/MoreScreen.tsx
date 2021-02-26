@@ -1,22 +1,30 @@
-import { StackNavigationProp } from '@react-navigation/stack';
-import { Divider, Icon, Layout, List, ListItem } from '@ui-kitten/components';
-import React, { useCallback, useEffect, useState } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
-import ColorPicker from '../components/settings/ColorPicker';
-import ListItemAds from '../components/settings/ListItemAds';
-import ListItemTheme from '../components/settings/ListItemTheme';
-import ListItemToggle from '../components/settings/ListItemToggle';
-import PotentialAd from '../components/shared/PotentialAd';
-import { resetApp } from '../redux/actions';
 import {
   BooleanSettings,
   SelectSettings,
 } from '../redux/reducers/settingsReducer';
-import { useSetting } from '../redux/selectors';
-import { useAppDispatch } from '../redux/store';
+import {
+  Divider,
+  Icon,
+  Layout,
+  List,
+  ListItem,
+  Text,
+} from '@ui-kitten/components';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { AdUnit } from '../utils/ads';
-import { useUpToDateBridgeData } from '../utils/bridge';
+import ColorPicker from '../components/settings/ColorPicker';
+import ListItemAds from '../components/settings/ListItemAds';
+import ListItemTheme from '../components/settings/ListItemTheme';
+import ListItemToggle from '../components/settings/ListItemToggle';
 import { MoreParamList } from '../utils/types';
+import PotentialAd from '../components/shared/PotentialAd';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { resetApp } from '../redux/actions';
+import { useAppDispatch } from '../redux/store';
+import { useSetting } from '../redux/selectors';
+import { useUpToDateBridgeData } from '../utils/bridge';
 
 type Props = {
   navigation: StackNavigationProp<MoreParamList, 'Settings'>;
@@ -64,20 +72,26 @@ const MoreScreen = ({ navigation }: Props) => {
     | ListItemAction
     | ListItemColor
     | ListItemBooleanSetting
+    | string
   )[] = [
     { label: 'About', destination: 'About' },
     { label: 'Feedback', destination: 'Feedback' },
     { label: 'Reset', action: resetAppAlert },
   ];
-  const lastNavListItem = listItems.length - 1;
+
+  listItems.push('Widget Settings');
 
   const selectables: (keyof SelectSettings)[] = ['theme', 'ads'];
   const booleans: (keyof BooleanSettings)[] = ['showLastModified', 'showTitle'];
 
   booleans.forEach((setting) => listItems.push({ setting, isBoolean: true }));
+
   listItems.push({
     label: 'Widget Color',
   });
+
+  listItems.push('App Settings');
+
   selectables.forEach((setting) =>
     listItems.push({ setting, isBoolean: false })
   );
@@ -96,10 +110,16 @@ const MoreScreen = ({ navigation }: Props) => {
       | ListItemSelectSetting
       | ListItemAction
       | ListItemColor
-      | ListItemBooleanSetting,
-    index: number
+      | ListItemBooleanSetting
+      | string
   ) => {
-    if ('setting' in listItem) {
+    if (typeof listItem === 'string') {
+      return (
+        <Text category="h6" style={styles.sectionLabel}>
+          {listItem}
+        </Text>
+      );
+    } else if ('setting' in listItem) {
       if (listItem.isBoolean) {
         return <ListItemToggle setting={listItem.setting} />;
       } else {
@@ -123,9 +143,6 @@ const MoreScreen = ({ navigation }: Props) => {
               <Icon {...props} name="chevron-right-outline" />
             )}
           />
-          {index === lastNavListItem ? (
-            <View style={{ height: 20 }}></View>
-          ) : null}
         </>
       );
     } else {
@@ -133,6 +150,7 @@ const MoreScreen = ({ navigation }: Props) => {
       return (
         <ListItem
           title={listItem.label}
+          description="Background color"
           onPress={() => setIsColorPickerVisible(true)}
           accessoryRight={(props) => (
             <View style={{ paddingRight: 10 }}>
@@ -155,7 +173,7 @@ const MoreScreen = ({ navigation }: Props) => {
         ItemSeparatorComponent={Divider}
         data={listItems}
         keyExtractor={(_, i) => '' + i}
-        renderItem={({ item, index }) => getListItem(item, index)}
+        renderItem={({ item }) => getListItem(item)}
       />
       <PotentialAd unit={AdUnit.settings} />
     </Layout>
@@ -177,6 +195,7 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
+  sectionLabel: { padding: 14 },
 });
 
 export default MoreScreen;
