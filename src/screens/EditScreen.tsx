@@ -2,6 +2,7 @@ import {
   Alert,
   Dimensions,
   FlatList,
+  Keyboard,
   KeyboardAvoidingView,
   Pressable,
   StyleSheet,
@@ -85,41 +86,39 @@ const EditScreen = ({ navigation, route }: Props) => {
     }
   }, [dispatch, isNew, slug]);
 
-  const loadNote = useCallback(
-    () =>
-      Alert.prompt(
-        'Load',
-        "Enter the slug/identifier of a note you'd like to load",
-        [
-          {
-            text: 'Load',
-            onPress: (slug) =>
-              slug
-                ? dispatch(getNote(slug))
-                    .then((note) => {
-                      setIsNew(false);
-                      setDraft({ ...note });
-                      setIsDirty(false);
-                    })
-                    .catch(sendErrorAlert)
-                : Alert.alert('Enter a slug'),
-          },
-          { text: 'Cancel', style: 'cancel' },
-        ],
-        'plain-text'
-      ),
-    [dispatch]
-  );
-
-  const shareNoteAlert = useCallback(
-    () =>
-      Alert.alert('Share', 'How would you like to share this note?', [
-        { text: 'View QR Code', onPress: () => setQRVisible(true) },
-        { text: 'Share Link', onPress: () => shareNote(draft.slug) },
+  const loadNote = useCallback(() => {
+    Keyboard.dismiss();
+    Alert.prompt(
+      'Load',
+      "Enter the slug/identifier of a note you'd like to load",
+      [
+        {
+          text: 'Load',
+          onPress: (slug) =>
+            slug
+              ? dispatch(getNote(slug))
+                  .then((note) => {
+                    setIsNew(false);
+                    setDraft({ ...note });
+                    setIsDirty(false);
+                  })
+                  .catch(sendErrorAlert)
+              : Alert.alert('Enter a slug'),
+        },
         { text: 'Cancel', style: 'cancel' },
-      ]),
-    [draft.slug]
-  );
+      ],
+      'plain-text'
+    );
+  }, [dispatch]);
+
+  const shareNoteAlert = useCallback(() => {
+    Keyboard.dismiss();
+    Alert.alert('Share', 'How would you like to share this note?', [
+      { text: 'View QR Code', onPress: () => setQRVisible(true) },
+      { text: 'Share Link', onPress: () => shareNote(draft.slug) },
+      { text: 'Cancel', style: 'cancel' },
+    ]);
+  }, [draft.slug]);
 
   useEffect(() => {
     const headerRight = () => (
@@ -193,6 +192,11 @@ const EditScreen = ({ navigation, route }: Props) => {
             header={(props) => (
               <View {...props}>
                 <Text category="s1">Point another iPhone camera at this!</Text>
+              </View>
+            )}
+            footer={(props) => (
+              <View {...props}>
+                <Text category="s2">Tap outside to dismiss</Text>
               </View>
             )}
           >
