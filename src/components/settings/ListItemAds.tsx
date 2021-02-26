@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { updateSetting } from '../../redux/actions';
+
 import { AdType } from '../../redux/reducers/settingsReducer';
-import { useSetting } from '../../redux/selectors';
-import { useAppDispatch } from '../../redux/store';
 import ListWithOptions from './ListWithOptions';
+import { updateSetting } from '../../redux/actions';
+import { useAppDispatch } from '../../redux/store';
+import { useSetting } from '../../redux/selectors';
 
 const ListItemAds = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +14,7 @@ const ListItemAds = () => {
 
   return (
     <ListWithOptions
-      title="Ad Choices"
+      title="Ads"
       optionLabels={options}
       selectedIndex={selectedIndex}
       setSelectedIndex={(newIndex) =>
