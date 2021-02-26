@@ -1,4 +1,8 @@
-import { getLocationOfNewNewLine, getNextLineCharacter } from '../editor';
+import {
+  getLocationOfNewNewLine,
+  getNextLineCharacter,
+  massageNewEditorContent,
+} from '../editor';
 
 import each from 'jest-each';
 
@@ -29,5 +33,15 @@ describe('getNextLineCharacter', () => {
   ]).test('input: %s output: %s', (input, expected) => {
     const actual = getNextLineCharacter(input);
     expected ? expect(actual).toBe(expected) : expect(actual).toBeUndefined();
+  });
+});
+
+describe('massageNewEditorContent', () => {
+  each([
+    ['- bullet', '- bullet\n', '- bullet\n- '],
+    ['1. number', '1. number\n', '1. number\n2. '],
+    ['', '\n', '\n'],
+  ]).test('old: %s, new: %s', (oldStr, newStr, expected) => {
+    expect(massageNewEditorContent(oldStr, newStr)).toBe(expected);
   });
 });

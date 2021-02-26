@@ -73,7 +73,7 @@ export const massageNewEditorContent = (
   const locationOfNewLine = getLocationOfNewNewLine(oldContent, newContent);
   if (locationOfNewLine) {
     const lines = oldContent.substring(0, locationOfNewLine).split('\n');
-    if (lines && lines.length > 1) {
+    if (lines && lines.length > 0) {
       const nextChar = getNextLineCharacter(lines[lines.length - 1]);
       if (nextChar) {
         return splice(newContent, locationOfNewLine + 1, nextChar);
