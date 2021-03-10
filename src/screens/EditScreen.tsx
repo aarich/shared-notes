@@ -60,7 +60,7 @@ const EditScreen = ({ navigation, route }: Props) => {
   const [draft, setDraft] = useState<NoteDraft>(() => ({
     name: note?.name || '',
     content: note?.content || '',
-    slug: slug || generateSlug(4),
+    slug: slug || generateSlug(),
   }));
 
   const setDraftWrapper = (newDraft: NoteDraft) => {
@@ -77,14 +77,15 @@ const EditScreen = ({ navigation, route }: Props) => {
   }, [bridgeError, setBridgeError]);
 
   useEffect(() => {
-    if (!isNew) {
-      slug &&
-        dispatch(getNote(slug))
-          .then((note) => setDraft({ ...note }))
-          .catch(sendErrorAlert)
-          .then(() => setIsRefreshing(false));
+    if (!isNew && slug) {
+      setIsRefreshing(true);
+      dispatch(getNote(slug))
+        .then((note) => setDraft({ ...note }))
+        .catch(sendErrorAlert)
+        .then(() => setIsRefreshing(false));
     }
-  }, [dispatch, isNew, slug]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, isNew]);
 
   const loadNote = useCallback(() => {
     Keyboard.dismiss();
