@@ -4,17 +4,18 @@
   </a>
 
   <h2 align="center">Shared Note Widgets</h2>
-  
-<p align="center">
-  <a href="https://apps.apple.com/app/apple-store/id1552960395?pt=117925864&ct=readme&mt=8">
-    <img alt="Download on the App Store" title="App Store" src="http://i.imgur.com/0n2zqHD.png" width="140">
-  </a>
 </p>
-<hr>
-</p>
+
+
+<a href="https://apps.apple.com/app/apple-store/id1552960395?pt=117925864&ct=readme&mt=8">
+  <img alt="Download on the App Store" title="App Store" src="http://i.imgur.com/0n2zqHD.png" width="200">
+</a>
+<br>
 
 [![Built with Expo](https://img.shields.io/badge/Built%20with%20Expo-informational.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://github.com/expo/expo)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-informational.svg?style=flat-square)](https://github.com/aarich/shared-notes/pulls)
+
+
 
 ## About
 
