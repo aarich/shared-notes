@@ -1,14 +1,16 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Icon, useTheme } from '@ui-kitten/components';
 import * as Linking from 'expo-linking';
-import React, { useCallback, useEffect } from 'react';
+
+import { Icon, useTheme } from '@ui-kitten/components';
 import { MoreParamList, NotesParamList } from '../../utils/types';
+import React, { useCallback, useEffect } from 'react';
+
 import AboutScreen from '../AboutScreen';
 import EditScreen from '../EditScreen';
 import FeedbackScreen from '../FeedbackScreen';
 import LibraryScreen from '../LibraryScreen';
 import MoreScreen from '../MoreScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { navigateToEdit } from './rootNavRef';
 
 type BottomTabParamList = {
@@ -58,7 +60,7 @@ export default function BottomTabNavigator() {
         options={{
           tabBarIcon: ({ color, focused, size }: TabBarIconProps) => (
             <Icon
-              name={`clock${focused ? '' : '-outline'}`}
+              name={`file-text${focused ? '' : '-outline'}`}
               fill={color}
               style={{ width: size, height: size }}
             />
@@ -71,7 +73,7 @@ export default function BottomTabNavigator() {
         options={{
           tabBarIcon: ({ color, focused, size }: TabBarIconProps) => (
             <Icon
-              name={`more-horizontal${focused ? '' : '-outline'}`}
+              name={`options-2${focused ? '' : '-outline'}`}
               fill={color}
               style={{ width: size, height: size }}
             />

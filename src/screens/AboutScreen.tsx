@@ -1,7 +1,9 @@
-import { Layout, Text } from '@ui-kitten/components';
 import * as Linking from 'expo-linking';
-import React from 'react';
+
+import { Layout, Text } from '@ui-kitten/components';
 import { ScrollView, StyleSheet, View } from 'react-native';
+
+import React from 'react';
 import { VERSION } from '../utils/experience';
 
 const h3 = (text: string) => (
@@ -29,17 +31,19 @@ const AboutScreen = () => {
     <Layout style={{ flex: 1, flexGrow: 1 }}>
       <ScrollView style={{ paddingHorizontal: '5%' }}>
         {h3('Instructions')}
-        {p("You can put custom notes on you and your friends' home screens!")}
-        {p('1. Draft and save a note (use the "Notes" tab)')}
+        {p("Put notes on your home screen (and your friends')!")}
+        {p('1. Create and save a note')}
         {p('2. Add the "Shared Notes" widget to your home screen')}
-        {p('3. Press and hold on the widget until the menu opens')}
+        {p(
+          '3. Press and hold on the widget until the menu opens (you may need to exit edit mode first)'
+        )}
         {p('4. Tap "Edit Widget"')}
         {p('5. Choose the note you just created!')}
         {p(
-          'You can have as many different notes as you like! Share the notes with friends or family members to always have automatically up-to-date information.'
+          'You can have as many different notes as you like! Share the notes with friends or family members to share up-to-date information.'
         )}
         {p(
-          'Widgets can take between fifteen minutes to an hour to refresh on other devices.'
+          'Due to best practices enforced by your device, widgets can take between fifteen minutes to an hour to refresh on other devices.'
         )}
         {h3('Privacy')}
         {p(
