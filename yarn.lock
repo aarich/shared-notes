@@ -2125,10 +2125,10 @@
   resolved "https://registry.npmjs.org/@types/react-native-shared-group-preferences/-/react-native-shared-group-preferences-1.1.0.tgz#91b4647765c9bb3a5f820c2b53c74d388bfa19f5"
   integrity sha512-i2onamZJMw4l4DIwnEju95HoiEYT0qUXEhF3WldL9dDwW0wBe4YLUn5KtVhj/aJvYW8JcblONMU47qKh18tksQ==
 
-"@types/react-native@~0.63.2":
-  version "0.63.48"
-  resolved "https://registry.npmjs.org/@types/react-native/-/react-native-0.63.48.tgz#83ebffe2900b8dee7e420bad9d8d0efea86efe92"
-  integrity sha512-6+7WsHfVkcYEwO/u3wxarMwZq/mbJZ5iDYCXwX5bs8lm0vEIuBdMsk9jrwxuCBvaXhGdB0lriwTgfew/7VN2Kg==
+"@types/react-native@~0.64.0":
+  version "0.64.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.0.tgz#8c4aab67fca2197eacc73e403239be85c909d564"
+  integrity sha512-yys0k6tNby1VxEVfuxpaJRUChMer7lvnxSQfK6EtpxV8rtNk8boo/nQJkUoXgIi0mdhC1pj72flztdkj6wOHPA==
   dependencies:
     "@types/react" "*"
 
