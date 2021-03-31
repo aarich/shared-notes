@@ -66,6 +66,7 @@ const AboutScreen = () => {
           'Thanks to the following open source software and free services for making this app possible.'
         )}
         {[
+          { name: 'AppMockUp', url: 'app-mockup.com' },
           { name: 'Expo', url: 'expo.io' },
           { name: 'GitHub', url: 'github.com' },
           {
@@ -85,6 +86,7 @@ const AboutScreen = () => {
             name: 'React Native WidgetKit',
             url: 'github.com/fasky-software/react-native-widgetkit#readme',
           },
+          { name: 'Redux', url: 'redux.js.org' },
           {
             name: 'Shared Group Preferences',
             url:
