@@ -21,8 +21,8 @@ struct Provider: IntentTimelineProvider {
   func getTimeline(for configuration: SelectNoteIntent, in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
     
     lookupNoteDetails(for: configuration) { (entry) in
-      // Wait 10 minutes before next fetch
-      let nextFetch = Date().addingTimeInterval(TimeInterval(20/*60*10*/))
+      // Wait 15 minutes before next fetch
+      let nextFetch = Date().addingTimeInterval(TimeInterval(60 * 15))
       let timeline = Timeline(entries: [entry], policy: .after(nextFetch))
       completion(timeline)
     }

@@ -60,6 +60,8 @@
 		<string>NoteIntentIntent</string>
 		<string>SelectNoteIntent</string>
 	</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>We'd like to be able to show relevant ads to you.</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
