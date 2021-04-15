@@ -7,7 +7,7 @@ import { Note } from './types';
 import { deleteNote } from '../redux/actions/thunks';
 import { removeNote } from '../redux/actions';
 
-export const VERSION = `${Constants.nativeAppVersion}-${Constants.manifest.extra.MyVersion}`;
+export const VERSION = `${Constants.nativeAppVersion}-${Constants.manifest.extra?.MyVersion}`;
 
 export const sendErrorAlert = (e: Error) => Alert.alert('Error', e.message);
 

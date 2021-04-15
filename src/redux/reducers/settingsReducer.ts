@@ -1,17 +1,22 @@
-import theme from '../../../assets/theme.json';
 import {
   AppActionTypes,
   RESET,
-  SettingsActionTypes,
   SET_SETTINGS,
+  SettingsActionTypes,
   UPDATE_SETTING,
 } from '../actions/actionTypes';
 
+import theme from '../../../assets/theme.json';
+
 export enum AdType {
+  /** @deprecated since ios 14.5 */
   Personal = 'Personal',
+  /** @deprecated since ios 14.5 */
   Generic = 'Generic',
   Off = 'Off',
+  On = 'On',
 }
+
 export enum ThemeType {
   Light = 'Light',
   Dark = 'Dark',

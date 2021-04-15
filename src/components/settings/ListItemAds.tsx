@@ -1,7 +1,8 @@
 import * as React from 'react';
 
+import { ListItem, Toggle } from '@ui-kitten/components';
+
 import { AdType } from '../../redux/reducers/settingsReducer';
-import ListWithOptions from './ListWithOptions';
 import { updateSetting } from '../../redux/actions';
 import { useAppDispatch } from '../../redux/store';
 import { useSetting } from '../../redux/selectors';
@@ -9,17 +10,25 @@ import { useSetting } from '../../redux/selectors';
 const ListItemAds = () => {
   const dispatch = useAppDispatch();
   const setting = useSetting('ads');
-  const options = Object.values(AdType);
-  const selectedIndex = options.indexOf(setting);
 
   return (
-    <ListWithOptions
-      title="Ads"
-      optionLabels={options}
-      selectedIndex={selectedIndex}
-      setSelectedIndex={(newIndex) =>
-        dispatch(updateSetting({ ads: options[newIndex] }))
-      }
+    <ListItem
+      disabled
+      title="Show Ads"
+      description="Support the developer!"
+      accessoryRight={() => (
+        <Toggle
+          style={{ paddingRight: 10 }}
+          checked={setting !== AdType.Off}
+          onChange={() =>
+            dispatch(
+              updateSetting({
+                ads: setting === AdType.Off ? AdType.On : AdType.Off,
+              })
+            )
+          }
+        />
+      )}
     />
   );
 };
