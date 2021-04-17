@@ -1,11 +1,10 @@
-import { Alert, AlertButton, Platform, Share } from 'react-native';
-
-import { AppDispatch } from '../redux/store';
 import Clipboard from 'expo-clipboard';
 import Constants from 'expo-constants';
-import { Note } from './types';
-import { deleteNote } from '../redux/actions/thunks';
+import { Alert, AlertButton, Share } from 'react-native';
 import { removeNote } from '../redux/actions';
+import { deleteNote } from '../redux/actions/thunks';
+import { AppDispatch } from '../redux/store';
+import { Note } from './types';
 
 export const VERSION = `${Constants.nativeAppVersion}-${Constants.manifest.extra?.MyVersion}`;
 
@@ -34,13 +33,7 @@ Deleting it from the servers means all others will lose access. You cannot undo 
 
 export const shareNote = (slug: string) => {
   const url = getShareLink(slug);
-  let content;
-  if (Platform.OS === 'ios') {
-    content = { url };
-  } else {
-    content = { message: url, title: 'Flow' };
-  }
-  Share.share(content);
+  Share.share({ url });
 };
 
 export const getShareLink = (slug: string) =>
@@ -111,3 +104,15 @@ export const checkDiscard = (
       },
     ]
   );
+
+const parseSqlDateString = (dateString: string) =>
+  new Date(dateString.replace(' ', 'T') + 'Z');
+
+export const dateToDisplay = (dateString: string) =>
+  parseSqlDateString(dateString).toLocaleString(undefined, {
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    weekday: 'long',
+  });

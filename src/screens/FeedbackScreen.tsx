@@ -1,12 +1,10 @@
-import * as StoreReview from 'expo-store-review';
-
-import { Button, Icon, Layout, Text } from '@ui-kitten/components';
-import { Platform, StyleSheet, View } from 'react-native';
-import React, { useEffect } from 'react';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { VERSION } from '../utils/experience';
+import { Button, Icon, Layout, Text } from '@ui-kitten/components';
 import { openURL } from 'expo-linking';
+import * as StoreReview from 'expo-store-review';
+import React, { useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { VERSION } from '../utils/experience';
 
 const baseMainURL = 'https://mrarich.com';
 
@@ -29,15 +27,12 @@ const makeButton = (title: string, icon: string, onPress: () => void) => (
 const FeedbackScreen = () => {
   const issuesUrl = 'https://github.com/aarich/shared-notes/issues/new';
   const storeUrl =
-    Platform.OS === 'ios'
-      ? 'https://apps.apple.com/app/apple-store/id1552960395?pt=117925864&ct=inappfeedback&mt=8'
-      : '';
-  const app = Platform.OS === 'ios' ? 'App' : 'Play';
+    'https://apps.apple.com/app/apple-store/id1552960395?pt=117925864&ct=inappfeedback&mt=8';
 
   useEffect(() => {
     const today = new Date();
 
-    if (today.getDate() === 1) {
+    if (today.getDate() % 7 === 1) {
       StoreReview.isAvailableAsync()
         .then((available) => {
           if (available) {
@@ -62,7 +57,7 @@ const FeedbackScreen = () => {
         </Text>
         <View>
           {storeUrl ? (
-            makeButton(`Open in the ${app} Store`, 'bulb-outline', () =>
+            makeButton(`Open in the App Store`, 'bulb-outline', () =>
               openURL(storeUrl)
             )
           ) : (

@@ -4,7 +4,7 @@
   "expo": {
     "name": "Shared Notes",
     "slug": "shared-notes",
-    "version": "1.5",
+    "version": "1.8",
     "assetBundlePatterns": ["**/*"],
     "userInterfaceStyle": "automatic",
     "scheme": "sharednotes",
@@ -22,11 +22,8 @@
       },
       "bundleIdentifier": "com.mrarich.SharedNoteWidget"
     },
-    "web": {
-      "favicon": "./assets/images/favicon.png"
-    },
     "extra": {
-      "MyVersion": "5"
+      "MyVersion": "6"
     }
   }
 }

@@ -50,7 +50,7 @@ export const postNote = (note: NoteDraft): AppThunk<Note> => (dispatch) =>
     )
     .then(checkResponse)
     .then((resp) => {
-      const created = { ...note, ...resp.note };
+      const created = { ...resp.note };
       dispatch(setNote(created));
       return created;
     });
@@ -67,9 +67,8 @@ export const patchNote = (note: NoteDraft): AppThunk<[Note, boolean]> => (
     )
     .then(checkResponse)
     .then((resp) => {
-      const updated = { ...note, created: '', modified: '' };
-      dispatch(setNote(updated));
-      return [updated, resp.created];
+      dispatch(setNote(resp.note));
+      return [resp.note, resp.created];
     });
 
 export const deleteNote = (slug: string): AppThunk<void> => (dispatch) =>

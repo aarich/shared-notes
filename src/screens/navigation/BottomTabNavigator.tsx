@@ -1,16 +1,14 @@
-import * as Linking from 'expo-linking';
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, useTheme } from '@ui-kitten/components';
-import { MoreParamList, NotesParamList } from '../../utils/types';
+import * as Linking from 'expo-linking';
 import React, { useCallback, useEffect } from 'react';
-
+import { MoreParamList, NotesParamList } from '../../utils/types';
 import AboutScreen from '../AboutScreen';
-import EditScreen from '../EditScreen';
+import EditScreenContainer from '../EditScreenContainer';
 import FeedbackScreen from '../FeedbackScreen';
 import LibraryScreen from '../LibraryScreen';
 import MoreScreen from '../MoreScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import { navigateToEdit } from './rootNavRef';
 
 type BottomTabParamList = {
@@ -90,7 +88,7 @@ function NotesNavigator() {
   return (
     <NotesStack.Navigator initialRouteName="Library">
       <NotesStack.Screen name="Library" component={LibraryScreen} />
-      <NotesStack.Screen name="EditScreen" component={EditScreen} />
+      <NotesStack.Screen name="EditScreen" component={EditScreenContainer} />
     </NotesStack.Navigator>
   );
 }
