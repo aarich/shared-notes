@@ -24,6 +24,7 @@ func lookupNoteDetails(for configuration: SelectNoteIntent, completion: @escapin
     var name:String
     var modified:String
     var content:String
+    var twoColumn:Bool
     let unknownError = "We couldn't load the note for some reason. Make sure you have the latest version of the app!"
     
     let json = try? JSONSerialization.jsonObject(with: data, options: [])
@@ -42,6 +43,7 @@ func lookupNoteDetails(for configuration: SelectNoteIntent, completion: @escapin
         name = note["name"] as! String
         modified=note["modified"] as! String
         content = note["content"] as! String
+        twoColumn = note["columns"] as! Int == 2
       } else {
         completion(makeEntry(from: "Couldn't find your note, did someone delete it? Tap here to try and recover it."))
         return
@@ -54,9 +56,10 @@ func lookupNoteDetails(for configuration: SelectNoteIntent, completion: @escapin
     let dateFormatter = DateFormatter()
     dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
     let date = dateFormatter.date(from:modified)!
     
-    completion(makeEntry(name: name, content: content, lastModified: date, slug: slug!))
+    completion(makeEntry(name: name, content: content, lastModified: date, slug: slug!, twoColumn: twoColumn))
     return
   }
   task.resume()

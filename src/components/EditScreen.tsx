@@ -1,5 +1,10 @@
-import { Button, Input as UIKInput, Layout, Text } from '@ui-kitten/components';
-import React, { useRef } from 'react';
+import {
+  Button,
+  Layout,
+  Text,
+  Toggle,
+  Input as UIKInput,
+} from '@ui-kitten/components';
 import {
   FlatList,
   KeyboardAvoidingView,
@@ -7,46 +12,47 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import Input from '../components/shared/Input';
-import PotentialAd from '../components/shared/PotentialAd';
-import { AdUnit } from '../utils/ads';
+import React, { useRef } from 'react';
 import { copyWithConfirm, dateToDisplay } from '../utils/experience';
+
+import { AdUnit } from '../utils/ads';
+import Input from '../components/shared/Input';
+import { NoteDraft } from '../utils/types';
+import PotentialAd from '../components/shared/PotentialAd';
 import QRModal from './QRModal';
 
 type StringSetter = (str: string) => void;
 
 type Props = {
-  slug: string;
+  draft: NoteDraft;
   setSlug: StringSetter;
   isRefreshing: boolean;
   onRefresh: () => void;
-  name: string;
   setName: StringSetter;
   isNew: boolean;
-  content: string;
   setContent: StringSetter;
   onSave: () => void;
   isDirty: boolean;
   qrVisible: boolean;
   setQRVisible: (b: boolean) => void;
   lastModified?: string;
+  set2Cols: (is2Col: boolean) => void;
 };
 
 const EditScreen = ({
-  slug,
+  draft,
   setSlug,
   isRefreshing,
   onRefresh,
-  name,
   setName,
   isNew,
-  content,
   setContent,
   onSave,
   isDirty,
   qrVisible,
   setQRVisible,
   lastModified,
+  set2Cols,
 }: Props) => {
   const contentRef = useRef<UIKInput>(null);
   return (
@@ -58,7 +64,7 @@ const EditScreen = ({
         <QRModal
           visible={qrVisible}
           onBackdropPress={() => setQRVisible(false)}
-          slug={slug}
+          slug={draft.slug}
         />
         <FlatList
           refreshing={isRefreshing}
@@ -71,19 +77,21 @@ const EditScreen = ({
               <Input
                 label="Title"
                 placeholder="Note Title"
-                value={name}
+                value={draft.name}
                 onChangeText={setName}
                 returnKeyType="next"
                 onSubmitEditing={contentRef.current?.focus}
                 blurOnSubmit={false}
               />
               <Pressable
-                onPress={isNew ? undefined : () => copyWithConfirm(slug || '')}
+                onPress={
+                  isNew ? undefined : () => copyWithConfirm(draft.slug || '')
+                }
               >
                 <Input
                   label="Slug"
                   placeholder="Note Slug"
-                  value={slug}
+                  value={draft.slug}
                   onChangeText={setSlug}
                   disabled={!isNew}
                   returnKeyType="next"
@@ -94,7 +102,7 @@ const EditScreen = ({
               <Input
                 label="Note"
                 placeholder="Note Content"
-                value={content}
+                value={draft.content}
                 onChangeText={setContent}
                 numberOfLines={10}
                 textStyle={{ minHeight: 64 }}
@@ -102,6 +110,26 @@ const EditScreen = ({
                 size="large"
                 ref={contentRef}
               />
+              <View style={{ flexDirection: 'row', marginTop: 10 }}>
+                <Toggle checked={draft.columns === 2} onChange={set2Cols}>
+                  {(props) => (
+                    <View>
+                      <Text {...props}>Use two columns</Text>
+                      <Text
+                        style={{
+                          // @ts-ignore
+                          // eslint-disable-next-line react/prop-types
+                          marginHorizontal: props?.style?.marginHorizontal,
+                        }}
+                        category="c2"
+                        appearance="hint"
+                      >
+                        Useful for displaying lists
+                      </Text>
+                    </View>
+                  )}
+                </Toggle>
+              </View>
               <Button
                 style={styles.button}
                 disabled={!isDirty}
@@ -131,7 +159,7 @@ const EditScreen = ({
 
 const styles = StyleSheet.create({
   margined: { marginHorizontal: '5%', marginVertical: '2%' },
-  container: { flex: 1, flexGrow: 1 },
+  container: { flex: 1 },
   keyboardAvoidingContainer: { flex: 1 },
   button: { marginVertical: 10 },
 });

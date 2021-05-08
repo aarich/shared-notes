@@ -18,4 +18,5 @@ export type NoteDraft = {
   slug: string;
   name: string;
   content: string;
+  columns: number;
 };

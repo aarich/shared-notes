@@ -1,22 +1,23 @@
-import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { generateSlug } from 'random-word-slugs';
-import React, { useCallback, useEffect, useState } from 'react';
 import { Alert, Keyboard } from 'react-native';
-import EditHeaderActions from '../components/EditHeaderActions';
-import EditScreen from '../components/EditScreen';
-import { getNote, patchNote, postNote } from '../redux/actions/thunks';
-import { useNote } from '../redux/selectors';
-import { useAppDispatch } from '../redux/store';
-import { useUpToDateBridgeData } from '../utils/bridge';
-import { massageNewEditorContent } from '../utils/editor';
+import { NoteDraft, NotesParamList } from '../utils/types';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   checkDiscard,
   noteSavedMessage,
   sendErrorAlert,
   shareNote,
 } from '../utils/experience';
-import { NoteDraft, NotesParamList } from '../utils/types';
+import { getNote, patchNote, postNote } from '../redux/actions/thunks';
+
+import EditHeaderActions from '../components/EditHeaderActions';
+import EditScreen from '../components/EditScreen';
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { generateSlug } from 'random-word-slugs';
+import { massageNewEditorContent } from '../utils/editor';
+import { useAppDispatch } from '../redux/store';
+import { useNote } from '../redux/selectors';
+import { useUpToDateBridgeData } from '../utils/bridge';
 
 type Props = {
   navigation: StackNavigationProp<NotesParamList, 'EditScreen'>;
@@ -35,12 +36,16 @@ const EditScreenContainer = ({ navigation, route }: Props) => {
     name: note?.name || '',
     content: note?.content || '',
     slug: slug || generateSlug(),
+    columns: note?.columns || 1,
   }));
 
-  const setDraftWrapper = (newDraft: NoteDraft) => {
-    setIsDirty(true);
-    setDraft(newDraft);
-  };
+  const setDraftWrapper = useCallback(
+    (updates: Partial<NoteDraft>) => {
+      setIsDirty(true);
+      setDraft({ ...draft, ...updates });
+    },
+    [draft]
+  );
 
   const [bridgeError, setBridgeError] = useUpToDateBridgeData();
   useEffect(() => {
@@ -180,16 +185,16 @@ const EditScreenContainer = ({ navigation, route }: Props) => {
 
   return (
     <EditScreen
-      {...draft}
-      setSlug={(slug) => setDraftWrapper({ ...draft, slug })}
-      setName={(name) => setDraftWrapper({ ...draft, name })}
+      setSlug={(slug) => setDraftWrapper({ slug })}
+      setName={(name) => setDraftWrapper({ name })}
       setContent={(newContent) =>
         setDraftWrapper({
-          ...draft,
           content: massageNewEditorContent(draft.content, newContent),
         })
       }
+      set2Cols={(is2Cols) => setDraftWrapper({ columns: is2Cols ? 2 : 1 })}
       {...{
+        draft,
         isDirty,
         isNew,
         isRefreshing,

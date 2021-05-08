@@ -29,6 +29,7 @@
 		8D6A9CE225D26BE40004F108 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D03273125D25DB600DEA687 /* IntentHandler.swift */; };
 		8D7FE35025D31E9C007EB2C0 /* NoteApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7FE34F25D31E9C007EB2C0 /* NoteApi.swift */; };
 		8D7FE35825D31F3E007EB2C0 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7FE35725D31F3E007EB2C0 /* UIColorExtensions.swift */; };
+		8DE5FAED2645EC750080149F /* WidgetViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE5FAEC2645EC750080149F /* WidgetViewHelpers.swift */; };
 		96905EF65AED1B983A6B3ABC /* libPods-sharednotes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-sharednotes.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 /* End PBXBuildFile section */
@@ -182,6 +183,7 @@
 		8D7536A425D2039F00374ACA /* sharednotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = sharednotes.entitlements; path = sharednotes/sharednotes.entitlements; sourceTree = "<group>"; };
 		8D7FE34F25D31E9C007EB2C0 /* NoteApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteApi.swift; sourceTree = "<group>"; };
 		8D7FE35725D31F3E007EB2C0 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		8DE5FAEC2645EC750080149F /* WidgetViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetViewHelpers.swift; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = sharednotes/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -388,6 +390,7 @@
 				8D286ED525D0FEC700D3C0FD /* NoteWidget.swift */,
 				8D7FE35725D31F3E007EB2C0 /* UIColorExtensions.swift */,
 				8D213C2925D100B90096D194 /* NoteWidgetView.swift */,
+				8DE5FAEC2645EC750080149F /* WidgetViewHelpers.swift */,
 				8D286ED825D0FEC800D3C0FD /* Assets.xcassets */,
 				8D286EDA25D0FEC800D3C0FD /* Info.plist */,
 			);
@@ -650,6 +653,7 @@
 			files = (
 				8D6A9C9425D267F80004F108 /* NoteIntents.intentdefinition in Sources */,
 				8D7FE35825D31F3E007EB2C0 /* UIColorExtensions.swift in Sources */,
+				8DE5FAED2645EC750080149F /* WidgetViewHelpers.swift in Sources */,
 				8D6A9CE225D26BE40004F108 /* IntentHandler.swift in Sources */,
 				8D213C2A25D100B90096D194 /* NoteWidgetView.swift in Sources */,
 				8D6A9CA125D268440004F108 /* NoteWidget.swift in Sources */,
@@ -694,7 +698,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = sharednotes/sharednotes.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8H27F27VW9;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
@@ -706,7 +710,7 @@
 				INTENTS_CODEGEN_LANGUAGE = Swift;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -731,14 +735,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = sharednotes/sharednotes.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 8H27F27VW9;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = sharednotes/Info.plist;
 				INTENTS_CODEGEN_LANGUAGE = Swift;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -870,7 +874,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = NoteIntent/NoteIntent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 8H27F27VW9;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -878,7 +882,7 @@
 				INTENTS_CODEGEN_LANGUAGE = Swift;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrarich.SharedNoteWidget.NoteIntent;
@@ -904,7 +908,7 @@
 				CODE_SIGN_ENTITLEMENTS = NoteIntent/NoteIntent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8H27F27VW9;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -912,7 +916,7 @@
 				INTENTS_CODEGEN_LANGUAGE = Swift;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 2.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrarich.SharedNoteWidget.NoteIntent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -938,7 +942,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = NoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 8H27F27VW9;
@@ -946,7 +950,7 @@
 				INFOPLIST_FILE = NoteWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -977,7 +981,7 @@
 				CODE_SIGN_ENTITLEMENTS = NoteWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 8H27F27VW9;
@@ -985,7 +989,7 @@
 				INFOPLIST_FILE = NoteWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 2.0;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrarich.SharedNoteWidget.NoteWidget;

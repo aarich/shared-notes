@@ -38,6 +38,7 @@ struct SimpleEntry: TimelineEntry {
   let showTitle:Bool
   let showModified:Bool
   let slug:String
+  let twoColumn:Bool
 }
 
 @main
@@ -69,14 +70,14 @@ func makeEntry(from error: String) -> SimpleEntry {
 }
 
 func makeEntry(title: String, content:String) -> SimpleEntry {
-  return makeEntry(name: title, content: content, lastModified: Date(), slug:"", hideModified: true)
+  return makeEntry(name: title, content: content, lastModified: Date(), slug:"", twoColumn: false, hideModified: true)
 }
   
-func makeEntry(name: String, content: String, lastModified: Date, slug:String) -> SimpleEntry {
-  return makeEntry(name: name, content: content, lastModified: lastModified, slug: slug, hideModified: false)
+func makeEntry(name: String, content: String, lastModified: Date, slug:String, twoColumn:Bool) -> SimpleEntry {
+  return makeEntry(name: name, content: content, lastModified: lastModified, slug: slug, twoColumn: twoColumn, hideModified: false)
 }
 
-func makeEntry(name: String, content: String, lastModified: Date, slug:String, hideModified:Bool) -> SimpleEntry {
+func makeEntry(name: String, content: String, lastModified: Date, slug:String, twoColumn:Bool, hideModified:Bool) -> SimpleEntry {
 
   let appData = getAppData()
   
@@ -93,7 +94,7 @@ func makeEntry(name: String, content: String, lastModified: Date, slug:String, h
   if (hideModified) {
     showModified = false;
   }
-  
-  return SimpleEntry(date: Date(), name:name, content: content, lastModified: lastModified, color: color, showTitle: showTitle, showModified: showModified, slug: slug)
+    
+  return SimpleEntry(date: Date(), name:name, content: content, lastModified: lastModified, color: color, showTitle: showTitle, showModified: showModified, slug: slug, twoColumn: twoColumn)
 }
 

@@ -1,21 +1,22 @@
-import { StackNavigationProp } from '@react-navigation/stack';
 import {
   Divider,
   Icon,
   Layout,
   List,
-  ListItem,
   Text,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import React, { useEffect } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
-import PotentialAd from '../components/shared/PotentialAd';
-import { useNotes } from '../redux/selectors';
-import { useAppDispatch } from '../redux/store';
-import { AdUnit } from '../utils/ads';
-import { deleteNoteAlert } from '../utils/experience';
 import { Note, NotesParamList } from '../utils/types';
+import { Pressable, StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+
+import { AdUnit } from '../utils/ads';
+import DeletableListItem from '../components/shared/DeletableListItem';
+import PotentialAd from '../components/shared/PotentialAd';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { deleteNoteAlert } from '../utils/experience';
+import { useAppDispatch } from '../redux/store';
+import { useNotes } from '../redux/selectors';
 
 type Props = {
   navigation: StackNavigationProp<NotesParamList, 'Library'>;
@@ -44,7 +45,8 @@ const LibraryScreen = ({ navigation }: Props) => {
         data={notes}
         keyExtractor={(item: Note) => item.slug}
         renderItem={({ item }: { item: Note }) => (
-          <ListItem
+          <DeletableListItem
+            onDelete={() => deleteNoteAlert(item, dispatch)}
             title={item.name}
             onPress={() => navigation.push('EditScreen', { slug: item.slug })}
             accessoryRight={(props) => (
