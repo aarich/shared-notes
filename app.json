@@ -4,7 +4,7 @@
   "expo": {
     "name": "Shared Notes",
     "slug": "shared-notes",
-    "version": "2.0",
+    "version": "2.1",
     "assetBundlePatterns": ["**/*"],
     "userInterfaceStyle": "automatic",
     "scheme": "sharednotes",
@@ -23,7 +23,7 @@
       "bundleIdentifier": "com.mrarich.SharedNoteWidget"
     },
     "extra": {
-      "MyVersion": "7"
+      "MyVersion": "8"
     }
   }
 }

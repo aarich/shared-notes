@@ -1,10 +1,11 @@
+import { Alert, AlertButton, Share } from 'react-native';
+
+import { AppDispatch } from '../redux/store';
 import Clipboard from 'expo-clipboard';
 import Constants from 'expo-constants';
-import { Alert, AlertButton, Share } from 'react-native';
-import { removeNote } from '../redux/actions';
-import { deleteNote } from '../redux/actions/thunks';
-import { AppDispatch } from '../redux/store';
 import { Note } from './types';
+import { deleteNote } from '../redux/actions/thunks';
+import { removeNote } from '../redux/actions';
 
 export const VERSION = `${Constants.nativeAppVersion}-${Constants.manifest.extra?.MyVersion}`;
 
@@ -12,7 +13,7 @@ export const sendErrorAlert = (e: Error) => Alert.alert('Error', e.message);
 
 export const deleteNoteAlert = (note: Note, dispatch: AppDispatch) => {
   Alert.alert(
-    'Delete Note',
+    `Delete '${note.name}'`,
     `Would you like to remove '${note.name}' from this device or erase it from the servers?
 
 Deleting it from the servers means all others will lose access. You cannot undo this.`,

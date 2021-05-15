@@ -13,6 +13,8 @@ const DeletableListItem = ({ onDelete, ...listItemProps }: Props) => {
   const theme = useTheme();
   const redColor = theme['color-danger-600'];
   const iconColor = theme['text-alternate-color'];
+  const swipeableRow = useRef<Swipeable>(null);
+
   const renderRightAction = (progress: Animated.AnimatedInterpolation) => {
     const trans = progress.interpolate({
       inputRange: [0, 1],
@@ -47,14 +49,11 @@ const DeletableListItem = ({ onDelete, ...listItemProps }: Props) => {
     </View>
   );
 
-  const swipeableRow = useRef<Swipeable>(null);
-
   return (
     <Swipeable
       ref={swipeableRow}
       friction={2}
       enableTrackpadTwoFingerGesture
-      leftThreshold={30}
       rightThreshold={40}
       renderRightActions={renderRightActions}
     >

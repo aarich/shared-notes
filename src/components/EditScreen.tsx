@@ -2,6 +2,7 @@ import {
   Button,
   Layout,
   Text,
+  TextProps,
   Toggle,
   Input as UIKInput,
 } from '@ui-kitten/components';
@@ -12,11 +13,12 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { copyWithConfirm, dateToDisplay } from '../utils/experience';
 
 import { AdUnit } from '../utils/ads';
 import Input from '../components/shared/Input';
+import InputNavAccessory from './shared/InputNavAccessory';
 import { NoteDraft } from '../utils/types';
 import PotentialAd from '../components/shared/PotentialAd';
 import QRModal from './QRModal';
@@ -54,7 +56,11 @@ const EditScreen = ({
   lastModified,
   set2Cols,
 }: Props) => {
+  const titleRef = useRef<UIKInput>(null);
   const contentRef = useRef<UIKInput>(null);
+  const inputAccessoryViewID = 'uniqueID';
+
+  const [titleFocused, setTitleFocused] = useState(false);
   return (
     <Layout style={styles.container}>
       <KeyboardAvoidingView
@@ -82,6 +88,10 @@ const EditScreen = ({
                 returnKeyType="next"
                 onSubmitEditing={contentRef.current?.focus}
                 blurOnSubmit={false}
+                ref={titleRef}
+                inputAccessoryViewID={inputAccessoryViewID}
+                onFocus={() => setTitleFocused(true)}
+                onBlur={() => setTitleFocused(false)}
               />
               <Pressable
                 onPress={
@@ -109,16 +119,16 @@ const EditScreen = ({
                 multiline={true}
                 size="large"
                 ref={contentRef}
+                inputAccessoryViewID={inputAccessoryViewID}
               />
               <View style={{ flexDirection: 'row', marginTop: 10 }}>
                 <Toggle checked={draft.columns === 2} onChange={set2Cols}>
-                  {(props) => (
+                  {(props?: TextProps) => (
                     <View>
                       <Text {...props}>Use two columns</Text>
                       <Text
                         style={{
                           // @ts-ignore
-                          // eslint-disable-next-line react/prop-types
                           marginHorizontal: props?.style?.marginHorizontal,
                         }}
                         category="c2"
@@ -151,8 +161,16 @@ const EditScreen = ({
             </View>
           }
         />
-        <PotentialAd unit={AdUnit.edit} />
+        <InputNavAccessory
+          nativeID={inputAccessoryViewID}
+          canGoUp={!titleFocused}
+          canGoDown={titleFocused}
+          onPress={(up) =>
+            up ? titleRef.current?.focus() : contentRef.current?.focus()
+          }
+        />
       </KeyboardAvoidingView>
+      <PotentialAd unit={AdUnit.edit} />
     </Layout>
   );
 };
