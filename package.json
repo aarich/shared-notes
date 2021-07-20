@@ -25,7 +25,7 @@
     "random-word-slugs": "^0.0.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "0.63.4",
+    "react-native": "0.64.1",
     "react-native-color-palette": "^2.2.0",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-qrcode-svg": "^6.1.1",
