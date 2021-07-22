@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, View } from 'react-native';
+import { Alert, Share, StyleSheet, View } from 'react-native';
 import {
   BooleanSettings,
   SelectSettings,
@@ -10,6 +10,7 @@ import {
   List,
   ListItem,
   Text,
+  TopNavigationAction,
 } from '@ui-kitten/components';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -46,6 +47,19 @@ const MoreScreen = ({ navigation }: Props) => {
   const dispatch = useAppDispatch();
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
   const color = useSetting('widgetColor');
+
+  useEffect(() => {
+    const url =
+      'https://apps.apple.com/app/apple-store/id1552960395?pt=117925864&ct=inappshare&mt=8';
+    navigation.setOptions({
+      headerRight: () => (
+        <TopNavigationAction
+          icon={(props) => <Icon {...props} name="share" />}
+          onPress={() => Share.share({ url })}
+        />
+      ),
+    });
+  }, [navigation]);
 
   const resetAppAlert = useCallback(() => {
     Alert.alert(
@@ -150,7 +164,7 @@ const MoreScreen = ({ navigation }: Props) => {
       return (
         <ListItem
           title={listItem.label}
-          description="Background color"
+          description="Background color of the widget"
           onPress={() => setIsColorPickerVisible(true)}
           accessoryRight={(props) => (
             <View style={{ paddingRight: 10 }}>

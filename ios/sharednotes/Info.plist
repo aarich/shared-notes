@@ -61,7 +61,7 @@
 		<string>SelectNoteIntent</string>
 	</array>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>We'd like to be able to show relevant ads to you.</string>
+	<string>We'd like to show relevant ads. Want to support us in other ways? Share the app or leave a review on the app store. Thanks!</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
