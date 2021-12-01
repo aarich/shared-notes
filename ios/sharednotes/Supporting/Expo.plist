@@ -3,7 +3,7 @@
 <plist version="1.0">
   <dict>
     <key>EXUpdatesSDKVersion</key>
-    <string>40.0.0</string>
+    <string>42.0.0</string>
     <key>EXUpdatesURL</key>
     <string>https://exp.host/@mrarich/shared-notes</string>
     <key>EXUpdatesEnabled</key>

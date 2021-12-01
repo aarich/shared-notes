@@ -14,7 +14,7 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "enabled": false
+      "enabled": true
     },
     "ios": {
       "config": {
