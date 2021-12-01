@@ -1,8 +1,4 @@
-import { Alert, Share, StyleSheet, View } from 'react-native';
-import {
-  BooleanSettings,
-  SelectSettings,
-} from '../redux/reducers/settingsReducer';
+import { StackNavigationProp } from '@react-navigation/stack';
 import {
   Divider,
   Icon,
@@ -12,27 +8,39 @@ import {
   Text,
   TopNavigationAction,
 } from '@ui-kitten/components';
+import { AdMobInterstitial } from 'expo-ads-admob';
 import React, { useCallback, useEffect, useState } from 'react';
-
-import { AdUnit } from '../utils/ads';
+import { Alert, Share, StyleSheet, View } from 'react-native';
 import ColorPicker from '../components/settings/ColorPicker';
 import ListItemAds from '../components/settings/ListItemAds';
 import ListItemTheme from '../components/settings/ListItemTheme';
 import ListItemToggle from '../components/settings/ListItemToggle';
-import { MoreParamList } from '../utils/types';
 import PotentialAd from '../components/shared/PotentialAd';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { resetApp } from '../redux/actions';
-import { useAppDispatch } from '../redux/store';
+import {
+  BooleanSettings,
+  SelectSettings,
+} from '../redux/reducers/settingsReducer';
 import { useSetting } from '../redux/selectors';
+import { useAppDispatch } from '../redux/store';
+import { AdUnit, getAdId } from '../utils/ads';
 import { useUpToDateBridgeData } from '../utils/bridge';
+import { MoreParamList } from '../utils/types';
 
 type Props = {
   navigation: StackNavigationProp<MoreParamList, 'Settings'>;
 };
 
-type ListItemNav = { label: string; destination: keyof MoreParamList };
-type ListItemAction = { label: string; action: () => void };
+type ListItemNav = {
+  label: string;
+  description?: string;
+  destination: keyof MoreParamList;
+};
+type ListItemAction = {
+  label: string;
+  description?: string;
+  action: () => void;
+};
 type ListItemColor = { label: string };
 type ListItemBooleanSetting = {
   setting: keyof BooleanSettings;
@@ -80,6 +88,12 @@ const MoreScreen = ({ navigation }: Props) => {
     );
   }, [dispatch]);
 
+  const showAd = useCallback(async () => {
+    await AdMobInterstitial.setAdUnitID(getAdId(AdUnit.settingsInterstitial));
+    await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: false });
+    await AdMobInterstitial.showAdAsync();
+  }, []);
+
   const listItems: (
     | ListItemNav
     | ListItemSelectSetting
@@ -91,6 +105,11 @@ const MoreScreen = ({ navigation }: Props) => {
     { label: 'About', destination: 'About' },
     { label: 'Feedback', destination: 'Feedback' },
     { label: 'Reset', action: resetAppAlert },
+    {
+      label: 'Support the developer',
+      description: 'View a brief ad',
+      action: showAd,
+    },
   ];
 
   listItems.push('Widget Settings');
@@ -148,6 +167,7 @@ const MoreScreen = ({ navigation }: Props) => {
         <>
           <ListItem
             title={listItem.label}
+            description={listItem.description}
             onPress={
               'destination' in listItem
                 ? () => navigation.push(listItem.destination)

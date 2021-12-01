@@ -4,12 +4,11 @@
   "expo": {
     "name": "Shared Notes",
     "slug": "shared-notes",
-    "version": "2.2",
+    "version": "2.3",
     "assetBundlePatterns": ["**/*"],
     "userInterfaceStyle": "automatic",
     "scheme": "sharednotes",
     "splash": {
-      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,7 +22,7 @@
       "bundleIdentifier": "com.mrarich.SharedNoteWidget"
     },
     "extra": {
-      "MyVersion": "9"
+      "MyVersion": "10"
     }
   }
 }
