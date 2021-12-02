@@ -1,4 +1,4 @@
-export const enum AdUnit {
+export enum AdUnit {
   library = 'library',
   settings = 'settings',
   settingsInterstitial = 'settingsInterstitial',
@@ -12,11 +12,4 @@ const AD_UNIT = {
   edit: 'ca-app-pub-6949812709353975/5088560986',
 };
 
-const TEST_AD_ID = 'ca-app-pub-3940256099942544/6300978111';
-const TEST_AD_INT_ID = 'ca-app-pub-3940256099942544/4411468910';
-
-const getTestAdId = (location: AdUnit) =>
-  location === AdUnit.settingsInterstitial ? TEST_AD_INT_ID : TEST_AD_ID;
-
-export const getAdId = (location: AdUnit) =>
-  __DEV__ ? getTestAdId(location) : AD_UNIT[location];
+export const getAdId = (location: AdUnit) => AD_UNIT[location];

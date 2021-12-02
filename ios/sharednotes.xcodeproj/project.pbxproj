@@ -12,6 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
+		78D14312EB87C6420B1506EC /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B4C4EC522D7E22DD75449E /* ExpoModulesProvider.swift */; };
 		7F4BB89AF90C860F72231240 /* libPods-sharednotes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7535FC25D1ED4800374ACA /* libPods-sharednotes.a */; };
 		8D03272F25D25DB600DEA687 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D03272E25D25DB600DEA687 /* Intents.framework */; };
 		8D03273225D25DB600DEA687 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D03273125D25DB600DEA687 /* IntentHandler.swift */; };
@@ -75,6 +76,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = sharednotes/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = sharednotes/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = sharednotes/main.m; sourceTree = "<group>"; };
+		21B4C4EC522D7E22DD75449E /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-sharednotes/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-sharednotes.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sharednotes.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-sharednotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sharednotes.debug.xcconfig"; path = "Target Support Files/Pods-sharednotes/Pods-sharednotes.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-sharednotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sharednotes.release.xcconfig"; path = "Target Support Files/Pods-sharednotes/Pods-sharednotes.release.xcconfig"; sourceTree = "<group>"; };
@@ -339,6 +341,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8318A4A3F15331DBD0B74777 /* sharednotes */ = {
+			isa = PBXGroup;
+			children = (
+				21B4C4EC522D7E22DD75449E /* ExpoModulesProvider.swift */,
+			);
+			name = sharednotes;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +367,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
+				88A869AA5B1DE75F38252500 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -371,6 +382,14 @@
 				8D03272D25D25DB600DEA687 /* NoteIntent.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		88A869AA5B1DE75F38252500 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				8318A4A3F15331DBD0B74777 /* sharednotes */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 		8D03273025D25DB600DEA687 /* NoteIntent */ = {
@@ -594,10 +613,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-sharednotes/Pods-sharednotes-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/EXUpdates/EXUpdates.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXConstants.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXUpdates.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -635,6 +658,7 @@
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				8D03277025D2672900DEA687 /* IntentHandler.swift in Sources */,
 				8D6A9C8025D267960004F108 /* NoteIntents.intentdefinition in Sources */,
+				78D14312EB87C6420B1506EC /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,7 +734,7 @@
 				INTENTS_CODEGEN_LANGUAGE = Swift;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -743,7 +767,7 @@
 				INTENTS_CODEGEN_LANGUAGE = Swift;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -790,6 +814,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -846,6 +871,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -883,7 +909,7 @@
 				INTENTS_CODEGEN_LANGUAGE = Swift;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrarich.SharedNoteWidget.NoteIntent;
@@ -917,7 +943,7 @@
 				INTENTS_CODEGEN_LANGUAGE = Swift;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.3;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrarich.SharedNoteWidget.NoteIntent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -931,7 +957,7 @@
 		8D286EE125D0FEC800D3C0FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -951,7 +977,7 @@
 				INFOPLIST_FILE = NoteWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -969,7 +995,7 @@
 		8D286EE225D0FEC800D3C0FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -990,7 +1016,7 @@
 				INFOPLIST_FILE = NoteWidget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2;
+				MARKETING_VERSION = 2.3;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mrarich.SharedNoteWidget.NoteWidget;
