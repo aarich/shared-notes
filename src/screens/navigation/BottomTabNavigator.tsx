@@ -1,8 +1,9 @@
+/* eslint-disable react/no-unused-prop-types */
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, useTheme } from '@ui-kitten/components';
 import * as Linking from 'expo-linking';
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { MoreParamList, NotesParamList } from '../../utils/types';
 import AboutScreen from '../AboutScreen';
 import EditScreenContainer from '../EditScreenContainer';

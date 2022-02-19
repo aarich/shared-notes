@@ -4,8 +4,9 @@
   "expo": {
     "name": "Shared Notes",
     "slug": "shared-notes",
-    "version": "2.4",
-    "assetBundlePatterns": ["**/*"],
+    "version": "3.0",
+    "platforms": ["ios"],
+    "assetBundlePatterns": ["assets/*"],
     "userInterfaceStyle": "automatic",
     "scheme": "sharednotes",
     "splash": {
@@ -13,16 +14,16 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "enabled": false
+      "enabled": true,
+      "fallbackToCacheTimeout": 3000
     },
     "ios": {
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-6949812709353975~7748559513"
-      },
-      "bundleIdentifier": "com.mrarich.SharedNoteWidget"
+      }
     },
     "extra": {
-      "MyVersion": "11"
+      "MyVersion": "14"
     }
   }
 }

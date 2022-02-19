@@ -1,0 +1,15 @@
+{
+  "cli": { "version": ">= 0.45.1" },
+  "build": {
+    "production": { "releaseChannel": "prod-3-0" }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "arich@hmc.edu",
+        "ascAppId": "1552960395",
+        "appleTeamId": "8H27F27VW9"
+      }
+    }
+  }
+}

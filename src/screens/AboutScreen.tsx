@@ -1,9 +1,6 @@
-import * as Linking from 'expo-linking';
-
 import { Layout, Text } from '@ui-kitten/components';
+import * as Linking from 'expo-linking';
 import { ScrollView, StyleSheet, View } from 'react-native';
-
-import React from 'react';
 import { VERSION } from '../utils/experience';
 
 const h3 = (text: string) => (
@@ -28,8 +25,8 @@ const a = (name: string, url: string) => (
 
 const AboutScreen = () => {
   return (
-    <Layout style={{ flex: 1, flexGrow: 1 }}>
-      <ScrollView style={{ paddingHorizontal: '5%' }}>
+    <Layout style={styles.layout}>
+      <ScrollView style={styles.padding}>
         {h3('Instructions')}
         {p("Put notes on your home screen (and your friends')!")}
         {p('1. Create and save a note')}
@@ -90,8 +87,7 @@ const AboutScreen = () => {
           { name: 'Redux', url: 'redux.js.org' },
           {
             name: 'Shared Group Preferences',
-            url:
-              'github.com/KjellConnelly/react-native-shared-group-preferences',
+            url: 'github.com/KjellConnelly/react-native-shared-group-preferences',
           },
           { name: 'Stack Overflow', url: 'stackoverflow.com' },
           {
@@ -119,6 +115,8 @@ const AboutScreen = () => {
 const styles = StyleSheet.create({
   h3: { paddingTop: 16 },
   p: { paddingTop: 8 },
+  layout: { flex: 1, flexGrow: 1 },
+  padding: { paddingHorizontal: '5%' },
 });
 
 export default AboutScreen;

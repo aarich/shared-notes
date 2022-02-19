@@ -1,13 +1,12 @@
-import { Alert, AlertButton, Share } from 'react-native';
-
-import { AppDispatch } from '../redux/store';
-import Clipboard from 'expo-clipboard';
+import { setString as setClipboardString } from 'expo-clipboard';
 import Constants from 'expo-constants';
-import { Note } from './types';
+import { Alert, AlertButton, Share } from 'react-native';
+import { ignoreInfo, removeNote } from '../redux/actions';
 import { deleteNote } from '../redux/actions/thunks';
-import { removeNote } from '../redux/actions';
+import { AppDispatch, store } from '../redux/store';
+import { InfoAlert, Note } from './types';
 
-export const VERSION = `${Constants.nativeAppVersion}-${Constants.manifest.extra?.MyVersion}`;
+export const VERSION = `${Constants.manifest?.version}-${Constants.manifest?.extra?.MyVersion}`;
 
 export const sendErrorAlert = (e: Error) => Alert.alert('Error', e.message);
 
@@ -48,13 +47,27 @@ export const validateSlug = (slug: string) => {
   }
 };
 
+export const showCheckboxInfoAlert = (isNew: boolean) =>
+  Alert.alert(
+    'Checkbox Mode',
+    isNew
+      ? 'Save the note first to enter checkbox mode.'
+      : 'Use this mode to quickly remove things from a list.'
+  );
+
+const isInfoIgnored = (infoType: InfoAlert): boolean =>
+  store.getState().settings.ignoredInfos?.includes(infoType) ?? false;
+const ignoreInfoType = (infoType: InfoAlert) => {
+  store.dispatch(ignoreInfo(infoType));
+};
+
 export const showInfoAlert = (content: string, isNew: boolean) => {
   const infoButtons: AlertButton[] | undefined = isNew
     ? undefined
     : [
         {
           text: 'Copy Note to Clipboard',
-          onPress: () => Clipboard.setString(content),
+          onPress: () => setClipboardString(content),
         },
         { text: 'Cancel', style: 'cancel' },
       ];
@@ -66,21 +79,32 @@ export const showInfoAlert = (content: string, isNew: boolean) => {
   Alert.alert('Info', message + '\n\n' + secureMsg, infoButtons);
 };
 
-export const noteSavedMessage = (isNew: boolean) =>
+export const noteSavedMessage = (isNew: boolean) => {
+  if (isInfoIgnored(InfoAlert.ON_SAVE)) {
+    return;
+  }
   Alert.alert(
     'Note Saved',
     `To add it to a your home screen, press and hold the widget, then tap "Edit Widget" to choose a note.${
       isNew
         ? ''
         : '\n\nOther devices displaying this note will be updated soon!'
-    }`
+    }`,
+    [
+      {
+        text: "Don't show me this again",
+        onPress: () => ignoreInfoType(InfoAlert.ON_SAVE),
+      },
+      { text: 'Ok' },
+    ]
   );
+};
 
 export const copyWithConfirm = (textToCopy: string) =>
   Alert.alert('Copy to Clipboard?', textToCopy, [
     {
       text: 'Copy',
-      onPress: () => Clipboard.setString(textToCopy || ''),
+      onPress: () => setClipboardString(textToCopy || ''),
     },
     {
       text: 'Cancel',
@@ -91,7 +115,7 @@ export const copyWithConfirm = (textToCopy: string) =>
 export const checkDiscard = (
   onYes: () => void,
   text: string,
-  discardText?: string
+  discardText = 'Discard'
 ) =>
   Alert.alert(
     'Discard changes?',
@@ -99,7 +123,7 @@ export const checkDiscard = (
     [
       { text, style: 'cancel' },
       {
-        text: discardText || 'Discard',
+        text: discardText,
         style: 'destructive',
         onPress: onYes,
       },

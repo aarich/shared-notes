@@ -1,6 +1,6 @@
 import { Icon, Input as UIKInput, InputProps } from '@ui-kitten/components';
-import React, { forwardRef } from 'react';
-import { Dimensions, View } from 'react-native';
+import { forwardRef } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import useColorScheme from '../../hooks/useColorScheme';
 
 type Props = {
@@ -13,7 +13,7 @@ const Input = forwardRef<UIKInput, Props>(
     const type = numeric || typeof value === 'number' ? 'numeric' : 'default';
     const scheme = useColorScheme();
     return (
-      <View style={{ paddingTop: 5 }}>
+      <View style={styles.container}>
         <UIKInput
           {...otherProps}
           ref={ref}
@@ -35,3 +35,7 @@ const Input = forwardRef<UIKInput, Props>(
 );
 
 export default Input;
+
+const styles = StyleSheet.create({
+  container: { paddingTop: 5 },
+});

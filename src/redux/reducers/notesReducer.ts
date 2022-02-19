@@ -1,11 +1,7 @@
+import { produce } from 'immer';
+import { AnyAction } from 'redux';
 import { Note } from '../../utils/types';
-import {
-  AppActionTypes,
-  DELETE_NOTE,
-  NoteActionTypes,
-  RESET,
-  SET_NOTE,
-} from '../actions/actionTypes';
+import { removeNote, resetApp, setNote } from '../actions';
 
 export type NotesState = { [slug: string]: Note };
 
@@ -13,21 +9,16 @@ export const initialState: NotesState = {};
 
 const reducer = (
   state: NotesState = initialState,
-  action: NoteActionTypes | AppActionTypes
-): NotesState => {
-  switch (action.type) {
-    case SET_NOTE:
-      return { ...state, [action.payload.slug]: action.payload };
-    case DELETE_NOTE: {
-      const newState = { ...state };
-      delete newState[action.payload];
-      return newState;
-    }
-    case RESET:
+  action: AnyAction
+): NotesState =>
+  produce(state, (draft) => {
+    if (setNote.match(action)) {
+      draft[action.payload.slug] = action.payload;
+    } else if (removeNote.match(action)) {
+      delete draft[action.payload];
+    } else if (resetApp.match(action)) {
       return initialState;
-    default:
-      return state;
-  }
-};
+    }
+  });
 
 export default reducer;

@@ -1,37 +1,11 @@
-import { Note } from '../../utils/types';
+import { createAction } from '@reduxjs/toolkit';
+import { InfoAlert, Note } from '../../utils/types';
 import { AnySetting, SettingsState } from '../reducers/settingsReducer';
 
-export const RESET = 'RESET';
+export const resetApp = createAction('APP/RESET');
+export const setSettings = createAction<SettingsState>('APP/SET_SETTINGS');
+export const updateSetting = createAction<AnySetting>('APP/UPDATE_SETTING');
+export const ignoreInfo = createAction<InfoAlert>('APP/IGNORE_INFO');
 
-export const SET_NOTE = 'SET_NOTE';
-export const DELETE_NOTE = 'DELETE_NOTE';
-
-export const SET_SETTINGS = 'SET_SETTINGS';
-export const UPDATE_SETTING = 'UPDATE_SETTING';
-
-interface ResetAction {
-  type: typeof RESET;
-}
-
-interface SetNoteAction {
-  type: typeof SET_NOTE;
-  payload: Note;
-}
-
-interface DeleteNoteAction {
-  type: typeof DELETE_NOTE;
-  payload: string;
-}
-
-interface SetSettingsAction {
-  type: typeof SET_SETTINGS;
-  payload: SettingsState;
-}
-interface UpdateSettingsAction {
-  type: typeof UPDATE_SETTING;
-  payload: AnySetting;
-}
-
-export type AppActionTypes = ResetAction;
-export type NoteActionTypes = SetNoteAction | DeleteNoteAction;
-export type SettingsActionTypes = SetSettingsAction | UpdateSettingsAction;
+export const setNote = createAction<Note>('NOTE/SET');
+export const removeNote = createAction<string>('NOTE/REMOVE');

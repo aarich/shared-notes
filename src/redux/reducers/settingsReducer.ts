@@ -1,13 +1,7 @@
-import {
-  AppActionTypes,
-  RESET,
-  SET_SETTINGS,
-  SettingsActionTypes,
-  UPDATE_SETTING,
-} from '../actions/actionTypes';
-
+import { AnyAction } from 'redux';
 import theme from '../../../assets/theme.json';
-
+import { InfoAlert } from '../../utils/types';
+import { ignoreInfo, resetApp, setSettings, updateSetting } from '../actions';
 export enum AdType {
   /** @deprecated since ios 14.5 */
   Personal = 'Personal',
@@ -32,6 +26,8 @@ type showLastModified = { showLastModified: boolean };
 // other
 type adLastResetSetting = { adLastReset: number };
 type widgetColor = { widgetColor: string };
+// For the "Dont' show me this again option"
+type ignoredInfos = { ignoredInfos?: InfoAlert[] };
 
 export type AnySetting =
   | adSetting
@@ -39,7 +35,8 @@ export type AnySetting =
   | showTitle
   | showLastModified
   | adLastResetSetting
-  | widgetColor;
+  | widgetColor
+  | ignoredInfos;
 
 export type BooleanSettings = showTitle & showLastModified;
 
@@ -48,34 +45,37 @@ export type SelectSettings = adSetting & themeSetting;
 export type SettingsState = SelectSettings &
   BooleanSettings &
   adLastResetSetting &
-  widgetColor;
+  widgetColor &
+  ignoredInfos;
 
 export const initialState: SettingsState = {
-  ads: AdType.Generic,
+  ads: AdType.On,
   theme: ThemeType.System,
   showTitle: true,
   showLastModified: true,
   widgetColor: theme['color-primary-500'],
   adLastReset: Date.now(),
+  ignoredInfos: [],
 };
 
 const reducer = (
   state: SettingsState = initialState,
-  action: SettingsActionTypes | AppActionTypes
+  action: AnyAction
 ): SettingsState => {
-  switch (action.type) {
-    case SET_SETTINGS:
-      return action.payload;
-    case UPDATE_SETTING: {
-      if ('ads' in action.payload) {
-        return { ...state, ...action.payload, adLastReset: Date.now() };
-      }
-      return { ...state, ...action.payload };
+  if (setSettings.match(action)) {
+    return action.payload;
+  } else if (updateSetting.match(action)) {
+    if ('ads' in action.payload) {
+      return { ...state, ...action.payload, adLastReset: Date.now() };
     }
-    case RESET:
-      return initialState;
-    default:
-      return state;
+    return { ...state, ...action.payload };
+  } else if (ignoreInfo.match(action)) {
+    const ignoredInfos = [...(state.ignoredInfos || []), action.payload];
+    return { ...state, ignoredInfos };
+  } else if (resetApp.match(action)) {
+    return initialState;
+  } else {
+    return state;
   }
 };
 

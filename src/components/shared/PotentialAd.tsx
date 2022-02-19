@@ -3,7 +3,7 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 
 import { AdType, initialState } from '../../redux/reducers/settingsReducer';
 import { AdUnit, getAdId } from '../../utils/ads';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { updateSetting } from '../../redux/actions';
 import { useAppDispatch } from '../../redux/store';

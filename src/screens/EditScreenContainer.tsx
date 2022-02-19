@@ -1,23 +1,23 @@
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { generateSlug } from 'random-word-slugs';
+import { useCallback, useEffect, useReducer, useState } from 'react';
 import { Alert, Keyboard } from 'react-native';
-import { NoteDraft, NotesParamList } from '../utils/types';
-import React, { useCallback, useEffect, useState } from 'react';
+import EditHeaderActions from '../components/EditHeaderActions';
+import EditScreen from '../components/EditScreen';
+import EditScreenCheckboxMode from '../components/EditScreenCheckboxMode';
+import { getNote, patchNote, postNote } from '../redux/actions/thunks';
+import { useNote } from '../redux/selectors';
+import { useAppDispatch } from '../redux/store';
+import { useUpToDateBridgeData } from '../utils/bridge';
+import { massageNewEditorContent } from '../utils/editor';
 import {
   checkDiscard,
   noteSavedMessage,
   sendErrorAlert,
   shareNote,
 } from '../utils/experience';
-import { getNote, patchNote, postNote } from '../redux/actions/thunks';
-
-import EditHeaderActions from '../components/EditHeaderActions';
-import EditScreen from '../components/EditScreen';
-import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { generateSlug } from 'random-word-slugs';
-import { massageNewEditorContent } from '../utils/editor';
-import { useAppDispatch } from '../redux/store';
-import { useNote } from '../redux/selectors';
-import { useUpToDateBridgeData } from '../utils/bridge';
+import { NoteDraft, NotesParamList } from '../utils/types';
 
 type Props = {
   navigation: StackNavigationProp<NotesParamList, 'EditScreen'>;
@@ -26,16 +26,17 @@ type Props = {
 
 const EditScreenContainer = ({ navigation, route }: Props) => {
   const dispatch = useAppDispatch();
-  const { slug } = route.params;
-  const [isNew, setIsNew] = useState(!slug);
+  const { slug: routeSlug } = route.params;
+  const [isNew, setIsNew] = useState(!routeSlug);
   const [qrVisible, setQRVisible] = useState(false);
-  const note = useNote(slug);
+  const note = useNote(routeSlug);
   const [isDirty, setIsDirty] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [useCheckboxMode, toggleCheckboxMode] = useReducer((b) => !b, false);
   const [draft, setDraft] = useState<NoteDraft>(() => ({
     name: note?.name || '',
     content: note?.content || '',
-    slug: slug || generateSlug(),
+    slug: routeSlug || generateSlug(),
     columns: note?.columns || 1,
   }));
 
@@ -57,9 +58,9 @@ const EditScreenContainer = ({ navigation, route }: Props) => {
 
   // Refresh note
   useEffect(() => {
-    if (!isNew && slug && note) {
+    if (!isNew && routeSlug && note) {
       setIsRefreshing(true);
-      dispatch(getNote(slug))
+      dispatch(getNote(routeSlug))
         .then((updatedNote) => {
           if (updatedNote.modified !== note.modified) {
             Alert.alert(
@@ -101,9 +102,9 @@ const EditScreenContainer = ({ navigation, route }: Props) => {
           onPress: (slug) =>
             slug
               ? dispatch(getNote(slug))
-                  .then((note) => {
+                  .then((updatedNote) => {
                     setIsNew(false);
-                    setDraft({ ...note });
+                    setDraft({ ...updatedNote });
                     setIsDirty(false);
                   })
                   .catch(sendErrorAlert)
@@ -131,12 +132,23 @@ const EditScreenContainer = ({ navigation, route }: Props) => {
         <EditHeaderActions
           content={draft.content}
           isNew={isNew}
+          isCheckboxMode={useCheckboxMode}
+          isDirty={isDirty}
           loadNote={loadNote}
           shareNote={shareNoteAlert}
+          toggleCheckbox={!isNew ? toggleCheckboxMode : undefined}
         />
       ),
     });
-  }, [draft.content, isNew, loadNote, navigation, shareNoteAlert]);
+  }, [
+    draft.content,
+    isNew,
+    loadNote,
+    navigation,
+    shareNoteAlert,
+    useCheckboxMode,
+    isDirty,
+  ]);
 
   useEffect(
     () =>
@@ -153,8 +165,8 @@ const EditScreenContainer = ({ navigation, route }: Props) => {
   const onRefresh = useCallback(() => {
     const inner = () => {
       setIsRefreshing(true);
-      slug &&
-        dispatch(getNote(slug))
+      routeSlug &&
+        dispatch(getNote(routeSlug))
           .then((note) => setDraft({ ...note }))
           .then(() => setIsDirty(false))
           .catch(sendErrorAlert)
@@ -168,41 +180,54 @@ const EditScreenContainer = ({ navigation, route }: Props) => {
     } else {
       inner();
     }
-  }, [dispatch, isDirty, slug]);
+  }, [dispatch, isDirty, routeSlug]);
 
-  const onSave = useCallback(() => {
-    setIsDirty(false);
-    setIsRefreshing(true);
-    (isNew
-      ? dispatch(postNote(draft)).then(() => undefined)
-      : dispatch(patchNote(draft)).then(() => undefined)
-    )
-      .then(() => noteSavedMessage(isNew))
-      .then(() => setIsNew(false))
-      .catch(sendErrorAlert)
-      .then(() => setIsRefreshing(false));
-  }, [dispatch, draft, isNew]);
+  const onSave = useCallback(
+    (content?: string) => {
+      setIsDirty(false);
+      setIsRefreshing(true);
+      const draftToSave =
+        typeof content === 'undefined' ? draft : { ...draft, content };
 
-  return (
+      (isNew
+        ? dispatch(postNote(draftToSave)).then(() => undefined)
+        : dispatch(patchNote(draftToSave)).then(() => undefined)
+      )
+        .then(() => !useCheckboxMode && noteSavedMessage(isNew))
+        .then(() => setIsNew(false))
+        .catch(sendErrorAlert)
+        .then(() => setIsRefreshing(false));
+    },
+    [dispatch, draft, isNew, useCheckboxMode]
+  );
+
+  const setContent = (newContent: string) =>
+    setDraftWrapper({
+      content: massageNewEditorContent(draft.content, newContent),
+    });
+
+  return useCheckboxMode ? (
+    <EditScreenCheckboxMode
+      draft={draft}
+      isRefreshing={isRefreshing}
+      onSave={onSave}
+      setContent={setContent}
+      setIsDirty={setIsDirty}
+    />
+  ) : (
     <EditScreen
       setSlug={(slug) => setDraftWrapper({ slug })}
       setName={(name) => setDraftWrapper({ name })}
-      setContent={(newContent) =>
-        setDraftWrapper({
-          content: massageNewEditorContent(draft.content, newContent),
-        })
-      }
+      setContent={setContent}
       set2Cols={(is2Cols) => setDraftWrapper({ columns: is2Cols ? 2 : 1 })}
-      {...{
-        draft,
-        isDirty,
-        isNew,
-        isRefreshing,
-        onRefresh,
-        onSave,
-        qrVisible,
-        setQRVisible,
-      }}
+      draft={draft}
+      isDirty={isDirty}
+      isNew={isNew}
+      isRefreshing={isRefreshing}
+      onRefresh={onRefresh}
+      onSave={() => onSave()}
+      qrVisible={qrVisible}
+      setQRVisible={setQRVisible}
       lastModified={note?.modified}
     />
   );

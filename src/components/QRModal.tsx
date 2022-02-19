@@ -1,5 +1,4 @@
 import { Card, Modal, Text } from '@ui-kitten/components';
-import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { getShareLink } from '../utils/experience';

@@ -1,14 +1,12 @@
-import * as React from 'react';
-
+import { ListItem, Toggle } from '@ui-kitten/components';
+import { StyleSheet } from 'react-native';
+import { updateSetting } from '../../redux/actions';
 import {
   AnySetting,
   BooleanSettings,
 } from '../../redux/reducers/settingsReducer';
-import { ListItem, Toggle } from '@ui-kitten/components';
-
-import { updateSetting } from '../../redux/actions';
-import { useAppDispatch } from '../../redux/store';
 import { useSetting } from '../../redux/selectors';
+import { useAppDispatch } from '../../redux/store';
 
 const labels = {
   showTitle: 'Show Title',
@@ -30,7 +28,7 @@ const ListItemToggle = ({ setting }: { setting: keyof BooleanSettings }) => {
       description={descriptions[setting]}
       accessoryRight={() => (
         <Toggle
-          style={{ paddingRight: 10 }}
+          style={styles.toggle}
           checked={on}
           onChange={() =>
             dispatch(updateSetting({ [setting]: !on } as AnySetting))
@@ -42,3 +40,7 @@ const ListItemToggle = ({ setting }: { setting: keyof BooleanSettings }) => {
 };
 
 export default ListItemToggle;
+
+const styles = StyleSheet.create({
+  toggle: { paddingRight: 10 },
+});

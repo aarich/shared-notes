@@ -10,7 +10,6 @@ import {
 import BottomTabNavigator from './BottomTabNavigator';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import LinkingConfiguration from './LinkingConfiguration';
-import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { rootNavRef } from './rootNavRef';
 import { default as theme } from '../../../assets/theme.json';

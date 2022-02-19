@@ -1,11 +1,10 @@
 import { Card, Icon, Modal, Text, useTheme } from '@ui-kitten/components';
+import { useMemo, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
-import React, { useMemo, useState } from 'react';
-
 import ColorPalette from 'react-native-color-palette';
 import { updateSetting } from '../../redux/actions';
-import { useAppDispatch } from '../../redux/store';
 import { useSetting } from '../../redux/selectors';
+import { useAppDispatch } from '../../redux/store';
 
 const { width } = Dimensions.get('window');
 
@@ -70,12 +69,12 @@ const ColorPicker = ({ visible, onDismiss }: Props) => {
             }}
             value={color}
             colors={colors}
-            title={''}
+            title=""
             icon={
               <Icon
                 name="checkmark-circle-2-outline"
                 fill={getTextColorForBackground(color, colors)}
-                style={{ width: 25, height: 25 }}
+                style={styles.icon}
               />
             }
           />
@@ -88,6 +87,7 @@ const ColorPicker = ({ visible, onDismiss }: Props) => {
 const styles = StyleSheet.create({
   backdrop: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
   body: { flex: 1, flexDirection: 'row', justifyContent: 'center' },
+  icon: { width: 25, height: 25 },
 });
 
 export default ColorPicker;

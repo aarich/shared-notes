@@ -1,11 +1,9 @@
-import * as React from 'react';
-
 import { ListItem, Toggle } from '@ui-kitten/components';
-
-import { AdType } from '../../redux/reducers/settingsReducer';
+import { StyleSheet } from 'react-native';
 import { updateSetting } from '../../redux/actions';
-import { useAppDispatch } from '../../redux/store';
+import { AdType } from '../../redux/reducers/settingsReducer';
 import { useSetting } from '../../redux/selectors';
+import { useAppDispatch } from '../../redux/store';
 
 const ListItemAds = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +16,7 @@ const ListItemAds = () => {
       description="Support the developer!"
       accessoryRight={() => (
         <Toggle
-          style={{ paddingRight: 10 }}
+          style={styles.toggle}
           checked={setting !== AdType.Off}
           onChange={() =>
             dispatch(
@@ -34,3 +32,7 @@ const ListItemAds = () => {
 };
 
 export default ListItemAds;
+
+const styles = StyleSheet.create({
+  toggle: { paddingRight: 10 },
+});

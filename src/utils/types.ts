@@ -20,3 +20,7 @@ export type NoteDraft = {
   content: string;
   columns: number;
 };
+
+export enum InfoAlert {
+  ON_SAVE,
+}

@@ -1,3 +1,4 @@
+import { StackNavigationProp } from '@react-navigation/stack';
 import {
   Divider,
   Icon,
@@ -6,17 +7,15 @@ import {
   Text,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import { Note, NotesParamList } from '../utils/types';
+import { useEffect } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
-import React, { useEffect } from 'react';
-
-import { AdUnit } from '../utils/ads';
 import DeletableListItem from '../components/shared/DeletableListItem';
 import PotentialAd from '../components/shared/PotentialAd';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { deleteNoteAlert } from '../utils/experience';
-import { useAppDispatch } from '../redux/store';
 import { useNotes } from '../redux/selectors';
+import { useAppDispatch } from '../redux/store';
+import { AdUnit } from '../utils/ads';
+import { deleteNoteAlert } from '../utils/experience';
+import { Note, NotesParamList } from '../utils/types';
 
 type Props = {
   navigation: StackNavigationProp<NotesParamList, 'Library'>;
@@ -40,7 +39,7 @@ const LibraryScreen = ({ navigation }: Props) => {
   return (
     <Layout style={styles.container}>
       <List
-        style={{ flex: 1, width: '100%' }}
+        style={styles.list}
         ItemSeparatorComponent={Divider}
         data={notes}
         keyExtractor={(item: Note) => item.slug}
@@ -51,7 +50,7 @@ const LibraryScreen = ({ navigation }: Props) => {
             onPress={() => navigation.push('EditScreen', { slug: item.slug })}
             accessoryRight={(props) => (
               <Pressable
-                style={{ flexDirection: 'row' }}
+                style={styles.row}
                 onPress={() => deleteNoteAlert(item, dispatch)}
               >
                 <Icon {...props} name="trash-outline" />
@@ -61,31 +60,14 @@ const LibraryScreen = ({ navigation }: Props) => {
           />
         )}
         contentContainerStyle={
-          notes.length === 0
-            ? {
-                flexGrow: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }
-            : undefined
+          notes.length === 0 ? styles.emptyContainer : undefined
         }
         ListEmptyComponent={
-          <View
-            style={[
-              styles.container,
-              {
-                justifyContent: 'center',
-                alignContent: 'center',
-                alignItems: 'center',
-                width: '80%',
-              },
-            ]}
-          >
+          <View style={[styles.container, styles.emptyView]}>
             <Text category="h1">Nothing Here</Text>
-            <Text category="s1" style={{ textAlign: 'center', paddingTop: 10 }}>
-              {
-                'Not sure where to start? Tap the + icon at the top right to create a note!'
-              }
+            <Text category="s1" style={styles.text}>
+              Not sure where to start? Tap the + icon at the top right to create
+              a note!
             </Text>
           </View>
         }
@@ -96,9 +78,21 @@ const LibraryScreen = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  container: { flex: 1 },
+  list: { flex: 1, width: '100%' },
+  row: { flexDirection: 'row' },
+  emptyContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+  emptyView: {
+    justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    width: '80%',
+  },
+  text: { textAlign: 'center', paddingTop: 10 },
 });
 
 export default LibraryScreen;

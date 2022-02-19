@@ -1,7 +1,6 @@
-import { Animated, StyleSheet, View } from 'react-native';
 import { Icon, ListItem, ListItemProps, useTheme } from '@ui-kitten/components';
-import React, { useRef } from 'react';
-
+import { useRef } from 'react';
+import { Animated, StyleSheet, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
@@ -26,8 +25,10 @@ const DeletableListItem = ({ onDelete, ...listItemProps }: Props) => {
       onDelete();
     };
 
+    const viewStyle = { flex: 1, transform: [{ translateX: trans }] };
+
     return (
-      <Animated.View style={{ flex: 1, transform: [{ translateX: trans }] }}>
+      <Animated.View style={viewStyle}>
         <RectButton
           style={[styles.rightAction, { backgroundColor: redColor }]}
           onPress={pressHandler}
@@ -39,12 +40,7 @@ const DeletableListItem = ({ onDelete, ...listItemProps }: Props) => {
   };
 
   const renderRightActions = (progress: Animated.AnimatedInterpolation) => (
-    <View
-      style={{
-        width: 64,
-        flexDirection: 'row',
-      }}
-    >
+    <View style={styles.rightActionContainer}>
       {renderRightAction(progress)}
     </View>
   );
@@ -66,16 +62,9 @@ export default DeletableListItem;
 
 const styles = StyleSheet.create({
   icon: { width: 30, height: 30 },
-  leftAction: {
-    flex: 1,
-    backgroundColor: '#497AFC',
-    justifyContent: 'center',
-  },
-  actionText: {
-    color: 'white',
-    fontSize: 16,
-    backgroundColor: 'transparent',
-    padding: 10,
+  rightActionContainer: {
+    width: 64,
+    flexDirection: 'row',
   },
   rightAction: {
     alignItems: 'center',

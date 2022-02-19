@@ -1,11 +1,12 @@
 import {
   Button,
+  Input as UIKInput,
   Layout,
   Text,
   TextProps,
   Toggle,
-  Input as UIKInput,
 } from '@ui-kitten/components';
+import { useRef, useState } from 'react';
 import {
   FlatList,
   KeyboardAvoidingView,
@@ -13,15 +14,13 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import React, { useRef, useState } from 'react';
-import { copyWithConfirm, dateToDisplay } from '../utils/experience';
-
-import { AdUnit } from '../utils/ads';
 import Input from '../components/shared/Input';
-import InputNavAccessory from './shared/InputNavAccessory';
-import { NoteDraft } from '../utils/types';
 import PotentialAd from '../components/shared/PotentialAd';
+import { AdUnit } from '../utils/ads';
+import { copyWithConfirm, dateToDisplay } from '../utils/experience';
+import { NoteDraft } from '../utils/types';
 import QRModal from './QRModal';
+import InputNavAccessory from './shared/InputNavAccessory';
 
 type StringSetter = (str: string) => void;
 
@@ -115,13 +114,13 @@ const EditScreen = ({
                 value={draft.content}
                 onChangeText={setContent}
                 numberOfLines={10}
-                textStyle={{ minHeight: 64 }}
+                textStyle={styles.content}
                 multiline={true}
                 size="large"
                 ref={contentRef}
                 inputAccessoryViewID={inputAccessoryViewID}
               />
-              <View style={{ flexDirection: 'row', marginTop: 10 }}>
+              <View style={styles.colCheckbox}>
                 <Toggle checked={draft.columns === 2} onChange={set2Cols}>
                   {(props?: TextProps) => (
                     <View>
@@ -148,16 +147,12 @@ const EditScreen = ({
                 Save
               </Button>
               {lastModified ? (
-                <View
-                  style={{ flexDirection: 'row', justifyContent: 'flex-end' }}
-                >
-                  <Text appearance="hint" style={{ fontStyle: 'italic' }}>
+                <View style={styles.lastModified}>
+                  <Text appearance="hint" style={styles.fontStyleItalic}>
                     Last modified {dateToDisplay(lastModified)}
                   </Text>
                 </View>
-              ) : (
-                <></>
-              )}
+              ) : undefined}
             </View>
           }
         />
@@ -180,6 +175,18 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   keyboardAvoidingContainer: { flex: 1 },
   button: { marginVertical: 10 },
+  content: { minHeight: 64 },
+  colCheckbox: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  lastModified: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  fontStyleItalic: {
+    fontStyle: 'italic',
+  },
 });
 
 export default EditScreen;

@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Button, Icon, Layout, Text } from '@ui-kitten/components';
 import { openURL } from 'expo-linking';
 import * as StoreReview from 'expo-store-review';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { VERSION } from '../utils/experience';
 
@@ -12,7 +12,7 @@ const getContactUrl = (message: string) =>
   `${baseMainURL}/contact${message ? '?m=' + message : ''}`;
 
 const makeButton = (title: string, icon: string, onPress: () => void) => (
-  <View style={{ width: '100%', paddingTop: 8 }}>
+  <View style={styles.view}>
     <Button
       size="giant"
       appearance="ghost"
@@ -44,25 +44,24 @@ const FeedbackScreen = () => {
             });
           }
         })
+        // eslint-disable-next-line no-console
         .catch(console.log);
     }
   }, []);
 
   return (
-    <Layout style={{ flex: 1 }}>
+    <Layout style={styles.flex}>
       <View style={styles.container}>
         <Text category="h6" style={styles.descText}>
           How are you using this app? Have a bug to report? Want to share the
           app with others?
         </Text>
         <View>
-          {storeUrl ? (
-            makeButton(`Open in the App Store`, 'bulb-outline', () =>
-              openURL(storeUrl)
-            )
-          ) : (
-            <></>
-          )}
+          {storeUrl
+            ? makeButton(`Open in the App Store`, 'bulb-outline', () =>
+                openURL(storeUrl)
+              )
+            : undefined}
           {makeButton('Contact Directly', 'message-circle-outline', () =>
             openURL(getContactUrl(`Feedback for Notes (${VERSION}): `))
           )}
@@ -87,6 +86,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     paddingBottom: 50,
   },
+  flex: { flex: 1 },
+  view: { width: '100%', paddingTop: 8 },
 });
 
 export default FeedbackScreen;

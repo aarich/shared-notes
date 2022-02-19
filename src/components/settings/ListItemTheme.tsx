@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import ListWithOptions from './ListWithOptions';
 import { ThemeType } from '../../redux/reducers/settingsReducer';
 import { updateSetting } from '../../redux/actions';

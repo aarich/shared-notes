@@ -1,5 +1,5 @@
 import { Button, ListItem } from '@ui-kitten/components';
-import React from 'react';
+import { StyleSheet } from 'react-native';
 import ButtonPicker from '../shared/ButtonPicker';
 
 type Props = {
@@ -23,7 +23,7 @@ const ListWithOptions = ({
         <ButtonPicker
           selectedIndex={selectedIndex}
           onSelect={setSelectedIndex}
-          style={{ paddingRight: 10 }}
+          style={styles.button}
         >
           {optionLabels.map((label, i) => (
             <Button key={i}>{label}</Button>
@@ -35,3 +35,7 @@ const ListWithOptions = ({
 };
 
 export default ListWithOptions;
+
+const styles = StyleSheet.create({
+  button: { paddingRight: 10 },
+});
