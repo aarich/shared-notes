@@ -64,7 +64,7 @@ const AboutScreen = () => {
         )}
         {[
           { name: 'AppMockUp', url: 'app-mockup.com' },
-          { name: 'DreamHost', url: 'dreamhost.com' },
+          { name: 'DreamHost', url: 'mrarich.com/url/dreamhostsn' },
           { name: 'Expo', url: 'expo.io' },
           { name: 'GitHub', url: 'github.com' },
           {

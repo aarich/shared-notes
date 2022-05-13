@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://apps.apple.com/us/app/shared-note-widgets/id1552960395?itscg=30200&amp;itsct=apps_box" style="width: 170px; height: 170px; border-radius: 22%; overflow: hidden; display: inline-block; vertical-align: middle;">
+  <a href="https://apps.apple.com/app/apple-store/id1552960395?pt=117925864&ct=readme&mt=8" style="width: 170px; height: 170px; border-radius: 22%; overflow: hidden; display: inline-block; vertical-align: middle;">
     <img src="https://github.com/aarich/shared-notes/raw/master/ios/sharednotes/Images.xcassets/AppIcon.appiconset/icon120.png" alt="Shared Note Widgets">
   </a>
 
