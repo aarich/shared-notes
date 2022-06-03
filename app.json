@@ -4,7 +4,7 @@
   "expo": {
     "name": "Shared Notes",
     "slug": "shared-notes",
-    "version": "3.0",
+    "version": "4.0",
     "platforms": ["ios"],
     "assetBundlePatterns": ["assets/*"],
     "userInterfaceStyle": "automatic",
@@ -23,7 +23,7 @@
       }
     },
     "extra": {
-      "MyVersion": "14"
+      "MyVersion": "15"
     }
   }
 }

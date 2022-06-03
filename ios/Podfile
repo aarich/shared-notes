@@ -4,6 +4,7 @@ require File.join(File.dirname(`node --print "require.resolve('@react-native-com
 
 
 platform :ios, '12.0'
+install! 'cocoapods', :deterministic_uuids => false
 
 require 'json'
 podfile_properties = JSON.parse(File.read('./Podfile.properties.json')) rescue {}
@@ -11,7 +12,17 @@ podfile_properties = JSON.parse(File.read('./Podfile.properties.json')) rescue {
 
 target 'sharednotes' do
   use_expo_modules!
+  post_integrate do |installer|
+    begin
+      expo_patch_react_imports!(installer)
+    rescue => e
+      Pod::UI.warn e
+    end
+  end
   config = use_native_modules!
+
+  # Flags change depending on the env values.
+  flags = get_default_flags()
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -32,6 +43,7 @@ target 'sharednotes' do
 
   post_install do |installer|
     react_native_post_install(installer)
+    __apply_Xcode_12_5_M1_post_install_workaround(installer)
 
     # Workaround `Cycle inside FBReactNativeSpec` error for react-native 0.64
     # Reference: https://github.com/software-mansion/react-native-screens/issues/842#issuecomment-812543933

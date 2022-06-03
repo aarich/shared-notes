@@ -1,13 +1,11 @@
 import * as AdMob from 'expo-ads-admob';
 import * as ScreenOrientation from 'expo-screen-orientation';
-
-import { AdType, initialState } from '../../redux/reducers/settingsReducer';
-import { AdUnit, getAdId } from '../../utils/ads';
 import { useEffect, useState } from 'react';
-
 import { updateSetting } from '../../redux/actions';
-import { useAppDispatch } from '../../redux/store';
+import { AdType, initialState } from '../../redux/reducers/settingsReducer';
 import { useSetting } from '../../redux/selectors';
+import { useAppDispatch } from '../../redux/store';
+import { AdUnit, getAdId } from '../../utils/ads';
 
 //                   ms     s <- m <- h <- d <- 7 days
 const AD_RESET_DELAY_MS = 1000 * 60 * 60 * 24 * 7;
@@ -63,14 +61,18 @@ const PotentialAd = ({ unit }: { unit: AdUnit }) => {
     return () => ScreenOrientation.removeOrientationChangeListeners();
   }, []);
 
-  return showAd ? (
+  if (!showAd) {
+    return null;
+  }
+
+  return (
     <AdMob.AdMobBanner
       bannerSize={isPortrait ? 'smartBannerPortrait' : 'smartBannerLandscape'}
       adUnitID={getAdId(unit)}
       servePersonalizedAds={showPersonalized}
       onDidFailToReceiveAdWithError={() => setShowAd(false)}
     />
-  ) : null;
+  );
 };
 
 export default PotentialAd;

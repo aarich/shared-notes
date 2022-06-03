@@ -1,7 +1,7 @@
 {
   "cli": { "version": ">= 0.45.1" },
   "build": {
-    "production": { "releaseChannel": "prod-3-0" }
+    "production": { "releaseChannel": "prod-4-0" }
   },
   "submit": {
     "production": {

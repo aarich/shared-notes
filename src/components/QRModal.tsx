@@ -19,6 +19,7 @@ const QRModal = ({ visible, onBackdropPress, slug }: Props) => {
       backdropStyle={styles.backdrop}
     >
       <Card
+        onPress={onBackdropPress}
         header={(props) => (
           <View {...props}>
             <Text category="s1">Point another iPhone camera at this!</Text>
@@ -26,7 +27,7 @@ const QRModal = ({ visible, onBackdropPress, slug }: Props) => {
         )}
         footer={(props) => (
           <View {...props}>
-            <Text category="s2">Tap outside to dismiss</Text>
+            <Text category="s2">Tap anywhere to dismiss</Text>
           </View>
         )}
       >
