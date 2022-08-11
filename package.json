@@ -8,13 +8,13 @@
   "dependencies": {
     "@eva-design/eva": "^2.1.1",
     "@react-native-async-storage/async-storage": "~1.17.4",
-    "@react-navigation/bottom-tabs": "^5.11.10",
-    "@react-navigation/native": "^5.9.4",
-    "@react-navigation/stack": "^5.14.4",
-    "@reduxjs/toolkit": "^1.8.1",
+    "@react-navigation/bottom-tabs": "^6.3.1",
+    "@react-navigation/native": "^6.0.10",
+    "@react-navigation/stack": "^6.2.1",
+    "@reduxjs/toolkit": "^1.8.2",
     "@ui-kitten/components": "^5.1.2",
     "@ui-kitten/eva-icons": "^5.1.2",
-    "core-js": "^3.22.5",
+    "core-js": "^3.22.8",
     "expo": "^45.0.4",
     "expo-ads-admob": "~13.0.0",
     "expo-clipboard": "~3.0.1",
@@ -37,7 +37,7 @@
     "react-native-shared-group-preferences": "^1.1.23",
     "react-native-svg": "12.3.0",
     "react-native-widgetkit": "^1.0.9",
-    "react-redux": "^8.0.1",
+    "react-redux": "^8.0.2",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1"
@@ -50,23 +50,27 @@
     "@types/react-native": "~0.67.7",
     "@types/react-native-shared-group-preferences": "^1.1.1",
     "@types/react-redux": "^7.1.24",
-    "@typescript-eslint/eslint-plugin": "^5.23.0",
-    "@typescript-eslint/parser": "^5.23.0",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
     "babel-eslint": "^10.1.0",
     "babel-preset-expo": "~9.1.0",
-    "eslint": "^8.15.0",
+    "eslint": "^8.16.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-react-native": "^4.0.0",
     "jest": "^28.1.0",
     "jest-each": "^28.1.0",
     "jest-expo": "^45.0.1",
-    "typescript": "~4.6.4"
+    "typescript": "~4.7.2"
   },
   "jest": {
     "preset": "jest-expo"
   },
-  "private": true
+  "private": true,
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
+  }
 }

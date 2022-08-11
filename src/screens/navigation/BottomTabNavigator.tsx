@@ -4,18 +4,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, useTheme } from '@ui-kitten/components';
 import * as Linking from 'expo-linking';
 import { useCallback, useEffect } from 'react';
-import { MoreParamList, NotesParamList } from '../../utils/types';
+import {
+  BottomTabParamList,
+  MoreParamList,
+  NotesParamList,
+} from '../../utils/types';
 import AboutScreen from '../AboutScreen';
 import EditScreenContainer from '../EditScreenContainer';
 import FeedbackScreen from '../FeedbackScreen';
 import LibraryScreen from '../LibraryScreen';
 import MoreScreen from '../MoreScreen';
 import { navigateToEdit } from './rootNavRef';
-
-type BottomTabParamList = {
-  Notes: undefined;
-  More: undefined;
-};
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -48,9 +47,9 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="Notes"
-      tabBarOptions={{
-        activeTintColor: theme['color-primary-500'],
-        labelPosition: 'below-icon',
+      screenOptions={{
+        tabBarActiveTintColor: theme['color-primary-500'],
+        tabBarLabelPosition: 'below-icon',
       }}
     >
       <BottomTab.Screen
