@@ -40,8 +40,8 @@ export default function BottomTabNavigator() {
     });
 
     const handleUrlEvent = (e: Linking.EventType) => handleURL(e.url);
-    Linking.addEventListener('url', handleUrlEvent);
-    return () => Linking.removeEventListener('url', handleUrlEvent);
+    const subscription = Linking.addEventListener('url', handleUrlEvent);
+    return () => subscription.remove();
   }, [handleURL]);
 
   return (
@@ -50,6 +50,7 @@ export default function BottomTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: theme['color-primary-500'],
         tabBarLabelPosition: 'below-icon',
+        headerShown: false,
       }}
     >
       <BottomTab.Screen

@@ -43,13 +43,14 @@ const renderNavigation = (
 const renderAction = (
   label: string,
   onPress: VoidFunction,
-  description?: string
+  description?: string,
+  icon = 'chevron-right-outline'
 ) => (
   <ListItem
     title={label}
     description={description}
     onPress={onPress}
-    accessoryRight={(props) => <Icon {...props} name="chevron-right-outline" />}
+    accessoryRight={(props) => <Icon {...props} name={icon} />}
   />
 );
 
@@ -118,24 +119,31 @@ const MoreScreen = ({ navigation }: Props) => {
   const listItems: (() => React.ReactElement)[] = [
     () => renderNavigation(navigation, 'About'),
     () => renderNavigation(navigation, 'Feedback'),
-    () => renderAction('Reset', resetAppAlert),
-    () => renderAction('Support the developer', showAd, 'View a brief ad'),
+    () =>
+      renderAction('Support the developer', showAd, 'View a brief ad', 'heart'),
     () => renderHeader('Widget Settings'),
     () => <ListItemToggle setting="showLastModified" />,
     () => <ListItemToggle setting="showTitle" />,
     () => renderWidgetColorListItem(color, () => setIsColorPickerVisible(true)),
     () => renderHeader('App Settings'),
-    () => <ListItemAds />,
-    () => <ListItemTheme />,
   ];
 
   if ((useSetting('ignoredInfos')?.length ?? 0) > 0) {
     listItems.push(() =>
-      renderAction('Reset Walkthrough', () => {
-        dispatch(updateSetting({ ignoredInfos: [] }));
-      })
+      renderAction(
+        'Reset Walkthrough',
+        () => dispatch(updateSetting({ ignoredInfos: [] })),
+        'Start over with the "help" messages',
+        'question-mark-outline'
+      )
     );
   }
+
+  listItems.push(
+    () => <ListItemAds />,
+    () => <ListItemTheme />,
+    () => renderAction('Reset', resetAppAlert, undefined, 'flip-2-outline')
+  );
 
   const [bridgeError, setBridgeError] = useUpToDateBridgeData();
   useEffect(() => {

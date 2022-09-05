@@ -30,4 +30,5 @@ export type NoteDraft = {
 
 export enum InfoAlert {
   ON_SAVE,
+  ON_EDIT_CHECKBOX_MODE,
 }

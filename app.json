@@ -4,7 +4,7 @@
   "expo": {
     "name": "Shared Notes",
     "slug": "shared-notes",
-    "version": "4.0",
+    "version": "5.0",
     "platforms": ["ios"],
     "assetBundlePatterns": ["assets/*"],
     "userInterfaceStyle": "automatic",
@@ -20,10 +20,12 @@
     "ios": {
       "config": {
         "googleMobileAdsAppId": "ca-app-pub-6949812709353975~7748559513"
-      }
+      },
+      "bundleIdentifier": "com.mrarich.SharedNoteWidget",
+      "infoPlist": { "ITSAppUsesNonExemptEncryption": false }
     },
     "extra": {
-      "MyVersion": "15"
+      "MyVersion": "16"
     }
   }
 }

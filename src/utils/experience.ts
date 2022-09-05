@@ -1,4 +1,4 @@
-import { setString as setClipboardString } from 'expo-clipboard';
+import { setStringAsync as setClipboardString } from 'expo-clipboard';
 import Constants from 'expo-constants';
 import { Alert, AlertButton, Share } from 'react-native';
 import { ignoreInfo, removeNote } from '../redux/actions';
@@ -79,25 +79,42 @@ export const showInfoAlert = (content: string, isNew: boolean) => {
   Alert.alert('Info', message + '\n\n' + secureMsg, infoButtons);
 };
 
-export const noteSavedMessage = (isNew: boolean) => {
-  if (isInfoIgnored(InfoAlert.ON_SAVE)) {
-    return;
-  }
-  Alert.alert(
+export const noteSavedMessage = (isNew: boolean) =>
+  showIgnorableAlert(
+    InfoAlert.ON_SAVE,
     'Note Saved',
     `To add it to a your home screen, press and hold the widget, then tap "Edit Widget" to choose a note.${
       isNew
         ? ''
         : '\n\nOther devices displaying this note will be updated soon!'
-    }`,
-    [
-      {
-        text: "Don't show me this again",
-        onPress: () => ignoreInfoType(InfoAlert.ON_SAVE),
-      },
-      { text: 'Ok' },
-    ]
+    }`
   );
+
+export const openCheckboxEditModeMessage = () => {
+  showIgnorableAlert(
+    InfoAlert.ON_EDIT_CHECKBOX_MODE,
+    'Checklist Edit Mode',
+    'Use this mode to quickly edit lists.\n\n' +
+      'Check items to remove, then press the "Remove Checked Items" button to update the note.\n\n' +
+      'Press the checkbox at the top again to return to full edit mode.'
+  );
+};
+
+const showIgnorableAlert = (
+  alertType: InfoAlert,
+  subject: string,
+  message: string
+) => {
+  if (isInfoIgnored(alertType)) {
+    return;
+  }
+  Alert.alert(subject, message, [
+    {
+      text: "Don't show me this again",
+      onPress: () => ignoreInfoType(alertType),
+    },
+    { text: 'Ok' },
+  ]);
 };
 
 export const copyWithConfirm = (textToCopy: string) =>
@@ -133,11 +150,17 @@ export const checkDiscard = (
 const parseSqlDateString = (dateString: string) =>
   new Date(dateString.replace(' ', 'T') + 'Z');
 
-export const dateToDisplay = (dateString: string) =>
-  parseSqlDateString(dateString).toLocaleString(undefined, {
+const YEAR_MS = 1000 * 3600 * 24 * 365;
+
+export const dateToDisplay = (dateString: string) => {
+  const date = parseSqlDateString(dateString);
+  const isOverYearOld = Date.now() - date.getTime() > YEAR_MS;
+  return date.toLocaleString(undefined, {
+    year: isOverYearOld ? 'numeric' : undefined,
     month: 'long',
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
-    weekday: 'long',
+    weekday: isOverYearOld ? undefined : 'long',
   });
+};

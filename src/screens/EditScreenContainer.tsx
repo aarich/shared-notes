@@ -14,6 +14,7 @@ import { massageNewEditorContent } from '../utils/editor';
 import {
   checkDiscard,
   noteSavedMessage,
+  openCheckboxEditModeMessage,
   sendErrorAlert,
   shareNote,
 } from '../utils/experience';
@@ -124,6 +125,12 @@ const EditScreenContainer = ({ navigation, route }: Props) => {
       { text: 'Cancel', style: 'cancel' },
     ]);
   }, [draft.slug]);
+
+  useEffect(() => {
+    if (!isNew && useCheckboxMode) {
+      openCheckboxEditModeMessage();
+    }
+  }, [isNew, useCheckboxMode]);
 
   useEffect(() => {
     navigation.setOptions({
