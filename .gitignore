@@ -56,4 +56,5 @@ buck-out/
 web-build/
 
 AppStore/generated
-ios/.xcode.env
+ios/.xcode.env.local
+
