@@ -1,6 +1,7 @@
-import * as AdMob from 'expo-ads-admob';
-import * as ScreenOrientation from 'expo-screen-orientation';
+import { PermissionStatus, requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 import { useEffect, useState } from 'react';
+import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+
 import { updateSetting } from '../../redux/actions';
 import { AdType, initialState } from '../../redux/reducers/settingsReducer';
 import { useSetting } from '../../redux/selectors';
@@ -14,7 +15,6 @@ const PotentialAd = ({ unit }: { unit: AdUnit }) => {
   const dispatch = useAppDispatch();
   const adSetting = useSetting('ads');
   const adLastReset = useSetting('adLastReset');
-  const [isPortrait, setIsPortrait] = useState(true);
 
   const [showAd, setShowAd] = useState(AdType.Off !== adSetting);
   const [showPersonalized, setShowPersonalized] = useState(false);
@@ -32,45 +32,22 @@ const PotentialAd = ({ unit }: { unit: AdUnit }) => {
 
   useEffect(() => {
     if (showAd) {
-      AdMob.getPermissionsAsync().then(async (resp) => {
-        if (resp.status === AdMob.PermissionStatus.GRANTED) {
-          setShowPersonalized(true);
-        } else if (resp.status === AdMob.PermissionStatus.UNDETERMINED) {
-          resp = await AdMob.requestPermissionsAsync();
-          setShowPersonalized(resp.status === AdMob.PermissionStatus.GRANTED);
-        }
-      });
+      requestTrackingPermissionsAsync().then((resp) =>
+        setShowPersonalized(resp.status === PermissionStatus.GRANTED)
+      );
     }
   }, [dispatch, showAd]);
-
-  useEffect(() => {
-    const setMode = (orientation: ScreenOrientation.Orientation) =>
-      setIsPortrait(
-        ![
-          ScreenOrientation.Orientation.LANDSCAPE_LEFT,
-          ScreenOrientation.Orientation.LANDSCAPE_RIGHT,
-        ].includes(orientation)
-      );
-
-    ScreenOrientation.getOrientationAsync().then((o) => setMode(o));
-
-    ScreenOrientation.addOrientationChangeListener((e) => {
-      setMode(e.orientationInfo.orientation);
-    });
-
-    return () => ScreenOrientation.removeOrientationChangeListeners();
-  }, []);
 
   if (!showAd) {
     return null;
   }
 
   return (
-    <AdMob.AdMobBanner
-      bannerSize={isPortrait ? 'smartBannerPortrait' : 'smartBannerLandscape'}
-      adUnitID={getAdId(unit)}
-      servePersonalizedAds={showPersonalized}
-      onDidFailToReceiveAdWithError={() => setShowAd(false)}
+    <BannerAd
+      size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}
+      unitId={getAdId(unit)}
+      requestOptions={{ requestNonPersonalizedAdsOnly: !showPersonalized }}
+      onAdFailedToLoad={() => setShowAd(false)}
     />
   );
 };

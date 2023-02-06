@@ -1,31 +1,5 @@
 {
-  "name": "shared-notes",
-  "displayName": "Shared Notes",
-  "expo": {
-    "name": "Shared Notes",
-    "slug": "shared-notes",
-    "version": "5.0",
-    "platforms": ["ios"],
-    "assetBundlePatterns": ["assets/*"],
-    "userInterfaceStyle": "automatic",
-    "scheme": "sharednotes",
-    "splash": {
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "enabled": true,
-      "fallbackToCacheTimeout": 3000
-    },
-    "ios": {
-      "config": {
-        "googleMobileAdsAppId": "ca-app-pub-6949812709353975~7748559513"
-      },
-      "bundleIdentifier": "com.mrarich.SharedNoteWidget",
-      "infoPlist": { "ITSAppUsesNonExemptEncryption": false }
-    },
-    "extra": {
-      "MyVersion": "16"
-    }
+  "react-native-google-mobile-ads": {
+    "ios_app_id": "ca-app-pub-6949812709353975~7748559513"
   }
 }

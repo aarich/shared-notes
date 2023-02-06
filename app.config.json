@@ -1,0 +1,27 @@
+{
+  "name": "shared-notes",
+  "displayName": "Shared Notes",
+  "expo": {
+    "name": "Shared Notes",
+    "slug": "shared-notes",
+    "version": "6.0",
+    "platforms": ["ios"],
+    "assetBundlePatterns": ["assets/*"],
+    "userInterfaceStyle": "automatic",
+    "scheme": "sharednotes",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "enabled": true,
+      "fallbackToCacheTimeout": 3000
+    },
+    "ios": {
+      "bundleIdentifier": "com.mrarich.SharedNoteWidget"
+    },
+    "extra": {
+      "MyVersion": "17"
+    }
+  }
+}

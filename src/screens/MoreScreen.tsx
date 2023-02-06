@@ -1,16 +1,12 @@
-import { StackNavigationProp } from '@react-navigation/stack';
-import {
-  Divider,
-  Icon,
-  Layout,
-  List,
-  ListItem,
-  Text,
-  TopNavigationAction,
-} from '@ui-kitten/components';
-import { AdMobInterstitial } from 'expo-ads-admob';
 import { useCallback, useEffect, useState } from 'react';
 import { Alert, Share, StyleSheet, View } from 'react-native';
+import { AdEventType, InterstitialAd } from 'react-native-google-mobile-ads';
+
+import { StackNavigationProp } from '@react-navigation/stack';
+import {
+    Divider, Icon, Layout, List, ListItem, Text, TopNavigationAction
+} from '@ui-kitten/components';
+
 import ColorPicker from '../components/settings/ColorPicker';
 import ListItemAds from '../components/settings/ListItemAds';
 import ListItemTheme from '../components/settings/ListItemTheme';
@@ -26,6 +22,11 @@ import { MoreParamList } from '../utils/types';
 type Props = {
   navigation: StackNavigationProp<MoreParamList, 'Settings'>;
 };
+
+const INTERSTITIAL_AD = InterstitialAd.createForAdRequest(
+  getAdId(AdUnit.settingsInterstitial),
+  { requestNonPersonalizedAdsOnly: true }
+);
 
 const renderNavigation = (
   navigation: Props['navigation'],
@@ -77,6 +78,7 @@ const MoreScreen = ({ navigation }: Props) => {
   const dispatch = useAppDispatch();
   const [isColorPickerVisible, setIsColorPickerVisible] = useState(false);
   const color = useSetting('widgetColor');
+  const [adLoaded, setAdLoaded] = useState(false);
 
   useEffect(() => {
     const url =
@@ -110,11 +112,33 @@ const MoreScreen = ({ navigation }: Props) => {
     );
   }, [dispatch]);
 
-  const showAd = useCallback(async () => {
-    await AdMobInterstitial.setAdUnitID(getAdId(AdUnit.settingsInterstitial));
-    await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: false });
-    await AdMobInterstitial.showAdAsync();
+  useEffect(() => {
+    INTERSTITIAL_AD.addAdEventsListener(({ type }) => {
+      switch (type) {
+        case AdEventType.LOADED:
+          setAdLoaded(true);
+          break;
+        case AdEventType.CLICKED:
+        case AdEventType.ERROR:
+        case AdEventType.CLOSED:
+          // Thank user
+          Alert.alert('Thanks for your support!');
+          // Reload a new one
+          setAdLoaded(false);
+          break;
+      }
+    });
+
+    return () => INTERSTITIAL_AD.removeAllListeners();
   }, []);
+
+  useEffect(() => {
+    if (!adLoaded) {
+      INTERSTITIAL_AD.load();
+    }
+  }, [adLoaded]);
+
+  const showAd = () => INTERSTITIAL_AD.show();
 
   const listItems: (() => React.ReactElement)[] = [
     () => renderNavigation(navigation, 'About'),

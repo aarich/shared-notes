@@ -1,23 +1,12 @@
-import {
-  Button,
-  Input as UIKInput,
-  Layout,
-  Text,
-  TextProps,
-  Toggle,
-} from '@ui-kitten/components';
 import { useRef, useState } from 'react';
-import {
-  FlatList,
-  KeyboardAvoidingView,
-  Pressable,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { FlatList, KeyboardAvoidingView, StyleSheet, View } from 'react-native';
+
+import { Button, Input as UIKInput, Layout, Text, TextProps, Toggle } from '@ui-kitten/components';
+
 import Input from '../components/shared/Input';
 import PotentialAd from '../components/shared/PotentialAd';
 import { AdUnit } from '../utils/ads';
-import { copyWithConfirm, dateToDisplay } from '../utils/experience';
+import { dateToDisplay } from '../utils/experience';
 import { NoteDraft } from '../utils/types';
 import QRModal from './QRModal';
 import InputNavAccessory from './shared/InputNavAccessory';
@@ -26,11 +15,11 @@ type StringSetter = (str: string) => void;
 
 type Props = {
   draft: NoteDraft;
-  setSlug: StringSetter;
+
   isRefreshing: boolean;
   onRefresh: () => void;
   setName: StringSetter;
-  isNew: boolean;
+
   setContent: StringSetter;
   onSave: () => void;
   isDirty: boolean;
@@ -42,11 +31,11 @@ type Props = {
 
 const EditScreen = ({
   draft,
-  setSlug,
+
   isRefreshing,
   onRefresh,
   setName,
-  isNew,
+
   setContent,
   onSave,
   isDirty,
@@ -92,22 +81,6 @@ const EditScreen = ({
                 onFocus={() => setTitleFocused(true)}
                 onBlur={() => setTitleFocused(false)}
               />
-              <Pressable
-                onPress={
-                  isNew ? undefined : () => copyWithConfirm(draft.slug || '')
-                }
-              >
-                <Input
-                  label="Slug"
-                  placeholder="Note Slug"
-                  value={draft.slug}
-                  onChangeText={setSlug}
-                  disabled={!isNew}
-                  returnKeyType="next"
-                  onSubmitEditing={contentRef.current?.focus}
-                  blurOnSubmit={false}
-                />
-              </Pressable>
               <Input
                 label="Note"
                 placeholder="Note Content"

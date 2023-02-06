@@ -1,8 +1,9 @@
-import { Icon, ListItem, ListItemProps, useTheme } from '@ui-kitten/components';
 import { useRef } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+
+import { Icon, ListItem, ListItemProps, useTheme } from '@ui-kitten/components';
 
 type Props = {
   onDelete: () => void;
@@ -14,7 +15,9 @@ const DeletableListItem = ({ onDelete, ...listItemProps }: Props) => {
   const iconColor = theme['text-alternate-color'];
   const swipeableRow = useRef<Swipeable>(null);
 
-  const renderRightAction = (progress: Animated.AnimatedInterpolation) => {
+  const renderRightAction = (
+    progress: Animated.AnimatedInterpolation<number>
+  ) => {
     const trans = progress.interpolate({
       inputRange: [0, 1],
       outputRange: [64, 0],
@@ -39,7 +42,9 @@ const DeletableListItem = ({ onDelete, ...listItemProps }: Props) => {
     );
   };
 
-  const renderRightActions = (progress: Animated.AnimatedInterpolation) => (
+  const renderRightActions = (
+    progress: Animated.AnimatedInterpolation<number>
+  ) => (
     <View style={styles.rightActionContainer}>
       {renderRightAction(progress)}
     </View>

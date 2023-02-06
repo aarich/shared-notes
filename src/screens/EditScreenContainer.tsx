@@ -1,8 +1,10 @@
-import { RouteProp } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
 import { generateSlug } from 'random-word-slugs';
 import { useCallback, useEffect, useReducer, useState } from 'react';
 import { Alert, Keyboard } from 'react-native';
+
+import { RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
 import EditHeaderActions from '../components/EditHeaderActions';
 import EditScreen from '../components/EditScreen';
 import EditScreenCheckboxMode from '../components/EditScreenCheckboxMode';
@@ -12,11 +14,7 @@ import { useAppDispatch } from '../redux/store';
 import { useUpToDateBridgeData } from '../utils/bridge';
 import { massageNewEditorContent } from '../utils/editor';
 import {
-  checkDiscard,
-  noteSavedMessage,
-  openCheckboxEditModeMessage,
-  sendErrorAlert,
-  shareNote,
+    checkDiscard, noteSavedMessage, openCheckboxEditModeMessage, sendErrorAlert, shareNote
 } from '../utils/experience';
 import { NoteDraft, NotesParamList } from '../utils/types';
 
@@ -223,13 +221,11 @@ const EditScreenContainer = ({ navigation, route }: Props) => {
     />
   ) : (
     <EditScreen
-      setSlug={(slug) => setDraftWrapper({ slug })}
       setName={(name) => setDraftWrapper({ name })}
       setContent={setContent}
       set2Cols={(is2Cols) => setDraftWrapper({ columns: is2Cols ? 2 : 1 })}
       draft={draft}
       isDirty={isDirty}
-      isNew={isNew}
       isRefreshing={isRefreshing}
       onRefresh={onRefresh}
       onSave={() => onSave()}

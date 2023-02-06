@@ -1,6 +1,7 @@
 import { setStringAsync as setClipboardString } from 'expo-clipboard';
 import Constants from 'expo-constants';
 import { Alert, AlertButton, Share } from 'react-native';
+
 import { ignoreInfo, removeNote } from '../redux/actions';
 import { deleteNote } from '../redux/actions/thunks';
 import { AppDispatch, store } from '../redux/store';
@@ -116,18 +117,6 @@ const showIgnorableAlert = (
     { text: 'Ok' },
   ]);
 };
-
-export const copyWithConfirm = (textToCopy: string) =>
-  Alert.alert('Copy to Clipboard?', textToCopy, [
-    {
-      text: 'Copy',
-      onPress: () => setClipboardString(textToCopy || ''),
-    },
-    {
-      text: 'Cancel',
-      style: 'cancel',
-    },
-  ]);
 
 export const checkDiscard = (
   onYes: () => void,
