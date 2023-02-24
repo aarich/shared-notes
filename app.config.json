@@ -4,7 +4,7 @@
   "expo": {
     "name": "Shared Notes",
     "slug": "shared-notes",
-    "version": "6.0",
+    "version": "6.1",
     "platforms": ["ios"],
     "assetBundlePatterns": ["assets/*"],
     "userInterfaceStyle": "automatic",
@@ -21,7 +21,7 @@
       "bundleIdentifier": "com.mrarich.SharedNoteWidget"
     },
     "extra": {
-      "MyVersion": "17"
+      "MyVersion": "18"
     }
   }
 }

@@ -14,7 +14,11 @@ import { useAppDispatch } from '../redux/store';
 import { useUpToDateBridgeData } from '../utils/bridge';
 import { massageNewEditorContent } from '../utils/editor';
 import {
-    checkDiscard, noteSavedMessage, openCheckboxEditModeMessage, sendErrorAlert, shareNote
+  checkDiscard,
+  noteSavedMessage,
+  openCheckboxEditModeMessage,
+  sendErrorAlert,
+  shareNote,
 } from '../utils/experience';
 import { NoteDraft, NotesParamList } from '../utils/types';
 
@@ -186,6 +190,12 @@ const EditScreenContainer = ({ navigation, route }: Props) => {
       inner();
     }
   }, [dispatch, isDirty, routeSlug]);
+
+  useEffect(() => {
+    if (!note && routeSlug) {
+      onRefresh();
+    }
+  }, [note, onRefresh, routeSlug]);
 
   const onSave = useCallback(
     (content?: string) => {
